@@ -3,9 +3,9 @@
 
 const initialState = []
 
-export default function books(initialState, action) {
+export default function books(state=initialState, action) {
     switch (action.type) {
 
-        default: return initialState
+        default: return state
     }
 }

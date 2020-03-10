@@ -2,12 +2,12 @@
 
 
 const initialState = {
-    
+
 }
 
-export default function profile(initialState, action) {
+export default function profile(state=initialState, action) {
     switch (action.type) {
 
-        default: return initialState
+        default: return state
     }
 }

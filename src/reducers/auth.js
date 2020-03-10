@@ -7,9 +7,9 @@ const initialState = {
     provider: ""
 }
 
-export default function auth(initialState, action) {
+export default function auth(state=initialState, action) {
     switch (action.type) {
 
-        default: return initialState
+        default: return state
     }
 }

@@ -3,9 +3,9 @@
 
 const initialState = []
 
-export default function comments(initialState, action) {
+export default function comments(state=initialState, action) {
     switch (action.type) {
 
-        default: return initialState
+        default: return state
     }
 }
