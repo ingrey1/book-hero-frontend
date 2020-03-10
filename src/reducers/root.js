@@ -5,12 +5,6 @@ import {comments} from './comments'
 import {currentChapter} from './currentChapter'
 import {profile} from './profile'
 
-
-
-
-
-
-
 export default combineReducers({
     currentChapter: currentChapter,   
     books: books,
