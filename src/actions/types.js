@@ -1,7 +1,9 @@
 // auth reducer
-const LOGIN = 'LOGIN'
-const LOGOUT = 'LOGOUT'
-const AUTHORIZE = 'AUTHORIZE'
+export const LOGIN_WITH_GOOGLE = 'LOGIN'
+export const SIGNUP = 'SIGNUP'
+export const LOGOUT = 'LOGOUT'
+export const AUTHORIZE = 'AUTHORIZE'
+export const UPDATE_LOGIN_ERRORS = 'UPDATE_LOGIN_ERRORS'
 // books reducer
 const SEARCH_BOOKS = 'SEARCH_BOOKS'
 const GET_USER_BOOKS = 'GET_USER_BOOKS'

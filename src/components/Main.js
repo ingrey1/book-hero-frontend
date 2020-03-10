@@ -1,10 +1,10 @@
 import React from 'react'
-import SignIn from 'SignIn'
+import SignIn from './SignIn'
 
 
-function Main(props) {
+function Main({signOut, signInWithGoogle}) {
     // routes declared here
-    const {signInWithGoogle, signOut} = props
+   
 
     return <div>
         <SignIn signInWithGoogle={signInWithGoogle} />
