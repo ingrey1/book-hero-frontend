@@ -2,6 +2,30 @@ import {SIGNUP, LOGOUT, AUTHORIZE, UPDATE_LOGIN_ERRORS} from "./types"
 import {authenticateUser} from "../api/api"
 
 
+// used to protect routes
+export const authorizeUserOrLogout = () => {
+  const token = localStorage.getItem('fire_token')
+  return function(dispatch) {
+    authenticateUser(token).then(res => res.json()).then((userAuthInfo => {
+               
+        if (!userAuthInfo.errors) {
+         dispatch({ // user is successfully authenticated
+             type: AUTHORIZE,
+             payload: userAuthInfo
+         })
+        } else { // log out the unauthorized user
+          dispatch({
+              type: LOGOUT
+          })
+        }
+     })).catch(err => {
+         console.log("backend error", err)
+         dispatch({  // something went wrong on the backend, so the user should not have access to the route
+            type: LOGOUT
+        })
+     })
+  }
+}
 
 export const loginWithGoogle = (gSignIn) => {
 

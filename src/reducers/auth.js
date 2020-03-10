@@ -25,6 +25,15 @@ export default function auth(state=initialState, action) {
                 errors: action.payload.errors
             }
 
+        case LOGOUT:
+
+            return {
+              ...state,
+              email: "",
+              errors: [],
+              loggedIn: false  
+            } 
+
         default: return state
     }
 }
