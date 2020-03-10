@@ -3,6 +3,7 @@ import {auth} from './auth'
 import {books} from './books'
 import {comments} from './comments'
 import {currentChapter} from './currentChapter'
+import {profile} from './profile'
 
 
 
@@ -11,10 +12,10 @@ import {currentChapter} from './currentChapter'
 
 
 export default combineReducers({
-    currentChapter: chapterReducer,   
-    books: booksReducer,
-    comments: commentsReducer,
-    auth: authReducer,
-    profile: profileReducer
+    currentChapter: currentChapter,   
+    books: books,
+    comments: comments,
+    auth: auth,
+    profile: profile
 
 })
