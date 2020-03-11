@@ -4,11 +4,9 @@ import {BrowserRouter as Router, Switch, Redirect} from 'react-router-dom'
 
 
 function Main({signOut, signInWithGoogle}) {
-    // routes declared here
-   // <SignIn signInWithGoogle={signInWithGoogle} />
+   
    const loginFunctions = {
-       signInWithGoogle,
-       signOut
+       signInWithGoogle
    }
 
     return <div>
