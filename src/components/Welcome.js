@@ -7,8 +7,8 @@ import { authorizeUserOrLogout } from '../actions/auth'
 function Welcome({signInWithGoogle, login, handleAuth}) {
 
     useEffect(() => {
-      handleAuth
-    })
+      handleAuth()
+    }, [])
 
     return <div>
        <SignIn signInWithGoogle={signInWithGoogle}  />

@@ -1,7 +1,6 @@
 import React from 'react'
-import SignIn from './SignIn'
-import {BrowserRouter as Router, Switch, Redirect} from 'react-router-dom'
-
+import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom'
+import Welcome from './Welcome'
 
 function Main({signOut, signInWithGoogle}) {
    
