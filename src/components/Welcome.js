@@ -4,7 +4,9 @@ import {connect} from 'react-redux'
 
 
 
-function Welcome({signInWithGoogle, loggedIn, history, location, ...props}) {
+function Welcome({loginFunctions, loggedIn, history, location, ...props}) {
+
+    
 
     useEffect(() => {
      console.log("use effect Welcome Comp")
@@ -17,7 +19,7 @@ function Welcome({signInWithGoogle, loggedIn, history, location, ...props}) {
     })
 
     return <div>
-       <SignIn signInWithGoogle={signInWithGoogle}  />
+       <SignIn loginFunctions={loginFunctions}  />
     </div>
 }
 

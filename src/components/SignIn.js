@@ -4,10 +4,10 @@ import {loginWithGoogle} from '../actions/auth'
 
 
 
-function SignIn(props) {
+function SignIn({loginFunctions: {signInWithGoogle}, ...props}) {
  
   return <div>
-      <button onClick={() => props.loginWithGoogle(props.signInWithGoogle)}>SignIn</button>
+      <button onClick={() => props.loginWithGoogle(signInWithGoogle)}>SignIn</button>
   </div>
 }
 

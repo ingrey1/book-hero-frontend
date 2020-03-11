@@ -15,7 +15,9 @@ export default function auth(state=initialState, action) {
             return {
                 ...state,
                 email: action.payload.email,
-                loggedIn: true
+                loggedIn: true,
+                userId: action.payload.id,
+                errors: []
 
             }
         case UPDATE_LOGIN_ERRORS:
@@ -29,9 +31,10 @@ export default function auth(state=initialState, action) {
 
             return {
               ...state,
-              email: "",
+              email: null,
               errors: [],
-              loggedIn: false  
+              loggedIn: false,
+              userId: null  
             } 
 
         default: return state

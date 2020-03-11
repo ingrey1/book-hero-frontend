@@ -35,7 +35,7 @@ export const loginWithGoogle = (gSignIn) => {
          gSignIn().then( data => {  // login with google  
             const token = data.credential.idToken
             // save token to local storage
-            localStorage.setItem('fire_token')
+            localStorage.setItem('fire_token', token)
             // send token to rails backend for auth
             authenticateUser(token).then(res => res.json()).then((userAuthInfo => {
                
