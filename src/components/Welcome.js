@@ -1,24 +1,31 @@
 import React, {useEffect} from 'react'
 import SignIn from './SignIn'
 import {connect} from 'react-redux' 
-import { authorizeUserOrLogout } from '../actions/auth'
 
 
-function Welcome({signInWithGoogle, login, handleAuth}) {
+
+function Welcome({signInWithGoogle, loggedIn, history, location, ...props}) {
 
     useEffect(() => {
-      handleAuth()
-    }, [])
+     console.log("use effect Welcome Comp")
+     if (loggedIn) {
+        history.push('/home')
+     } else {
+        if (location.path === "/") history.push('/welcome')
+        
+     } 
+    })
 
     return <div>
        <SignIn signInWithGoogle={signInWithGoogle}  />
     </div>
 }
 
-const mapDispatchToProps = dispatch => {
+const mapStateToProps = state => {
     return {
-        handleAuth: () => dispatch(authorizeUserOrLogout()) 
+        loggedIn: state.auth.loggedIn
     }
 }
 
-export default connect(null, mapDispatchToProps)(Welcome)
+
+export default connect(mapStateToProps)(Welcome)
