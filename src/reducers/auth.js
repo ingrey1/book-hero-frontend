@@ -28,7 +28,7 @@ export default function auth(state=initialState, action) {
             }
 
         case LOGOUT:
-
+            if (localStorage && localStorage.getItem('fire_token')) localStorage.removeItem('fire_token')
             return {
               ...state,
               email: null,

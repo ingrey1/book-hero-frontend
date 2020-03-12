@@ -2,6 +2,12 @@ import {SIGNUP, LOGOUT, AUTHORIZE, UPDATE_LOGIN_ERRORS} from "./types"
 import {authenticateUser} from "../api/api"
 
 
+export const logout = () => {
+  return {
+    type: LOGOUT
+  }
+}
+
 // used to protect routes
 export const authorizeUserOrLogout = () => {
   const token = localStorage.getItem('fire_token')

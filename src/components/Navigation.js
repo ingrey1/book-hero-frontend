@@ -1,7 +1,14 @@
 import React from 'react'
-import NavBar from 'react-bootstrap/Navbar'
+import {connect} from 'react-redux'
+import NavBar from 'react-bootstrap/NavBar'
+import Nav from 'react-bootstrap/Nav'
+import {Form, FormControl, Button} from 'react-bootstrap'
+import {LinkContainer} from 'react-router-bootstrap'
+import {logout} from '../actions/auth'
 
-function Navigation({readerMode, loggedIn,...props}) {
+
+
+function Navigation({readerMode, logout, loggedIn,...props}) {
    
 
 
@@ -9,21 +16,55 @@ function Navigation({readerMode, loggedIn,...props}) {
     
     if (!loggedIn) {
         return <NavBar>
-       
-       
-
+       <Nav>
+     
+       <Nav.Item>   
+       <NavBar.Brand>
+            About
+        </NavBar.Brand>
+        </Nav.Item>
+        </Nav>
+    
+      <Nav className="justify-content-end">  
+        <Nav.Item> 
        <NavBar.Brand>
            Book Hero
        </NavBar.Brand>
+       </Nav.Item>
+      
 
+      </Nav>
     </NavBar>
+   
     
     } else if (!readerMode) { // logged in, not in the reader
 
         return <NavBar>
-        <NavBar.Brand>
-            Book Hero
-        </NavBar.Brand>
+           <Nav className="mr-auto">
+
+           <LinkContainer to="/library" exact={true}>
+              <Nav.Link className="nav-link">My Library</Nav.Link>
+           </LinkContainer>
+
+           <LinkContainer to="/write" exact={true}>
+              <Nav.Link>Write</Nav.Link>
+           </LinkContainer>
+
+           <LinkContainer to="/browse" exact={true}>
+              <Nav.Link>Browse</Nav.Link>
+           </LinkContainer>    
+
+           <Form inline>
+              <FormControl type="text" placeholder="Search Books and Stories" className="mr-sm-2" />
+              <Button variant="outline-success">Search</Button>
+           </Form>
+
+           <LinkContainer to="/welcome" exact={true}>
+              <Nav.Link onClick={logout}>Logout</Nav.Link>
+           </LinkContainer>
+          
+
+           </Nav>
  
      </NavBar>
 
@@ -48,4 +89,14 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(Navigation)
+const mapDispatchToProps = dispatch => {
+    return {
+
+        logout: () => dispatch(logout())
+
+    }
+    
+
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navigation)

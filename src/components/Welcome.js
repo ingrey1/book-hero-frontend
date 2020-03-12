@@ -1,15 +1,19 @@
 import React, {useEffect} from 'react'
 import SignIn from './SignIn'
 import {connect} from 'react-redux' 
+import {authorizeUserOrLogout} from '../actions/auth'
 
 
 
-function Welcome({loginFunctions, loggedIn, history, location, ...props}) {
-
-    
+function Welcome({authorize, loginFunctions, loggedIn, history, location, ...props}) {
 
     useEffect(() => {
-     console.log("use effect Welcome Comp")
+        console.log("use effect welcome comp, called just once")
+        authorize()
+     }, [])
+
+    useEffect(() => {
+     console.log("use effect Welcome Comp, called every time")
      if (loggedIn) {
         history.push('/home')
      } else {
@@ -29,5 +33,13 @@ const mapStateToProps = state => {
     }
 }
 
+const mapDispatchToProps = dispatch => {
+    return {
+ 
+      authorize: () => dispatch(authorizeUserOrLogout())
+        
+    }
+ }
 
-export default connect(mapStateToProps)(Welcome)
+
+export default connect(mapStateToProps, mapDispatchToProps)(Welcome)
