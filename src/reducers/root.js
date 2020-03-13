@@ -4,12 +4,14 @@ import books from './books'
 import comments from './comments'
 import currentChapter from './currentChapter'
 import profile from './profile'
+import library from './library'
 
 export default combineReducers({
     currentChapter: currentChapter,   
     books: books,
     comments: comments,
     auth: auth,
-    profile: profile
+    profile: profile,
+    library: library
 
 })
