@@ -1,6 +1,9 @@
 import _ from 'underscore'
 import {SET_USER_BOOKS,
-     SET_SELECTED_LIBRARY_BOOK, SORT_USER_BOOKS, FILTER_USER_BOOKS} from '../actions/types'
+     SET_SELECTED_LIBRARY_BOOK,
+      SORT_USER_BOOKS,
+     FILTER_USER_BOOKS,
+     UPDATE_LIBRARY_RETRIEVAL_ERRORS} from '../actions/types'
 
 
 const initialState = {
@@ -12,7 +15,8 @@ const initialState = {
             ascending: true
         },
         filter: null
-    }
+    },
+    errors: []
 }
 
 export default function library(state=initialState, action) {
@@ -51,6 +55,13 @@ export default function library(state=initialState, action) {
                         filter: action.payload
                     }
                 }
+
+        case UPDATE_LIBRARY_RETRIEVAL_ERRORS:
+
+            return {
+                ...state,
+                errors: action.payload
+            }
 
         default: return state
     }
