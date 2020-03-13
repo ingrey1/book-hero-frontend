@@ -2,7 +2,7 @@ import {SET_USER_LIBRARY, UPDATE_LIBRARY_RETRIEVAL_ERRORS} from './types'
 import {getUserBooks} from '../api/api'
 
 
-function retrieveLibrary(userId) {
+export function retrieveLibrary(userId) {
 
    return function(dispatch) {
 
@@ -28,9 +28,5 @@ function retrieveLibrary(userId) {
             payload: data.errors
         })
       })
-
-
-
-
    }
 }
