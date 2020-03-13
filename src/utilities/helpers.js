@@ -2,12 +2,14 @@
 
 export function constructLibraryListBook(book) {
 
-    return {
+    const newBook = {
         title: book.title,
         imageUrl: book.image_url,
-        authors: book.author.split(";") 
+        authors: book.author.name.split(";") 
     }
 
+    console.log("new book", newBook)
+    return newBook
 }
 
 export function constructLibraryDetailBook(book) {

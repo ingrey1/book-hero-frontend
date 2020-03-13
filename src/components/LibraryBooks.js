@@ -1,14 +1,19 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {CardDeck} from 'react-bootstrap'
+import { Grid, Card } from 'semantic-ui-react'
 import LibraryListBook from './LibraryListBook'
 import {constructLibraryListBook} from '../utilities/helpers'
 
 
 function LibraryBooks({library}) {
-    return <CardDeck> 
-          {library.userBooks.map(book => <LibraryListBook book={constructLibraryListBook(book)} /> )}
-          </CardDeck>
+    console.log(library)
+    return <Grid columns={4} divided style={{padding: '20px'}}>
+      <Card.Group>
+      {library.userBooks.map(book => <LibraryListBook key={Math.random()}  book={constructLibraryListBook(book)} /> )}
+      </Card.Group>
+   
+  </Grid>
+          
 
 }
 const mapStateToProps = (state) => {
@@ -18,7 +23,9 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
+     return {
 
+     }
 }
 
 

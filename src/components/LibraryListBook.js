@@ -1,17 +1,21 @@
 import React from 'react'
-import {Card} from 'react-bootstrap'
+import {Card, Image} from 'semantic-ui-react'
 
-function LibraryListBook({book: {title, author, imageUrl} }) {
-
-    return <Card style={{ width: '18rem' }}>
-    <Card.Img variant="left" src={imageUrl} />
-    <Card.Body>
-      <Card.Title>{title}</Card.Title>
-      <Card.Text>
-{author.map(a => <h5>{a}</h5> )}
-      </Card.Text>
+function LibraryListBook({book, ...props }) {
+  
+    //debugger 
+    return <Card style={{ width: '18rem', height: '15rem' }}>
+    <Image  style={{height: '10rem'}} src={book.imageUrl} />
+    <Card.Content>
+      <Card.Header>{book.title}</Card.Header>
       
-    </Card.Body>
+<Card.Description>{book.authors.map(a => `${a} ` )}</Card.Description>
+      
+      
+      </Card.Content>
+
+      
+    
   </Card>
 
 }
