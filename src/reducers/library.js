@@ -5,7 +5,7 @@ import {SET_USER_BOOKS,
 
 const initialState = {
     userBooks: [],
-    selectedBook: null,
+    selectedBook: null, // this will be an id from userBooks
     displayOptions: {
         sort: {
             property: 'title',
@@ -20,9 +20,37 @@ export default function library(state=initialState, action) {
 
         case SET_USER_BOOKS:
             
-            return state
+            return {
+                ...state,
+                userBooks: action.payload
+            }
 
-         
+        case SET_SELECTED_LIBRARY_BOOK:
+
+                return {
+                    ...state,
+                    selectedBook: action.payload
+                }
+
+        case SORT_USER_BOOKS:
+
+            return {
+                ...state,
+                displayOptions: {
+                    ...state.displayOptions,
+                    sort: action.payload
+                }
+            }
+        
+        case FILTER_USER_BOOKS:
+
+                return {
+                    ...state,
+                    displayOptions: {
+                        ...state.displayOptions,
+                        filter: action.payload
+                    }
+                }
 
         default: return state
     }
