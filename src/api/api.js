@@ -22,3 +22,13 @@ export function authenticateUser(token) {
     return fetch(url, configuration)
 
 }
+
+export function getUserBooks(userId, token) {
+   const url = baseUrl + `/${userId}/books`
+   const configuration = {
+    method: "GET",
+    headers: createAuthHeader(token)
+    }
+    return fetch(url, configuration)
+
+}

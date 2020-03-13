@@ -4,9 +4,11 @@ export const SIGNUP = 'SIGNUP'
 export const LOGOUT = 'LOGOUT'
 export const AUTHORIZE = 'AUTHORIZE'
 export const UPDATE_LOGIN_ERRORS = 'UPDATE_LOGIN_ERRORS'
-// books reducer
-export const SEARCH_BOOKS = 'SEARCH_BOOKS'
-export const SET_USER_BOOKS = 'GET_USER_BOOKS'
+// library reducer
+export const SORT_USER_BOOKS = 'SORT_USER_BOOKS'
+export const FILTER_USER_BOOKS = 'FILTER_USER_BOOKS'
+export const SET_USER_BOOKS = 'SET_USER_BOOKS'
+export const SET_SELECTED_LIBRARY_BOOK = 'SET_SELECTED_LIBRARY_BOOK'
 // currentChapter reducer
 export const START_READER = 'START_READER'
 export const END_READER = 'END_READER'
