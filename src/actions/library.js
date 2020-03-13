@@ -25,7 +25,7 @@ export function retrieveLibrary(userId) {
           console.log("error retrieving library", err)
           dispatch({
             type: UPDATE_LIBRARY_RETRIEVAL_ERRORS,
-            payload: data.errors
+            payload: [err.message]
         })
       })
    }

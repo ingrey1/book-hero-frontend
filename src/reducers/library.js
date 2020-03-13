@@ -1,5 +1,5 @@
 import _ from 'underscore'
-import {SET_USER_BOOKS,
+import {SET_USER_LIBRARY,
      SET_SELECTED_LIBRARY_BOOK,
       SORT_USER_BOOKS,
      FILTER_USER_BOOKS,
@@ -22,7 +22,7 @@ const initialState = {
 export default function library(state=initialState, action) {
     switch (action.type) {
 
-        case SET_USER_BOOKS:
+        case SET_USER_LIBRARY:
             
             return {
                 ...state,

@@ -5,6 +5,7 @@ import {authorizeUserOrLogout} from '../actions/auth'
 
 
 
+
 function Welcome({authorize, loginFunctions, loggedIn, history, location, ...props}) {
 
     useEffect(() => {

@@ -1,12 +1,14 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {CardDeck} from 'react-bootstrap'
 import LibraryListBook from './LibraryListBook'
-import {generateCardGrid, constructLibraryListBook} from '../utilities/helpers'
+import {constructLibraryListBook} from '../utilities/helpers'
 
 
 function LibraryBooks({library}) {
-    return generateCardGrid(library.userBooks.map(
-        book => <LibraryListBook book={constructLibraryListBook(book)} /> ))
+    return <CardDeck> 
+          {library.userBooks.map(book => <LibraryListBook book={constructLibraryListBook(book)} /> )}
+          </CardDeck>
 
 }
 const mapStateToProps = (state) => {

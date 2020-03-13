@@ -10,7 +10,7 @@ function LibraryListBook({book: {title, author, imageUrl} }) {
       <Card.Text>
 {author.map(a => <h5>{a}</h5> )}
       </Card.Text>
-      <Button variant="primary">Go somewhere</Button>
+      
     </Card.Body>
   </Card>
 

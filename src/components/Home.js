@@ -1,10 +1,15 @@
 import React, { useEffect } from 'react';
 import {connect} from 'react-redux'
 import { authorizeUserOrLogout } from '../actions/auth';
+import {retrieveLibrary} from '../actions/library'
 
-function Home({authorize, loggedIn, history, ...props}) {
+function Home({authorize, loggedIn, getLibrary, userId, history, ...props}) {
 
-
+    useEffect(() => {
+       if (loggedIn) {
+           getLibrary(userId)
+       }
+    }, [])
   
     
     useEffect(() => {
@@ -20,14 +25,16 @@ function Home({authorize, loggedIn, history, ...props}) {
 
 const mapStateToProps = (state) => {
    return {
-       loggedIn: state.auth.loggedIn
+       loggedIn: state.auth.loggedIn,
+       userId: state.auth.userId
    }
 }
 
 const mapDispatchToProps = dispatch => {
    return {
 
-     authorize: () => dispatch(authorizeUserOrLogout())
+     authorize: () => dispatch(authorizeUserOrLogout()),
+     getLibrary: (userId) => dispatch(retrieveLibrary(userId))
        
    }
 }
