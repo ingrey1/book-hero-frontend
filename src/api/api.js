@@ -24,7 +24,7 @@ export function authenticateUser(token) {
 }
 
 export function getUserBooks(userId, token) {
-   const url = baseUrl + `/${userId}/books`
+   const url = baseUrl + `/users/${userId}/books`
    const configuration = {
     method: "GET",
     headers: createAuthHeader(token)
