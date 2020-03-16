@@ -19,8 +19,8 @@ export function constructLibraryDetailBook(book) {
 
 }
 
-export function satisfiesCategories (filterCategories, bookCategories) {
-       for (filterCategory of filterCategories) {
+export function satisfiesCategories(filterCategories, bookCategories) {
+       for (let filterCategory of filterCategories) {
          if (!bookCategories.includes(filterCategory)) return false 
        }
        return true // all filter categories are satisfied by the book's categories
@@ -37,12 +37,12 @@ export function doubleFilterByTitleAndCategory(arr, title, categories) {
     } else {
       if (title === '') { // just category filter
          
-        filteredArr = filteredArr.filter(e => e.categories.includes(categories))
+        filteredArr = filteredArr.filter(e => satisfiesCategories(categories, e.categories))
 
 
       } else { // category and title filter 
 
-        filteredArr = filteredArr.filter(e => e.categories.includes(categories) && e.title.startsWith(title) )
+        filteredArr = filteredArr.filter(e => satisfiesCategories(categories, e.categories) && e.title.startsWith(title) )
 
       }
     }

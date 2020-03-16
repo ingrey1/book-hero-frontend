@@ -15,7 +15,7 @@ const initialState = {
             ascending: true
         },
         filter: {
-            category: 'all',
+            categories: [],
             titleSearch: ''
         }
     },
