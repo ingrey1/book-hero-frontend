@@ -1,5 +1,27 @@
-import {SET_USER_LIBRARY, UPDATE_LIBRARY_RETRIEVAL_ERRORS} from './types'
+import {SET_USER_LIBRARY, UPDATE_LIBRARY_RETRIEVAL_ERRORS,
+     SET_FILTER_USER_BOOKS_VALUE, SET_SORT_USER_BOOKS_VALUE} from './types'
 import {getUserBooks} from '../api/api'
+
+
+
+
+
+
+
+export function setSortUserBooksValue(newSortInfo) {
+    return {
+       type: SET_SORT_USER_BOOKS_VALUE,
+       payload: newSortInfo
+    }
+}
+
+export function setFilterUserBooksValue(newFilterInfo) {
+    return {
+       type: SET_FILTER_USER_BOOKS_VALUE,
+       payload: newFilterInfo
+    }
+}
+
 
 
 export function retrieveLibrary(userId) {

@@ -1,15 +1,24 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import { Grid, Card } from 'semantic-ui-react'
+import _ from 'underscore'
 import LibraryListBook from './LibraryListBook'
-import {constructLibraryListBook} from '../utilities/helpers'
+import {constructLibraryListBook, doubleFilterByTitleAndCategory} from '../utilities/helpers'
 
 
-function LibraryBooks({library}) {
-    console.log(library)
+function LibraryBooks({library: {userBooks, displayOptions: {filter: {categories, titleSearch}, sort: { property, ascending }}}, ...props}) {
+    
+    const properlyShapedBooks = userBooks.map(book => constructLibraryListBook(book))
+    console.log("properly shaped books", properlyShapedBooks)
+    const filteredBooks = doubleFilterByTitleAndCategory(properlyShapedBooks, titleSearch, categories) 
+    console.log(filteredBooks)  
+    const sortedBooks = ascending ? _.sortBy(filteredBooks, property) : _.sortBy(filteredBooks, property).reverse() 
+     
+
+
     return <Grid columns={4} divided style={{padding: '20px'}}>
       <Card.Group>
-      {library.userBooks.map(book => <LibraryListBook key={Math.random()}  book={constructLibraryListBook(book)} /> )}
+      {sortedBooks.map(book => <LibraryListBook key={Math.random()}  book={book} /> )}
       </Card.Group>
    
   </Grid>

@@ -1,8 +1,8 @@
 import _ from 'underscore'
 import {SET_USER_LIBRARY,
      SET_SELECTED_LIBRARY_BOOK,
-      SORT_USER_BOOKS,
-     FILTER_USER_BOOKS,
+      SET_SORT_USER_BOOKS_VALUE,
+     SET_FILTER_USER_BOOKS_VALUE,
      UPDATE_LIBRARY_RETRIEVAL_ERRORS} from '../actions/types'
 
 
@@ -14,7 +14,10 @@ const initialState = {
             property: 'title',
             ascending: true
         },
-        filter: null
+        filter: {
+            category: 'all',
+            titleSearch: ''
+        }
     },
     errors: []
 }
@@ -36,7 +39,7 @@ export default function library(state=initialState, action) {
                     selectedBook: action.payload
                 }
 
-        case SORT_USER_BOOKS:
+        case SET_SORT_USER_BOOKS_VALUE:
 
             return {
                 ...state,
@@ -46,7 +49,7 @@ export default function library(state=initialState, action) {
                 }
             }
         
-        case FILTER_USER_BOOKS:
+        case SET_FILTER_USER_BOOKS_VALUE:
 
                 return {
                     ...state,
