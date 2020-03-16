@@ -55,7 +55,10 @@ export default function library(state=initialState, action) {
                     ...state,
                     displayOptions: {
                         ...state.displayOptions,
-                        filter: action.payload
+                        filter: {
+                            ...state.displayOptions.filter,
+                            categories: action.payload.length === 0 ? [] : action.payload
+                        }
                     }
                 }
 

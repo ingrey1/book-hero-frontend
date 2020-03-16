@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
 import LibraryBooks from './LibraryBooks'
-import LibraryControls from './LibraryContols'
+import LibraryControls from './LibraryControls'
 import {retrieveLibrary} from '../actions/library'
 
 

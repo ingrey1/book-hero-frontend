@@ -60,7 +60,7 @@ export const getAllCategories = (books) => {
 
 export const createBootstrapDropDownItems = (elements) => {
     return elements.map(e => {
-       return <Dropdown.Item as="button" activeKey={e}>{e}</Dropdown.Item>
+       return <Dropdown.Item key={Math.random()} as="button" eventKey={e}>{e}</Dropdown.Item>
     })
 }
 
