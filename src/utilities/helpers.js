@@ -1,4 +1,6 @@
-
+import React from 'react'
+import {Dropdown} from 'react-bootstrap'
+import _ from 'underscore'
 
 export function constructLibraryListBook(book) {
 
@@ -48,5 +50,17 @@ export function doubleFilterByTitleAndCategory(arr, title, categories) {
     }
     console.log("filteredArr", filteredArr)
     return filteredArr;
+}
+
+export const getAllCategories = (books) => {
+   return _.uniq(books.map(book => {
+     return book.categories.split(";")
+   }).flat())
+}
+
+export const createBootstrapDropDownItems = (elements) => {
+    return elements.map(e => {
+       return <Dropdown.Item as="button" activeKey={e}>{e}</Dropdown.Item>
+    })
 }
 

@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
 import LibraryBooks from './LibraryBooks'
+import LibraryControls from './LibraryContols'
 import {retrieveLibrary} from '../actions/library'
 
 
@@ -17,6 +18,7 @@ function Library({getLibrary, library, userId, history, loggedIn, ...props}) {
     }, [])
 
     return <div>
+       <LibraryControls /> 
        <LibraryBooks />
     </div>
 }
