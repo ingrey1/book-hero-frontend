@@ -2,27 +2,36 @@ import React, {useState} from 'react'
 import {Dropdown} from 'react-bootstrap'
 import {connect} from 'react-redux'
 import {getAllCategories, createBootstrapDropDownItems} from '../utilities/helpers'
-import {setFilterUserBooksValue} from '../actions/library'
+import {setFilterUserBooksValue, setSortUserBooksValue} from '../actions/library'
 
 
-function LibraryControls({books, filterBooks, ...props}) {
+function LibraryControls({books, sort, sortBooks, filterBooks, ...props}) {
 
-  const [dropdownState, setDropdownState] = useState("none")
+  const [dropdownFilterState, setDropdownFilterState] = useState("none")
+
+  const [dropdownSortState, setDropdownSortState] = useState("title")
     
-  const handleSelect = (e) => {
-        setDropdownState(e) 
+  const handleSelectFilter = (e) => {
+        setDropdownFilterState(e) 
         filterBooks(e === 'none' ? []:[e])
-    }
+  }
 
-    const categories = getAllCategories(books)
+  const handleSortFilter = (e) => {
+    setDropdownSortState(e) 
+    sortBooks({property: e, ascending: sort.ascending})
+  }
+
+  
+
+  const categories = getAllCategories(books)
 
    
     
     return <div>
 
-<Dropdown onSelect={(e) => handleSelect(e)}>
+<Dropdown onSelect={(e) => handleSelectFilter(e)}>
   <Dropdown.Toggle variant="success" id="dropdown-basic" >
-    Filter By: {dropdownState}
+    Filter By: {dropdownFilterState}
   </Dropdown.Toggle>
 
   <Dropdown.Menu id="dropdown-item-menu" title="dropdown-button">
@@ -33,6 +42,17 @@ function LibraryControls({books, filterBooks, ...props}) {
   </Dropdown.Menu>
 </Dropdown>
 
+<Dropdown onSelect={(e) => handleSortFilter(e)}>
+  <Dropdown.Toggle variant="success" id="dropdown-basic" >
+    Sort By: {dropdownSortState}
+  </Dropdown.Toggle>
+
+  <Dropdown.Menu id="dropdown-item-menu" title="dropdown-button">
+  <Dropdown.Item as="button" eventKey="title">Title</Dropdown.Item>
+  <Dropdown.Item as="button" eventKey="recent_add_to_library">Add To Library Date</Dropdown.Item>
+  </Dropdown.Menu>
+</Dropdown>
+
     </div>
 
 }
@@ -40,13 +60,15 @@ function LibraryControls({books, filterBooks, ...props}) {
 const mapStateToProps = (state) => {
     return {
         books: state.library.userBooks,
-        filter: state.library.displayOptions.filter
+        filter: state.library.displayOptions.filter,
+        sort: state.library.displayOptions.sort
     }
  }
  
  const mapDispatchToProps = (dispatch) => {
       return {
-        filterBooks: (e) => dispatch(setFilterUserBooksValue(e))
+        filterBooks: (e) => dispatch(setFilterUserBooksValue(e)),
+        sortBooks: (e) => dispatch(setSortUserBooksValue(e))
       }
  }
 
