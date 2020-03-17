@@ -67,3 +67,9 @@ export const createBootstrapDropDownItems = (elements) => {
     })
 }
 
+export const mapSortPropertyToSortLabel = (sortProperty) => {
+    if (sortProperty === 'last_read') return 'Last Read Date'
+    else if (sortProperty === 'last_added_to_library') return 'Add To Library Date'
+    else return 'Title'
+}
+

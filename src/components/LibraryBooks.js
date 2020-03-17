@@ -9,9 +9,7 @@ import {constructLibraryListBook, doubleFilterByTitleAndCategory} from '../utili
 function LibraryBooks({library: {userBooks, displayOptions: {filter: {categories, titleSearch}, sort: { property, ascending }}}, ...props}) {
     
     const properlyShapedBooks = userBooks.map(book => constructLibraryListBook(book))
-    console.log("properly shaped books", properlyShapedBooks)
     const filteredBooks = doubleFilterByTitleAndCategory(properlyShapedBooks, titleSearch, categories) 
-    console.log(filteredBooks)
     const ascendingStatus = (property === 'last_read' || property === 'last_added_to_library') ? !ascending : ascending  
     const sortedBooks = ascendingStatus ? _.sortBy(filteredBooks, property) : _.sortBy(filteredBooks, property).reverse() 
      
