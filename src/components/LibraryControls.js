@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {Dropdown} from 'react-bootstrap'
+import {Dropdown, Row, Col} from 'react-bootstrap'
 import {connect} from 'react-redux'
 import {getAllCategories, createBootstrapDropDownItems} from '../utilities/helpers'
 import {setFilterUserBooksValue, setSortUserBooksValue} from '../actions/library'
@@ -28,7 +28,8 @@ function LibraryControls({books, sort, sortBooks, filterBooks, ...props}) {
    
     
     return <div>
-
+<Row>
+  <Col>
 <Dropdown onSelect={(e) => handleSelectFilter(e)}>
   <Dropdown.Toggle variant="success" id="dropdown-basic" >
     Filter By: {dropdownFilterState}
@@ -41,7 +42,8 @@ function LibraryControls({books, sort, sortBooks, filterBooks, ...props}) {
   
   </Dropdown.Menu>
 </Dropdown>
-
+</Col>
+<Col>
 <Dropdown onSelect={(e) => handleSortFilter(e)}>
   <Dropdown.Toggle variant="success" id="dropdown-basic" >
     Sort By: {dropdownSortState}
@@ -49,9 +51,13 @@ function LibraryControls({books, sort, sortBooks, filterBooks, ...props}) {
 
   <Dropdown.Menu id="dropdown-item-menu" title="dropdown-button">
   <Dropdown.Item as="button" eventKey="title">Title</Dropdown.Item>
-  <Dropdown.Item as="button" eventKey="recent_add_to_library">Add To Library Date</Dropdown.Item>
+  <Dropdown.Item as="button" eventKey="last_added_to_library">Add To Library Date</Dropdown.Item>
+  <Dropdown.Item as="button" eventKey="last_read">Last Read Date</Dropdown.Item>
   </Dropdown.Menu>
 </Dropdown>
+</Col>
+</Row>
+
 
     </div>
 

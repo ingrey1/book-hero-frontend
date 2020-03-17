@@ -4,11 +4,14 @@ import _ from 'underscore'
 
 export function constructLibraryListBook(book) {
 
+    
     const newBook = {
         title: book.title,
         imageUrl: book.image_url,
         authors: book.author.name.split(";"),
-        categories: book.categories.split(";") 
+        categories: book.categories.split(";"),
+        last_read: Date.parse(book.current_reading_location.updated_at),
+        last_added_to_library: Date.parse(book.current_reading_location.created_at)   
     }
 
     console.log("new book", newBook)
