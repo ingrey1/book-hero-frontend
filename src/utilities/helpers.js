@@ -6,6 +6,7 @@ export function constructLibraryListBook(book) {
 
     
     const newBook = {
+        id: book.id,
         title: book.title,
         imageUrl: book.image_url,
         authors: book.author.name.split(";"),

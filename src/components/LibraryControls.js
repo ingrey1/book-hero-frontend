@@ -1,22 +1,20 @@
 import React, {useState} from 'react'
 import {Dropdown, Row, Col} from 'react-bootstrap'
+import { Input } from 'semantic-ui-react'
 import {connect} from 'react-redux'
 import {getAllCategories, createBootstrapDropDownItems, mapSortPropertyToSortLabel} from '../utilities/helpers'
-import {setFilterUserBooksValue, setSortUserBooksValue} from '../actions/library'
+import {setFilterUserBooksValue, setSortUserBooksValue, searchAndFilterLibrary} from '../actions/library'
 
 
-function LibraryControls({books, sort, sortBooks, filterBooks, ...props}) {
+function LibraryControls({books, sort, filter, sortBooks, filterBooks, searchBooks, ...props}) {
 
   const [dropdownFilterState, setDropdownFilterState] = useState("none")
 
- 
- 
-    
   const handleSelectFilter = (e) => {
         setDropdownFilterState(e) 
         filterBooks(e === 'none' ? []:[e])
   }
-
+  
   const handleSortFilter = (e) => {
     sortBooks({property: e, ascending: sort.ascending})
   }
@@ -24,6 +22,12 @@ function LibraryControls({books, sort, sortBooks, filterBooks, ...props}) {
   const handleAscendingFilter = (e) => {
     sortBooks({property: sort.property, ascending: e === "true" ? true : false })
   }
+
+  const handleSearch = (e) => {
+
+       searchBooks(e.target.value)
+        
+  } 
 
   
 
@@ -75,6 +79,12 @@ function LibraryControls({books, sort, sortBooks, filterBooks, ...props}) {
   </Dropdown.Menu>
 </Dropdown>
 </Col>
+  
+<Col>
+
+<Input onChange={handleSearch} placeholder="Search Library" icon="search" value={filter.titleSearch} />
+
+</Col>
 
 
 
@@ -98,7 +108,8 @@ const mapStateToProps = (state) => {
  const mapDispatchToProps = (dispatch) => {
       return {
         filterBooks: (e) => dispatch(setFilterUserBooksValue(e)),
-        sortBooks: (e) => dispatch(setSortUserBooksValue(e))
+        sortBooks: (e) => dispatch(setSortUserBooksValue(e)),
+        searchBooks: (e) => dispatch(searchAndFilterLibrary(e))
       }
  }
 

@@ -1,7 +1,9 @@
 import _ from 'underscore'
-import {SET_USER_LIBRARY,
+import {
+     SET_USER_LIBRARY,
+     SEARCH_AND_FILTER_LIBRARY,
      SET_SELECTED_LIBRARY_BOOK,
-      SET_SORT_USER_BOOKS_VALUE,
+     SET_SORT_USER_BOOKS_VALUE,
      SET_FILTER_USER_BOOKS_VALUE,
      UPDATE_LIBRARY_RETRIEVAL_ERRORS} from '../actions/types'
 
@@ -61,6 +63,19 @@ export default function library(state=initialState, action) {
                         }
                     }
                 }
+
+        case SEARCH_AND_FILTER_LIBRARY:
+
+            return {
+                 ...state,
+                 displayOptions: {
+                     ...state.displayOptions,
+                     filter: {
+                         ...state.displayOptions.filter,
+                         titleSearch: action.payload
+                     }
+                 }
+            }
 
         case UPDATE_LIBRARY_RETRIEVAL_ERRORS:
 

@@ -1,11 +1,16 @@
 import {SET_USER_LIBRARY, UPDATE_LIBRARY_RETRIEVAL_ERRORS,
-     SET_FILTER_USER_BOOKS_VALUE, SET_SORT_USER_BOOKS_VALUE} from './types'
+     SET_FILTER_USER_BOOKS_VALUE, SET_SORT_USER_BOOKS_VALUE, SEARCH_AND_FILTER_LIBRARY} from './types'
 import {getUserBooks} from '../api/api'
 
 
 
 
-
+export function searchAndFilterLibrary(newSearchTitle) {
+    return {
+       type: SEARCH_AND_FILTER_LIBRARY,
+       payload: newSearchTitle
+    }
+}
 
 
 export function setSortUserBooksValue(newSortInfo) {
