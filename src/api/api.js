@@ -44,4 +44,15 @@ export function getCurrentChapter(userId, bookId, token) {
 
 }
 
+export function getNextChapter(userId, bookId, token) {
+
+    const url = baseUrl + `/users/${userId}/books/${bookId}/chapters/next_chapter`
+    const configuration = {
+        method: 'GET',
+        headers: createAuthHeader(token)
+    }
+    return fetch(url, configuration)
+
+}
+
 
