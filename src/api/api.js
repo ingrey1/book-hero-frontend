@@ -55,4 +55,15 @@ export function getNextChapter(userId, bookId, token) {
 
 }
 
+export function updateReadingStatus(userId, bookId, token) {
+
+    const url = baseUrl + `/users/${userId}/books/${bookId}/chapters/update_reading_status`
+    const configuration = {
+        method: 'POST',
+        headers: createAuthHeader(token)
+    }
+    return fetch(url, configuration)
+
+}
+
 
