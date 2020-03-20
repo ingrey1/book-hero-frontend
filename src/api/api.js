@@ -32,3 +32,16 @@ export function getUserBooks(userId, token) {
     return fetch(url, configuration)
 
 }
+
+export function getCurrentChapter(userId, bookId, token) {
+
+    const url = baseUrl + `/users/${userId}/books/${bookId}/chapters/current_chapter`
+    const configuration = {
+        method: 'GET',
+        headers: createAuthHeader(token)
+    }
+    return fetch(url, configuration)
+
+}
+
+
