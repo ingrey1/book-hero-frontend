@@ -55,12 +55,16 @@ export function getNextChapter(userId, bookId, token) {
 
 }
 
-export function updateReadingStatus(userId, bookId, token) {
+export function updateReadingStatus(userId, bookId, token, newCurrentWord, newCurrentChapter) {
 
     const url = baseUrl + `/users/${userId}/books/${bookId}/chapters/update_reading_status`
     const configuration = {
         method: 'POST',
-        headers: createAuthHeader(token)
+        headers: createAuthHeader(token),
+        body: JSON.stringify({
+            current_chapter: newCurrentChapter,
+            current_word: newCurrentWord
+        })
     }
     return fetch(url, configuration)
 
