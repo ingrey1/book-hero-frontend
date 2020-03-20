@@ -55,7 +55,7 @@ export default function currentChapter(state=initialState, action) {
                   ...state,
                   [action.payload.chapter]: {
                       ...state[action.payload.chapter],
-                      current_word: action.payload.new_current_word
+                      current_word: action.payload.newCurrentWord
                   }
               }
 
