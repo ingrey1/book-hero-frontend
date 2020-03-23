@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {connect} from 'react-redux'
 import {retrieveCurrentChapter, updateChapterLocation, updateReadingInfo, startReader, endReader, setNextChapter, setPreviousChapter} from '../actions/currentChapter'
 import {Row, Col, Container} from 'react-bootstrap'
-import {Button, Icon} from 'semantic-ui-react'
+import {Button, Icon, Progress} from 'semantic-ui-react'
 import {getBookByChapter, calculatePercentOfChapterForCurrentPage} from '../utilities/helpers'
 
 
@@ -22,9 +22,12 @@ const commentsContainerStyle = {
     textAlign: 'center',
     marginTop: '50px',
     marginBottom: '50px'
+}
 
-
-    
+const progressContainerStyle = {
+    marginTop: '15px',
+    width: '20%',
+    height: '20px'
 }
 
 const max_characters = 3100
@@ -43,11 +46,34 @@ function Reader({books, match, updateReadingInfo, updateChapterLocation, current
 
     }
 
+    const showPreviousButton = () => {
+
+        return currentChapter.number && (currentChapter.number > 1) || stillHasPreviousText()
+
+    }
+
+    const showNextButton = () => {
+
+        return currentChapter.number && (currentChapter.number < getBookByChapter(books, currentChapter.book_id).chapter_count) || stillHasNextText()
+
+    }
+
+    const stillHasNextText = () => {
+
+        return currentChapter.content && ((currentChapter.current_word + max_characters) < currentChapter.content.length)
+    }
+
+    const stillHasPreviousText = () => {
+
+        return (currentChapter.current_word - max_characters) > 0
+
+    }
+
     const handleTurnNextPage = () => {
 
-        const stillHasText = currentChapter.current_word + max_characters < currentChapter.content.length
+        console.log("handle next page clicked")
         // if there is still text left in this chapter, show the next slice of text, and update backend
-        if (stillHasText) {
+        if (stillHasNextText()) {
            // updateChapterLocation
            const newCharacterIndex = currentChapter.current_word + max_characters
            updateChapterLocation('currentChapter', newCharacterIndex) 
@@ -61,6 +87,21 @@ function Reader({books, match, updateReadingInfo, updateChapterLocation, current
 
     
     const handleTurnPreviousPage = () => {
+        console.log("handle previous page clicked")
+        
+        // if its not the first page
+        if (stillHasPreviousText()) {
+           // updateChapterLocation
+           const newCharacterIndex = currentChapter.current_word - max_characters
+           updateChapterLocation('currentChapter', newCharacterIndex) 
+           // updateReadingInfo 
+        
+        }
+
+        // else go to the next chapter, update backend
+       
+    
+
 
     }
 
@@ -74,9 +115,9 @@ function Reader({books, match, updateReadingInfo, updateChapterLocation, current
   <Row>
     <Col> 
     
-     {currentChapter.number && currentChapter.number > 1 && <Button>
+     {showPreviousButton() && <Button onClick={handleTurnPreviousPage}>
      
-      <Button.Content visible>
+      <Button.Content  visible>
         <Icon name='arrow left' />
       </Button.Content>
      </Button> }
@@ -85,12 +126,12 @@ function Reader({books, match, updateReadingInfo, updateChapterLocation, current
     <Col style={readerStyles}>
     <h2 id="chapter-title">{currentChapter.content && currentChapter.title}</h2>
     <div id="chapter-content">{currentChapter.content && currentChapter.content.substring(currentChapter.current_word, currentChapter.current_word + max_characters)}</div>
-    
+    {currentChapter.content && <div style={progressContainerStyle}><Progress percent={calculatePercentOfChapterForCurrentPage(currentChapter.content, currentChapter.current_word + max_characters)}>{calculatePercentOfChapterForCurrentPage(currentChapter.content, currentChapter.current_word + max_characters)}%</Progress></div>}
     </Col>
     <Col>
      {console.log("current chapter", currentChapter)} 
-     {currentChapter.number && (currentChapter.number < getBookByChapter(books, currentChapter.book_id).chapter_count)  &&  <Button>
-    <Button.Content onClick={handleTurnNextPage} visible>
+     { showNextButton() &&  <Button onClick={handleTurnNextPage}>
+    <Button.Content  visible>
         <Icon name='arrow right' />
       </Button.Content>
     </Button>}
@@ -98,7 +139,7 @@ function Reader({books, match, updateReadingInfo, updateChapterLocation, current
   </Row>
   <Row style={commentsContainerStyle}>
       <Col></Col>
-      <Col> { currentChapter.content && calculatePercentOfChapterForCurrentPage(currentChapter.content, currentChapter.current_word + max_characters) > 99  && <Button basic color='blue' onClick={() => setShowCommentsState(!showCommentsState)}>
+      <Col> {currentChapter.content && calculatePercentOfChapterForCurrentPage(currentChapter.content, currentChapter.current_word + max_characters) > 99  && <Button basic color='blue' onClick={() => setShowCommentsState(!showCommentsState)}>
       {showCommentsState ? 'Hide': 'Show'} Comments
      </Button>}
      </Col>
