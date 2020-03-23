@@ -5,7 +5,7 @@ import {
      SET_SELECTED_LIBRARY_BOOK,
      SET_SORT_USER_BOOKS_VALUE,
      SET_FILTER_USER_BOOKS_VALUE,
-     UPDATE_LIBRARY_RETRIEVAL_ERRORS} from '../actions/types'
+     UPDATE_LIBRARY_RETRIEVAL_ERRORS, CLEAR_LIBRARY} from '../actions/types'
 
 
 const initialState = {
@@ -26,6 +26,10 @@ const initialState = {
 
 export default function library(state=initialState, action) {
     switch (action.type) {
+
+        case CLEAR_LIBRARY:
+            
+            return initialState
 
         case SET_USER_LIBRARY:
             

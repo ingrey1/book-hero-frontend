@@ -2,7 +2,7 @@ import {START_READER, END_READER,
      SET_CURRENT_CHAPTER,
       SET_NEXT_CHAPTER, 
       SET_PREVIOUS_CHAPTER,
-      UPDATE_CHAPTER_LOCATION} from './types'
+      UPDATE_CHAPTER_LOCATION, CLEAR_CURRENT_CHAPTER} from './types'
 import {getCurrentChapter, getNextChapter, updateReadingStatus} from '../api/api'
 
 export function startReader() {

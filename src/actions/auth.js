@@ -10,10 +10,6 @@ export const logout = () => {
   }
 }
 
-
-
-
-
 export const clearUserStoreAndLogout = () => {
     return function(dispatch){
       dispatch(logout())
@@ -35,16 +31,12 @@ export const authorizeUserOrLogout = () => {
          })
         
         } else { // log out the unauthorized user
-          dispatch({
-              type: LOGOUT
-          })
+          clearUserStoreAndLogout()
         
         }
      })).catch(err => {
          console.log("backend error", err)
-         dispatch({  // something went wrong on the backend, so the user should not have access to the route
-            type: LOGOUT
-        })
+         clearUserStoreAndLogout()
        
      })
   }

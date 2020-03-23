@@ -1,4 +1,4 @@
-import {START_READER, END_READER, SET_PREVIOUS_CHAPTER, SET_CURRENT_CHAPTER, SET_NEXT_CHAPTER, UPDATE_CHAPTER_LOCATION} from '../actions/types'
+import {START_READER, END_READER, CLEAR_CURRENT_CHAPTER, SET_PREVIOUS_CHAPTER, SET_CURRENT_CHAPTER, SET_NEXT_CHAPTER, UPDATE_CHAPTER_LOCATION} from '../actions/types'
 
 
 const initialState = {
@@ -13,6 +13,10 @@ const initialState = {
 export default function currentChapter(state=initialState, action) {
     
     switch (action.type) {
+
+        case CLEAR_CURRENT_CHAPTER:
+
+            return initialState
 
         case START_READER:
 
