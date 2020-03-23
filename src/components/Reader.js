@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react'
 import {connect} from 'react-redux'
-import {retrieveCurrentChapter, startReader, endReader, setNextChapter, setPreviousChapter} from '../actions/currentChapter'
+import {retrieveCurrentChapter, updateChapterLocation, updateReadingInfo, startReader, endReader, setNextChapter, setPreviousChapter} from '../actions/currentChapter'
 import {Row, Col, Container} from 'react-bootstrap'
 import {Button, Icon} from 'semantic-ui-react'
-import {getBookByChapter} from '../utilities/helpers'
+import {getBookByChapter, calculatePercentOfChapterForCurrentPage} from '../utilities/helpers'
 
 
 
@@ -29,7 +29,7 @@ const commentsContainerStyle = {
 
 const max_characters = 3100
 
-function Reader({books, match, currentChapter, retrieveCurrentChapter, setNextChapter, setPreviousChapter, userId, ...props}) {
+function Reader({books, match, updateReadingInfo, updateChapterLocation, currentChapter, retrieveCurrentChapter, setNextChapter, setPreviousChapter, userId, ...props}) {
     
 
     const [showCommentsState, setShowCommentsState] = useState(false)
@@ -39,18 +39,37 @@ function Reader({books, match, currentChapter, retrieveCurrentChapter, setNextCh
         retrieveCurrentChapter(userId, bookId)
     }, [])
 
+    const handleTurnNextChapter = () => {
+
+    }
+
     const handleTurnNextPage = () => {
+
+        const stillHasText = currentChapter.current_word + max_characters < currentChapter.content.length
+        // if there is still text left in this chapter, show the next slice of text, and update backend
+        if (stillHasText) {
+           // updateChapterLocation
+           const newCharacterIndex = currentChapter.current_word + max_characters
+           updateChapterLocation('currentChapter', newCharacterIndex) 
+           // updateReadingInfo 
+        
+        }
+
+        // else go to the next chapter, update backend
        
     }
 
+    
     const handleTurnPreviousPage = () => {
-        
+
     }
 
 
     return (
+       
 
         <Container style={readerContainerStyles}>
+             { currentChapter.content && console.log("content.length", currentChapter.content.length)}
             
   <Row>
     <Col> 
@@ -71,7 +90,7 @@ function Reader({books, match, currentChapter, retrieveCurrentChapter, setNextCh
     <Col>
      {console.log("current chapter", currentChapter)} 
      {currentChapter.number && (currentChapter.number < getBookByChapter(books, currentChapter.book_id).chapter_count)  &&  <Button>
-    <Button.Content visible>
+    <Button.Content onClick={handleTurnNextPage} visible>
         <Icon name='arrow right' />
       </Button.Content>
     </Button>}
@@ -79,9 +98,10 @@ function Reader({books, match, currentChapter, retrieveCurrentChapter, setNextCh
   </Row>
   <Row style={commentsContainerStyle}>
       <Col></Col>
-      <Col> <Button basic color='blue' onClick={() => setShowCommentsState(!showCommentsState)}>
+      <Col> { currentChapter.content && calculatePercentOfChapterForCurrentPage(currentChapter.content, currentChapter.current_word + max_characters) > 99  && <Button basic color='blue' onClick={() => setShowCommentsState(!showCommentsState)}>
       {showCommentsState ? 'Hide': 'Show'} Comments
-    </Button></Col>
+     </Button>}
+     </Col>
       <Col></Col>
   </Row>
 </Container>
@@ -111,7 +131,9 @@ const mapStateToProps = (state) => {
         endReader: () => dispatch(endReader()),
         retrieveCurrentChapter: (userId, bookId) => dispatch(retrieveCurrentChapter(userId, bookId)),
         setNextChapter: (chapter) => dispatch(setNextChapter(chapter)),
-        setPreviousChapter: (chapter) => dispatch(setPreviousChapter(chapter))
+        setPreviousChapter: (chapter) => dispatch(setPreviousChapter(chapter)),
+        updateChapterLocation: (chapter, newCurrentWord) => dispatch(updateChapterLocation(chapter, newCurrentWord)),
+        updateReadingInfo: (userId, bookId, chapterStoreName, newCurrentChapter, newCurrentWord) => dispatch(updateReadingInfo(userId, bookId, chapterStoreName, newCurrentChapter, newCurrentWord))
     
 
 
