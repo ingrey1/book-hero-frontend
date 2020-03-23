@@ -2,7 +2,7 @@ import {START_READER, END_READER,
      SET_CURRENT_CHAPTER,
       SET_NEXT_CHAPTER, 
       SET_PREVIOUS_CHAPTER,
-      UPDATE_CHAPTER_LOCATION, CLEAR_CURRENT_CHAPTER} from './types'
+      UPDATE_CHAPTER_LOCATION, CLEAR_CURRENT_CHAPTER, NEXT_CHAPTER_TRANSITION} from './types'
 import {getCurrentChapter, getNextChapter, updateReadingStatus} from '../api/api'
 
 export function startReader() {
@@ -63,16 +63,16 @@ export function setNextChapter(chapter) {
 export function retrieveNextChapter(userId, bookId) {
     
     const token = localStorage.getItem('fire_token')
-    
+    console.log("r")
     return function(dispatch) {
-    
+        console.log("thunk for retrieveNextChapter dispatched")
         getNextChapter(userId, bookId, token).then(res => res.json()).then(data => {
             if (!data.errors) { // all good, have chapter
-
+                console.log("data from getNextChapter", data)
                 dispatch(setNextChapter(data))
 
             } else { // handle errors; display message to inform user couldnt retrieve current chapter
-
+                console.log("data.errors", data)
             }
         }).catch(err => console.log(err)) // handle errors 
 
@@ -111,3 +111,27 @@ export function updateReadingInfo(userId, bookId, newCurrentWord, newCurrentChap
 
      } 
 }
+
+export const nextChapterTransition = (currentChapter, nextChapter, previousChapter, max_characters) => {
+
+    const newCurrentChapter = {...nextChapter,
+                            current_word: 1}
+        
+    const newNextChapter = {}
+
+    const newPreviousChapter = {...currentChapter,
+                                current_word: currentChapter.content.length - max_characters < 1 ? 1 : currentChapter.content.length - max_characters  }
+    
+    return {
+        type: NEXT_CHAPTER_TRANSITION,
+        payload: {
+            currentChapter: newCurrentChapter,
+            nextChapter: newNextChapter,
+            previousChapter: newPreviousChapter
+        }
+    }                            
+
+} 
+
+
+

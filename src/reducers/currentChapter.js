@@ -1,11 +1,11 @@
-import {START_READER, END_READER, CLEAR_CURRENT_CHAPTER, SET_PREVIOUS_CHAPTER, SET_CURRENT_CHAPTER, SET_NEXT_CHAPTER, UPDATE_CHAPTER_LOCATION} from '../actions/types'
+import {START_READER, NEXT_CHAPTER_TRANSITION, END_READER, CLEAR_CURRENT_CHAPTER, SET_PREVIOUS_CHAPTER, SET_CURRENT_CHAPTER, SET_NEXT_CHAPTER, UPDATE_CHAPTER_LOCATION} from '../actions/types'
 
 
 const initialState = {
 
     currentChapter: {},
     nextChapter: {},
-    prevChapter: {},
+    previousChapter: {},
     readingMode: false
    
 }
@@ -62,6 +62,15 @@ export default function currentChapter(state=initialState, action) {
                       current_word: action.payload.newCurrentWord
                   }
               }
+
+        case NEXT_CHAPTER_TRANSITION:
+
+            return {
+                ...state,
+                currentChapter: action.payload.currentChapter,
+                nextChapter: action.payload.nextChapter,
+                previousChapter: action.payload.previousChapter
+            }
 
         default: return state
 
