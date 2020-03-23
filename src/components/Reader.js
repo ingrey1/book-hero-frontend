@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {retrieveCurrentChapter, startReader, endReader, setNextChapter, setPreviousChapter} from '../actions/currentChapter'
 import {Row, Col, Container} from 'react-bootstrap'
 import {Button, Icon} from 'semantic-ui-react'
+import {getBookByChapter} from '../utilities/helpers'
 
 
 
@@ -16,20 +17,31 @@ const readerContainerStyles = {
     marginTop: '25px'
 }
 
+const commentsContainerStyle = {
+
+    textAlign: 'center',
+    marginTop: '50px',
+    marginBottom: '50px'
+
+
+    
+}
+
 const max_characters = 3100
 
 function Reader({books, match, currentChapter, retrieveCurrentChapter, setNextChapter, setPreviousChapter, userId, ...props}) {
+    
 
-
-  
-
+    const [showCommentsState, setShowCommentsState] = useState(false)
     
     useEffect(() => {
         const bookId = match.params.bookId
         retrieveCurrentChapter(userId, bookId)
     }, [])
 
-
+    const handleTurnNextPage = () => {
+       
+    }
 
 
     return (
@@ -39,7 +51,7 @@ function Reader({books, match, currentChapter, retrieveCurrentChapter, setNextCh
   <Row>
     <Col> 
     
-     {<Button>
+     {currentChapter.number && currentChapter.number > 1 && <Button>
      
       <Button.Content visible>
         <Icon name='arrow left' />
@@ -53,12 +65,20 @@ function Reader({books, match, currentChapter, retrieveCurrentChapter, setNextCh
     
     </Col>
     <Col>
-     <Button>
+     {console.log("current chapter", currentChapter)} 
+     {currentChapter.number && (currentChapter.number < getBookByChapter(books, currentChapter.book_id).chapter_count)  &&  <Button>
     <Button.Content visible>
         <Icon name='arrow right' />
       </Button.Content>
-    </Button>
+    </Button>}
     </Col>
+  </Row>
+  <Row style={commentsContainerStyle}>
+      <Col></Col>
+      <Col> <Button basic color='blue' onClick={() => setShowCommentsState(!showCommentsState)}>
+      {showCommentsState ? 'Hide': 'Show'} Comments
+    </Button></Col>
+      <Col></Col>
   </Row>
 </Container>
        

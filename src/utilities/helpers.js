@@ -74,7 +74,11 @@ export const mapSortPropertyToSortLabel = (sortProperty) => {
     else return 'Title'
 }
 
-export const calculateWordNumEnd = (wordNumStart) => {
-  return wordNumStart + 200
+export const getBookByChapter = (books, book_id) => {
+  console.log("books", books)
+  console.log("book id", book_id)
+   const book = books.find(book => book.id === book_id)
+   console.log(book)
+   return book
 }
 
