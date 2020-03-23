@@ -5,13 +5,9 @@ import LibraryControls from './LibraryControls'
 import {retrieveLibrary} from '../actions/library'
 
 
-function Library({getLibrary, library, userId, history, loggedIn, ...props}) {
+function Library({getLibrary, library, userId, loggedIn, ...props}) {
     
-    useEffect(() => {
-        if (!loggedIn) {
-            history.push("/welcome")
-        }
-    })
+   
 
     useEffect(() => { // populate library if its empty
        if (library.userBooks.length === 0) retrieveLibrary(userId) 
@@ -26,8 +22,7 @@ function Library({getLibrary, library, userId, history, loggedIn, ...props}) {
 const mapStateToProps = (state) => {
   return {
       library: state.library,
-      userId: state.auth.userId,
-      loggedIn: state.auth.loggedIn
+      userId: state.auth.userId
   }
 }
 

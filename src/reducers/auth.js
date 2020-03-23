@@ -4,6 +4,7 @@ import {AUTHORIZE, LOGOUT, UPDATE_LOGIN_ERRORS, SIGNUP} from "../actions/types"
 const initialState = {
     email: "",
     loggedIn: false,
+    userId: null,
     errors: []
 }
 

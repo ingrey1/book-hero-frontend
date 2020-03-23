@@ -19,16 +19,19 @@ export const authorizeUserOrLogout = () => {
              type: AUTHORIZE,
              payload: userAuthInfo
          })
+        
         } else { // log out the unauthorized user
           dispatch({
               type: LOGOUT
           })
+        
         }
      })).catch(err => {
          console.log("backend error", err)
          dispatch({  // something went wrong on the backend, so the user should not have access to the route
             type: LOGOUT
         })
+       
      })
   }
 }

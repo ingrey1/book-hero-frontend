@@ -15,7 +15,7 @@ export function constructLibraryListBook(book) {
         last_added_to_library: Date.parse(book.current_reading_location.created_at)   
     }
 
-    console.log("new book", newBook)
+    
     return newBook
 }
 
@@ -72,5 +72,9 @@ export const mapSortPropertyToSortLabel = (sortProperty) => {
     if (sortProperty === 'last_read') return 'Last Read Date'
     else if (sortProperty === 'last_added_to_library') return 'Add To Library Date'
     else return 'Title'
+}
+
+export const calculateWordNumEnd = (wordNumStart) => {
+  return wordNumStart + 200
 }
 

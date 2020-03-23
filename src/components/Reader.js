@@ -1,35 +1,78 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import {connect} from 'react-redux'
+import {retrieveCurrentChapter, startReader, endReader, setNextChapter, setPreviousChapter} from '../actions/currentChapter'
+import {Row, Col, Container} from 'react-bootstrap'
 
 
-function Reader({books, match, ...props}) {
 
+
+const readerStyles = {
+    minWidth: '700px',
+    maxWidth: '700px'
+}
+
+const readerContainerStyles = {
+    marginTop: '25px'
+}
+
+const max_characters = 3100
+
+function Reader({books, match, currentChapter, retrieveCurrentChapter, setNextChapter, setPreviousChapter, userId, ...props}) {
+
+
+  
+
+    
     useEffect(() => {
-        // if the chapter information isnt available for the given book, retrieve it
-    })
- 
-    const bookId = match.params.bookId
-    const thisBook = books.find(b => b.id == bookId) 
+        const bookId = match.params.bookId
+        retrieveCurrentChapter(userId, bookId)
+    }, [])
 
-    const handleStartReaderMode = () => {
+
+
+
+    return (
+
+        <Container style={readerContainerStyles}>
+            
+  <Row>
+    <Col></Col>
+    <Col style={readerStyles}>
+    <h2 id="chapter-title">{currentChapter.content && currentChapter.title}</h2>
+    <div id="chapter-content">{currentChapter.content && currentChapter.content.substring(currentChapter.current_word, currentChapter.current_word + max_characters)}</div>
+    
+    </Col>
+    <Col></Col>
+  </Row>
+</Container>
+       
       
-    }
-
-    return <div id="reader-container">
-       <p>book title: {thisBook.title}</p>
-       <button onClick={handleStartReaderMode}>Read This Book</button>
-    </div>
+      
+       
+         
+       
+       
+      )
 }
 
 const mapStateToProps = (state) => {
     return {
-        books: state.library.userBooks
+        books: state.library.userBooks,
+        currentChapter: state.currentChapter.currentChapter,
+        userId: state.auth.userId
     }
  }
  
  const mapDispatchToProps = (dispatch) => {
 
       return {
+
+        startReader: () => dispatch(startReader()), 
+        endReader: () => dispatch(endReader()),
+        retrieveCurrentChapter: (userId, bookId) => dispatch(retrieveCurrentChapter(userId, bookId)),
+        setNextChapter: (chapter) => dispatch(setNextChapter(chapter)),
+        setPreviousChapter: (chapter) => dispatch(setPreviousChapter(chapter))
+    
 
 
       }

@@ -8,7 +8,6 @@ function LibraryDetailBook({books, match, ...props}) {
 
     // note: make sure to handle case where user goes straight to library/bookId using url
     const bookId = match.params.bookId
-    console.log(match)
     const thisBook = books.find(b => b.id == bookId) 
      
     return <Col>

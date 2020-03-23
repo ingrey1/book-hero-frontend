@@ -19,3 +19,13 @@
 .navbar .navbar-brand:hover {
     color: #F3E9E0;
 }
+
+ 
+#chapter-title {
+    margin: 25px;
+}
+
+#chapter-content {
+    width: 100%;
+    word-wrap: break-word;
+} 
