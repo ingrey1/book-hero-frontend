@@ -11,6 +11,12 @@ export function startReader() {
     }
 }
 
+export const clearCurrentChapter = () => {
+    return {
+      type: CLEAR_CURRENT_CHAPTER
+    }
+  }
+
 export function endReader() {
     return {
        type: END_READER
@@ -91,15 +97,15 @@ export function updateChapterLocation(chapter, newCurrentWord ) {
     }
 }
 
-export function updateReadingInfo(userId, bookId, chapterStoreName, newCurrentChapter, newCurrentWord) {
+export function updateReadingInfo(userId, bookId, newCurrentWord, newCurrentChapter) {
      
     const token = localStorage.getItem('fire_token')
     
     return function(dispatch) {
 
         updateReadingStatus(userId, bookId, token, newCurrentChapter, newCurrentWord).then(res => res.json()).then(data => {
-            if (!data.errors) {
-                dispatch(updateChapterLocation(chapterStoreName, newCurrentWord))
+            if (data.errors) {
+                // handle errors
             }
         }).catch(err => console.log(err))
 

@@ -1,11 +1,25 @@
-import {SIGNUP, LOGOUT, AUTHORIZE, UPDATE_LOGIN_ERRORS} from "./types"
+import {SIGNUP, LOGOUT, AUTHORIZE, UPDATE_LOGIN_ERRORS, CLEAR_LIBRARY, CLEAR_CURRENT_CHAPTER} from "./types"
 import {authenticateUser} from "../api/api"
+import {clearLibrary} from './library'
+import {clearCurrentChapter} from './currentChapter'
 
 
 export const logout = () => {
   return {
     type: LOGOUT
   }
+}
+
+
+
+
+
+export const clearUserStoreAndLogout = () => {
+    return function(dispatch){
+      dispatch(logout())
+      dispatch(clearLibrary())
+      dispatch(clearCurrentChapter())
+    }
 }
 
 // used to protect routes

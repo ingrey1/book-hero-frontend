@@ -42,10 +42,6 @@ function Reader({books, match, updateReadingInfo, updateChapterLocation, current
         retrieveCurrentChapter(userId, bookId)
     }, [])
 
-    const handleTurnNextChapter = () => {
-
-    }
-
     const showPreviousButton = () => {
 
         return currentChapter.number && (currentChapter.number > 1) || stillHasPreviousText()
@@ -68,6 +64,7 @@ function Reader({books, match, updateReadingInfo, updateChapterLocation, current
         return (currentChapter.current_word - max_characters) > 0
 
     }
+    
 
     const handleTurnNextPage = () => {
 
@@ -78,7 +75,8 @@ function Reader({books, match, updateReadingInfo, updateChapterLocation, current
            const newCharacterIndex = currentChapter.current_word + max_characters
            updateChapterLocation('currentChapter', newCharacterIndex) 
            // updateReadingInfo 
-        
+           //(userId, bookId, chapterStoreName, newCurrentChapter, newCurrentWord)
+           updateReadingInfo(userId, currentChapter.book_id, currentChapter.number, newCharacterIndex)
         }
 
         // else go to the next chapter, update backend
@@ -174,7 +172,7 @@ const mapStateToProps = (state) => {
         setNextChapter: (chapter) => dispatch(setNextChapter(chapter)),
         setPreviousChapter: (chapter) => dispatch(setPreviousChapter(chapter)),
         updateChapterLocation: (chapter, newCurrentWord) => dispatch(updateChapterLocation(chapter, newCurrentWord)),
-        updateReadingInfo: (userId, bookId, chapterStoreName, newCurrentChapter, newCurrentWord) => dispatch(updateReadingInfo(userId, bookId, chapterStoreName, newCurrentChapter, newCurrentWord))
+        updateReadingInfo: (userId, bookId, newCurrentChapter, newCurrentWord) => dispatch(updateReadingInfo(userId, bookId, newCurrentChapter, newCurrentWord))
     
 
 

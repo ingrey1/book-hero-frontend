@@ -3,7 +3,11 @@ import {SET_USER_LIBRARY, UPDATE_LIBRARY_RETRIEVAL_ERRORS,
 import {getUserBooks} from '../api/api'
 
 
-
+export const clearLibrary = () => {
+    return {
+      type: CLEAR_LIBRARY
+    }
+  }
 
 export function searchAndFilterLibrary(newSearchTitle) {
     return {
