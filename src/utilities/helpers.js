@@ -75,10 +75,12 @@ export const mapSortPropertyToSortLabel = (sortProperty) => {
 }
 
 export const getBookByChapter = (books, book_id) => {
-  console.log("books", books)
-  console.log("book id", book_id)
+  
    const book = books.find(book => book.id === book_id)
-   console.log(book)
    return book
+}
+
+export const calculatePercentOfChapterForCurrentPage = (chapterContent, lastCharOnPageIndex) => {
+    return Math.round(1.0 * lastCharOnPageIndex / chapterContent.length * 100) 
 }
 

@@ -43,6 +43,10 @@ function Reader({books, match, currentChapter, retrieveCurrentChapter, setNextCh
        
     }
 
+    const handleTurnPreviousPage = () => {
+        
+    }
+
 
     return (
 
