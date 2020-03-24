@@ -97,20 +97,20 @@ export function updateChapterLocation(chapter, newCurrentWord ) {
     }
 }
 
-export function updateReadingInfo(userId, bookId, newCurrentWord, newCurrentChapter) {
+// export function updateReadingInfo(userId, bookId, newCurrentWord, newCurrentChapter) {
      
-    const token = localStorage.getItem('fire_token')
+//     const token = localStorage.getItem('fire_token')
     
-    return function(dispatch) {
+//     return function(dispatch) {
 
-        updateReadingStatus(userId, bookId, token, newCurrentChapter, newCurrentWord).then(res => res.json()).then(data => {
-            if (data.errors) {
-                // handle errors
-            }
-        }).catch(err => console.log(err))
+//         updateReadingStatus(userId, bookId, token, newCurrentChapter, newCurrentWord).then(res => res.json()).then(data => {
+//             if (data.errors) {
+//                 // handle errors
+//             }
+//         }).catch(err => console.log(err))
 
-     } 
-}
+//      } 
+// }
 
 export const nextChapterTransition = (currentChapter, nextChapter, previousChapter, max_characters) => {
 

@@ -1,12 +1,15 @@
 import React, { useEffect } from 'react';
 import {connect} from 'react-redux'
 import {retrieveLibrary} from '../actions/library'
+import {clearCurrentChapter} from '../actions/currentChapter'
 
-function Home({getLibrary, userId, ...props}) {
+function Home({getLibrary, clearCurrentChapter, userId, ...props}) {
 
     useEffect(() => {
       
            getLibrary(userId)
+           clearCurrentChapter()
+
        
     }, [])
   
@@ -25,7 +28,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => {
    return {
 
-     getLibrary: (userId) => dispatch(retrieveLibrary(userId))
+     getLibrary: (userId) => dispatch(retrieveLibrary(userId)),
+     clearCurrentChapter: () => dispatch(clearCurrentChapter())
        
    }
 }

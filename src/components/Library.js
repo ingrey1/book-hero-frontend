@@ -3,15 +3,21 @@ import {connect} from 'react-redux'
 import LibraryBooks from './LibraryBooks'
 import LibraryControls from './LibraryControls'
 import {retrieveLibrary} from '../actions/library'
+import {clearCurrentChapter} from '../actions/currentChapter'
 
 
-function Library({getLibrary, library, userId, loggedIn, ...props}) {
+function Library({getLibrary, clearCurrentChapter, library, userId, loggedIn, ...props}) {
     
    
 
     useEffect(() => { // populate library if its empty
+        clearCurrentChapter() 
+        console.log("useeffect library, once")
        if (library.userBooks.length === 0) retrieveLibrary(userId) 
     }, [])
+
+   
+       
 
     return <div>
        <LibraryControls /> 
@@ -28,7 +34,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getLibrary: (userId) => dispatch(retrieveLibrary(userId))
+        getLibrary: (userId) => dispatch(retrieveLibrary(userId)),
+        clearCurrentChapter: () => dispatch(clearCurrentChapter())
     }
 }
 

@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react'
 import {connect} from 'react-redux'
-import {retrieveCurrentChapter, nextChapterTransition, retrieveNextChapter, updateChapterLocation, updateReadingInfo, startReader, endReader, setNextChapter, setPreviousChapter, setCurrentChapter} from '../actions/currentChapter'
+import {retrieveCurrentChapter, nextChapterTransition, retrieveNextChapter, updateChapterLocation, startReader, endReader, setNextChapter, setPreviousChapter, setCurrentChapter} from '../actions/currentChapter'
 import {Row, Col, Container} from 'react-bootstrap'
 import {Button, Icon, Progress} from 'semantic-ui-react'
+import {updateReadingStatus} from '../api/api'
 import {getBookByChapter, calculatePercentOfChapterForCurrentPage} from '../utilities/helpers'
 
 
@@ -32,7 +33,7 @@ const progressContainerStyle = {
 
 const max_characters = 3100
 
-function Reader({books, match, nextChapterTransition, previousChapter, nextChapter, updateReadingInfo, updateChapterLocation, currentChapter, retrieveCurrentChapter, retrieveNextChapter, setNextChapter, setPreviousChapter, setCurrentChapter, userId, ...props}) {
+function Reader({books, match, nextChapterTransition, previousChapter, nextChapter, updateChapterLocation, currentChapter, retrieveCurrentChapter, retrieveNextChapter, setNextChapter, setPreviousChapter, setCurrentChapter, userId, ...props}) {
     
 
     const [showCommentsState, setShowCommentsState] = useState(false)
@@ -96,14 +97,11 @@ function Reader({books, match, nextChapterTransition, previousChapter, nextChapt
            // updateChapterLocation
            const newCharacterIndex = currentChapter.current_word + max_characters
            updateChapterLocation('currentChapter', newCharacterIndex) 
-           // updateReadingInfo 
-           //(userId, bookId, chapterStoreName, newCurrentChapter, newCurrentWord)
-           updateReadingInfo(userId, currentChapter.book_id, currentChapter.number, newCharacterIndex)
+           updateReadingStatus(userId, currentChapter.book_id, currentChapter.number, newCharacterIndex)
         } else {  // else go to the next chapter, update backend
+            updateReadingStatus(userId, currentChapter.book_id, currentChapter.number + 1, 1)
             console.log("next chapter in handleTurnPage", nextChapter)
             nextChapterTransition(currentChapter, nextChapter, previousChapter, max_characters)
-           // updateReadingInfo(userId, currentChapter.book_id, currentChapter.number + 1, 1)
-            
         }
 
        
@@ -119,7 +117,7 @@ function Reader({books, match, nextChapterTransition, previousChapter, nextChapt
            // updateChapterLocation
            const newCharacterIndex = currentChapter.current_word - max_characters
            // updateReadingInfo 
-           updateReadingInfo(userId, currentChapter.book_id, currentChapter.number, newCharacterIndex)
+           updateReadingStatus(userId, currentChapter.book_id, currentChapter.number, newCharacterIndex)
         
         } else {  // else go to the prev chapter, update backend
 
@@ -133,7 +131,7 @@ function Reader({books, match, nextChapterTransition, previousChapter, nextChapt
              // clear previousChapter
              setPreviousChapter({}) 
              // update reading record
-             updateReadingInfo(userId, currentChapter.book_id, currentChapter.number, previousChapter.content.length - max_characters)
+             updateReadingStatus(userId, currentChapter.book_id, currentChapter.number, previousChapter.content.length - max_characters)
 
         }
 
@@ -217,9 +215,7 @@ const mapStateToProps = (state) => {
         nextChapterTransition: (current, next, prev, max) => dispatch(nextChapterTransition(current, next, prev, max)),
         setCurrentChapter: (chapter) => dispatch(setCurrentChapter(chapter)),
         setPreviousChapter: (chapter) => dispatch(setPreviousChapter(chapter)),
-        updateChapterLocation: (chapter, newCurrentWord) => dispatch(updateChapterLocation(chapter, newCurrentWord)),
-        updateReadingInfo: (userId, bookId, newCurrentChapter, newCurrentWord) => dispatch(updateReadingInfo(userId, bookId, newCurrentChapter, newCurrentWord))
-    
+        updateChapterLocation: (chapter, newCurrentWord) => dispatch(updateChapterLocation(chapter, newCurrentWord))
 
 
       }
