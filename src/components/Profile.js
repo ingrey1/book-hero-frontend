@@ -30,7 +30,7 @@ function Profile({auth: {email, username, firstName, lastName, userId}, updateUs
         [name]: editInputState[name],
 
       }
-
+      
       updateUserInfo(updatedState)
       setEditState({...editState, [name]: false})
       updateUser(userId, localStorage.getItem('fire_token'), updatedState)
