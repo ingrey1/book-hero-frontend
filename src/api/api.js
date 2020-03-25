@@ -23,6 +23,16 @@ export function authenticateUser(token) {
 
 }
 
+export function updateUser(userId, token, info) {
+    const url = `${baseUrl}/users/${userId}`
+    const configuration = {
+        method: "PATCH",
+        headers: createAuthHeader(token),
+        body: JSON.stringify(info)
+    }
+    return fetch(url, configuration)
+}
+
 export function getUserBooks(userId, token) {
    const url = baseUrl + `/users/${userId}/books`
    const configuration = {

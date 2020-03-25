@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import {connect} from 'react-redux'
 import {Grid, Label, Segment, Icon, List, Input, Button} from 'semantic-ui-react'
 import {updateUserInfo} from '../actions/auth'
+import {updateUser} from '../api/api'
 
 const colStyle = {
     marginLeft: '10px'
@@ -24,6 +25,7 @@ function Profile({auth: {email, username, firstName, lastName}, updateUserInfo, 
 
       updateUserInfo(editInputState)
       setEditState({...editState, [name]: false})
+      updateUser(auth.userId, localStorage.getItem('fire_token'), editInputState)
         
     }
 
