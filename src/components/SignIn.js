@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
 import {loginWithGoogle, createUserWithEmailPassword} from '../actions/auth'
 import { Button, Form, Grid, Header, Image, Message, Segment, Icon } from 'semantic-ui-react'
@@ -6,11 +6,24 @@ import { Button, Form, Grid, Header, Image, Message, Segment, Icon } from 'seman
 
 
 function SignIn({providers, user, firebaseAppAuth, loginWithGoogle, loginFunctions: {signInWithGoogle, signInWithEmailAndPassword,createUserWithEmailAndPassword}, createUser, ...props}) {
+  
+
+
 
   const [credentialsState, setCredentialsState] = useState({email: "", password: "", passwordVerification: ""})
   const [signupState, setSignupState] = useState(false)
   const [errorsState, setErrorsState] = useState({email: true, password: true, passwordVerification: true})
   
+  useEffect(() => {
+    setErrorsState({
+      ...errorsState,
+      password: validPassword(),
+      email: validEmail(),
+      passwordVerification: validPasswordVerification()
+    })
+  })
+
+
   const valid = () => {
     return validEmail() && validPassword() && validPasswordVerification()
   }
@@ -20,19 +33,17 @@ function SignIn({providers, user, firebaseAppAuth, loginWithGoogle, loginFunctio
   }
 
   const validPassword = () => {
-    return credentialState.password.length > 6
+    return credentialsState.password.length > 6
   }
 
   const validPasswordVerification = () => {
-    return credentialState.passwordVerification.length === credentialsState.password.length
+    return credentialsState.passwordVerification.length === credentialsState.password.length
   }
 
   const handleChange = (e) => {
     const value = e.target.value
     const name = e.target.name
-    setCredentialsState({...credentialsState, [name]: value}, () => {
-         
-    })
+    setCredentialsState({...credentialsState, [name]: value})
   }
 
  
@@ -66,7 +77,7 @@ function SignIn({providers, user, firebaseAppAuth, loginWithGoogle, loginFunctio
       </Header>
       <Form size='large'>
         <Segment stacked>
-          <Form.Input onChange={handleChange} fluid icon='user' name="email" iconPosition='left' placeholder='E-mail address' value={credentialsState.email} />
+          <Form.Input error={errorsState.email} onChange={handleChange} fluid icon='user' name="email" iconPosition='left' placeholder='E-mail address' value={credentialsState.email} />
           <Form.Input onChange={handleChange}
             name="password"
             value={credentialsState.password} 
@@ -75,8 +86,10 @@ function SignIn({providers, user, firebaseAppAuth, loginWithGoogle, loginFunctio
             iconPosition='left'
             placeholder='Password'
             type='password'
+            error={errorsState.password}
           />
           {signupState && <Form.Input
+            error={errorsState.passwordVerification}
             onChange={handleChange}
             name="passwordVerification"
             value={credentialsState.passwordVerification} 
