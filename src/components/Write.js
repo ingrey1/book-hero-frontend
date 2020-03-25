@@ -1,11 +1,11 @@
 import React, {useState} from 'react'
 import {connect} from 'react-redux'
 
-function Refill({...props}) {
+function Write({...props}) {
 
 
     return <div>
-        Refill
+        Write
     </div>
 
 }
@@ -22,4 +22,4 @@ const mapDispatchToProps = dispatch => {
    }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Refill)
+export default connect(mapStateToProps, mapDispatchToProps)(Write)
