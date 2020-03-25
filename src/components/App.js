@@ -11,20 +11,22 @@ const firebaseApp = firebase.initializeApp(firebaseConfig);
 
 const firebaseAppAuth = firebaseApp.auth();
 const gProvider = new firebase.auth.GoogleAuthProvider();
+const usernamePasswordProvider = new firebase.auth.EmailAuthProvider()
 gProvider.setCustomParameters({
   prompt: 'select_account'
 }) 
 const providers = {
-  googleProvider: gProvider 
+  googleProvider: gProvider,
+  emailAuthProvider: usernamePasswordProvider
 };
 
 function App(props) {
-
-  const {signInWithGoogle, signOut} = props
+  console.log(props) 
+  const {signInWithGoogle, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut} = props
 
   return (
     <div className="App">
-         <Main signInWithGoogle={signInWithGoogle} signOut={signOut} />
+         <Main user={props.user} firebaseAppAuth={firebaseAppAuth} providers={providers} signInWithGoogle={signInWithGoogle} signInWithEmailAndPassword={signInWithEmailAndPassword} createUserWithEmailAndPassword={createUserWithEmailAndPassword} signOut={signOut} />
     </div>
   );
 }

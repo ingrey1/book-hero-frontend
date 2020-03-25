@@ -1,27 +1,60 @@
 import React, {useState} from 'react'
 import {connect} from 'react-redux'
-import {loginWithGoogle} from '../actions/auth'
+import {loginWithGoogle, createUserWithEmailPassword} from '../actions/auth'
 import { Button, Form, Grid, Header, Image, Message, Segment, Icon } from 'semantic-ui-react'
 
 
 
-function SignIn({loginFunctions: {signInWithGoogle}, ...props}) {
+function SignIn({providers, user, firebaseAppAuth, loginWithGoogle, loginFunctions: {signInWithGoogle, signInWithEmailAndPassword,createUserWithEmailAndPassword}, createUser, ...props}) {
 
-  const [credentialsState, setCredentialsState] = useState({email: "", password: "", passwordVerfication: ""})
+  const [credentialsState, setCredentialsState] = useState({email: "", password: "", passwordVerification: ""})
   const [signupState, setSignupState] = useState(false)
+  const [errorsState, setErrorsState] = useState({email: true, password: true, passwordVerification: true})
+  
+  const valid = () => {
+    return validEmail() && validPassword() && validPasswordVerification()
+  }
+
+  const validEmail = () => {
+      return credentialsState.email.includes('@')
+  }
+
+  const validPassword = () => {
+    return credentialState.password.length > 6
+  }
+
+  const validPasswordVerification = () => {
+    return credentialState.passwordVerification.length === credentialsState.password.length
+  }
 
   const handleChange = (e) => {
     const value = e.target.value
     const name = e.target.name
-    setCredentialsState({...credentialsState, [name]: value})
+    setCredentialsState({...credentialsState, [name]: value}, () => {
+         
+    })
   }
+
+ 
 
   const handleLogin = () => {
 
+      if (valid()) loginWithGoogle(signInWithEmailAndPassword, credentialsState.email, credentialsState.password, firebaseAppAuth)
+      // const credential = providers.emailAuthProvider.credential(credentialsState.email, credentialsState.password).then(
+      //   (res) => console.log(res)
+      // )
+     
   }
 
   const handleSignup = () => {
     
+    console.log("password", credentialsState.password)
+    console.log("password verification", credentialsState.passwordVerification)
+      if (valid()){
+        console.log("handlesignup called")
+        createUser(createUserWithEmailAndPassword, credentialsState.email, credentialsState.password)
+      }
+      
   }
 
  
@@ -54,16 +87,16 @@ function SignIn({loginFunctions: {signInWithGoogle}, ...props}) {
             type='password'
           /> }
 
-          <Button color='blue' fluid size='large'>
+          <Button onClick={signupState ? handleSignup : handleLogin  } color='blue' fluid size='large'>
             {signupState ? "Signup" : "Login"}
           </Button>
         </Segment>
       </Form>
       <Message>
-      <Button style={{marginRight: '20px'}} onClick={() => props.loginWithGoogle(signInWithGoogle)} color='google plus'>
+      <Button style={{marginRight: '20px'}} onClick={() => loginWithGoogle(signInWithGoogle)} color='google plus'>
       <Icon name='google' /> Sign in With Google
     </Button>
-      <a href='#' disabled>{signupState ? "Login": "Signup"}</a>
+      <a onClick={() => setSignupState(!signupState)}>{signupState ? "Login": "Signup"}</a>
         
       </Message>
     </Grid.Column>
@@ -75,7 +108,8 @@ function SignIn({loginFunctions: {signInWithGoogle}, ...props}) {
 const mapDispatchToProps = (dispatch) => {
 
   return {
-    loginWithGoogle: (f) => dispatch(loginWithGoogle(f)) 
+    loginWithGoogle: (f, email, password, authy) => dispatch(loginWithGoogle(f, email, password, authy)),
+    createUser: (f, email, password) => dispatch(createUserWithEmailPassword(f, email, password)) 
   }
 
 }

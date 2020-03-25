@@ -6,7 +6,7 @@ import {authorizeUserOrLogout} from '../actions/auth'
 
 
 
-function Welcome({authorize, loginFunctions, loggedIn, history, location, ...props}) {
+function Welcome({user, firebaseAppAuth, providers,authorize, loginFunctions, loggedIn, history, location, ...props}) {
 
     useEffect(() => {
         console.log("use effect welcome comp, called just once")
@@ -24,7 +24,7 @@ function Welcome({authorize, loginFunctions, loggedIn, history, location, ...pro
     })
 
     return <div>
-       <SignIn loginFunctions={loginFunctions}  />
+       <SignIn user={user} firebaseAppAuth={firebaseAppAuth} providers={providers} loginFunctions={loginFunctions}  />
     </div>
 }
 
