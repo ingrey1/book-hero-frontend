@@ -12,19 +12,12 @@ function SignIn({providers, user, firebaseAppAuth, loginWithGoogle, loginFunctio
 
   const [credentialsState, setCredentialsState] = useState({email: "", password: "", passwordVerification: ""})
   const [signupState, setSignupState] = useState(false)
-  const [errorsState, setErrorsState] = useState({email: true, password: true, passwordVerification: true})
+  const [errorsState, setErrorsState] = useState({email: false, password: false, passwordVerification: false})
   
-  useEffect(() => {
-    setErrorsState({
-      ...errorsState,
-      password: validPassword(),
-      email: validEmail(),
-      passwordVerification: validPasswordVerification()
-    })
-  })
+  // IN REDUX HANDLE MESSAGES FOR FAILED SIGNUP AND FAILED LOGIN
 
 
-  const valid = () => {
+  const validSignup = () => {
     return validEmail() && validPassword() && validPasswordVerification()
   }
 
@@ -49,19 +42,27 @@ function SignIn({providers, user, firebaseAppAuth, loginWithGoogle, loginFunctio
  
 
   const handleLogin = () => {
-
-      if (valid()) loginWithGoogle(signInWithEmailAndPassword, credentialsState.email, credentialsState.password, firebaseAppAuth)
-      // const credential = providers.emailAuthProvider.credential(credentialsState.email, credentialsState.password).then(
-      //   (res) => console.log(res)
-      // )
+    setErrorsState({
+      ...errorsState,
+      password: !validPassword(),
+      email: !validEmail()
+    })  
+      if (validEmail() && validPassword()) loginWithGoogle(signInWithEmailAndPassword, credentialsState.email, credentialsState.password, firebaseAppAuth)
+     
      
   }
 
   const handleSignup = () => {
-    
+    setErrorsState({
+      ...errorsState,
+      password: !validPassword(),
+      email: !validEmail(),
+      passwordVerification: !validPasswordVerification()
+      
+    })
     console.log("password", credentialsState.password)
     console.log("password verification", credentialsState.passwordVerification)
-      if (valid()){
+      if (validSignup()){
         console.log("handlesignup called")
         createUser(createUserWithEmailAndPassword, credentialsState.email, credentialsState.password)
       }
@@ -77,8 +78,8 @@ function SignIn({providers, user, firebaseAppAuth, loginWithGoogle, loginFunctio
       </Header>
       <Form size='large'>
         <Segment stacked>
-          <Form.Input error={errorsState.email} onChange={handleChange} fluid icon='user' name="email" iconPosition='left' placeholder='E-mail address' value={credentialsState.email} />
-          <Form.Input onChange={handleChange}
+          <Form.Input error={errorsState.email ?  {content:'Please enter a valid email', pointing: 'below' }: null} onChange={handleChange} fluid icon='user' name="email" iconPosition='left' placeholder='E-mail address' value={credentialsState.email} />
+          <Form.Input error={errorsState.password ?  {content:'Password must be at least 6 characters', pointing: 'below' }: null} onChange={handleChange}
             name="password"
             value={credentialsState.password} 
             fluid
@@ -86,10 +87,10 @@ function SignIn({providers, user, firebaseAppAuth, loginWithGoogle, loginFunctio
             iconPosition='left'
             placeholder='Password'
             type='password'
-            error={errorsState.password}
+           
           />
           {signupState && <Form.Input
-            error={errorsState.passwordVerification}
+            error={errorsState.passwordVerification ?  {content:'Make sure your passwords match', pointing: 'below' }: null}
             onChange={handleChange}
             name="passwordVerification"
             value={credentialsState.passwordVerification} 
