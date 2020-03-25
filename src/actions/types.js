@@ -4,6 +4,7 @@ export const SIGNUP = 'SIGNUP'
 export const LOGOUT = 'LOGOUT'
 export const AUTHORIZE = 'AUTHORIZE'
 export const UPDATE_LOGIN_ERRORS = 'UPDATE_LOGIN_ERRORS'
+export const UPDATE_USER_INFO = 'UPDATE_USER_INFO'
 
 
 // library reducer

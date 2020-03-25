@@ -1,9 +1,16 @@
-import {SIGNUP, LOGOUT, AUTHORIZE, UPDATE_LOGIN_ERRORS} from "./types"
+import {SIGNUP, LOGOUT, AUTHORIZE, UPDATE_LOGIN_ERRORS, UPDATE_USER_INFO} from "./types"
 import {authenticateUser} from "../api/api"
 import {clearLibrary} from './library'
 import {clearCurrentChapter} from './currentChapter'
 const jwt = require('jsonwebtoken');
 
+
+export const updateUserInfo = (newInfo) => {
+  return {
+    type: UPDATE_USER_INFO,
+    payload: newInfo
+  }
+}
 
 export const logout = () => {
   return {
