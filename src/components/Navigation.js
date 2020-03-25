@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import NavBar from 'react-bootstrap/NavBar'
 import Nav from 'react-bootstrap/Nav'
-import {Form, FormControl, Button} from 'react-bootstrap'
+import {Form, FormControl, Button, NavDropdown} from 'react-bootstrap'
 import {LinkContainer} from 'react-router-bootstrap'
 import {clearUserStoreAndLogout} from '../actions/auth'
 
@@ -58,10 +58,20 @@ function Navigation({readerMode, logout, loggedIn,...props}) {
               <FormControl type="text" placeholder="Search Books and Stories" className="mr-sm-2" />
               <Button variant="outline-success">Search</Button>
            </Form>
+           <NavDropdown title="Account" id="basic-nav-dropdown">
+        <NavDropdown.Item ><LinkContainer to="/profile" exact={true}>
+              <Nav.Link>Profile</Nav.Link>
+           </LinkContainer></NavDropdown.Item>
 
-           <LinkContainer to="/welcome" exact={true}>
+           <NavDropdown.Item ><LinkContainer to="/refill" exact={true}>
+              <Nav.Link>Refill Book Bucks</Nav.Link>
+           </LinkContainer></NavDropdown.Item>
+
+        <NavDropdown.Item><LinkContainer to="/welcome" exact={true}>
               <Nav.Link onClick={logout}>Logout</Nav.Link>
-           </LinkContainer>
+           </LinkContainer></NavDropdown.Item>
+        
+      </NavDropdown>
           
 
            </Nav>
