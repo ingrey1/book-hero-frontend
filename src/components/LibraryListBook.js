@@ -4,8 +4,9 @@ import {Link} from 'react-router-dom'
 
 
 const bookContainerStyle =  {
-  marginTop: '25px' 
+  margin: '25px' 
 }
+
 
 function LibraryListBook({book, ...props }) {
   

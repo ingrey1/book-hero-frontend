@@ -38,7 +38,7 @@ export function doubleFilterByTitleAndCategory(arr, title, categories) {
 
     if (categories === 'all' && title !== '') { // filter by title only
          
-         filteredArr = filteredArr.filter(e => e.title.startsWith(title))
+         filteredArr = filteredArr.filter(e => e.title.toLowerCase().startsWith(title.toLowerCase()))
     
     } else {
       if (title === '') { // just category filter
@@ -48,7 +48,7 @@ export function doubleFilterByTitleAndCategory(arr, title, categories) {
 
       } else { // category and title filter 
 
-        filteredArr = filteredArr.filter(e => satisfiesCategories(categories, e.categories) && e.title.startsWith(title) )
+        filteredArr = filteredArr.filter(e => satisfiesCategories(categories, e.categories) && e.title.toLowerCase().startsWith(title.toLowerCase()) )
 
       }
     }
