@@ -9,7 +9,7 @@ const colStyle = {
     
 }
 
-function Profile({auth: {email, username, firstName, lastName}, updateUserInfo, ...props}) {
+function Profile({auth: {email, username, firstName, lastName, userId}, updateUserInfo, ...props}) {
 
     const [editState, setEditState] = useState({firstName: false, lastName: false, username: false})
     const [editInputState, setEditInputState] = useState({firstName: "", lastName: "", username: ""})
@@ -22,10 +22,18 @@ function Profile({auth: {email, username, firstName, lastName}, updateUserInfo, 
     }
 
     const handleUpdateUserInfo = (name) => {
+      
+      const updatedState = {
+        username: username,
+        firstName: firstName,
+        lastName: lastName,
+        [name]: editInputState[name],
 
-      updateUserInfo(editInputState)
+      }
+
+      updateUserInfo(updatedState)
       setEditState({...editState, [name]: false})
-      updateUser(auth.userId, localStorage.getItem('fire_token'), editInputState)
+      updateUser(userId, localStorage.getItem('fire_token'), updatedState)
         
     }
 
