@@ -47,21 +47,23 @@ function Profile({auth: {email, username, firstName, lastName}, updateUserInfo, 
       <Label color='red' horizontal>
         First Name
       </Label>
-      {editState.firstName ? <span><Input onChange={handleEditInputChange} name="firstName" value={editInputState.firstName} placeholder={firstName} /><Button onClick={() => handleUpdateUserInfo('firstName')} color="red">Confirm</Button></span>: <span>{(firstName || firstName === "") ? firstName : 'edit me!'} <Icon onClick={() => setEditState({...editState, firstName: true})} name="edit"></Icon></span>}
+      {editState.firstName ? <span><Input onChange={handleEditInputChange} name="firstName" value={editInputState.firstName} placeholder={"First Name"} /><Button onClick={() => handleUpdateUserInfo('firstName')} color="red">Confirm</Button></span>: <span>{(firstName || firstName === "") ? firstName : 'edit me!'} <Icon onClick={() => setEditState({...editState, firstName: true})} name="edit"></Icon></span>}
     </List.Item>
 
     <List.Item>
       <Label color='red' horizontal>
         Last Name
       </Label>
-      {lastName ? lastName : 'edit me!'}
+      {editState.lastName ? <span><Input onChange={handleEditInputChange} name="lastName" value={editInputState.lastName} placeholder={"Last Name"} /><Button onClick={() => handleUpdateUserInfo('lastName')} color="red">Confirm</Button></span>: <span>{(lastName || lastName === "") ? lastName : 'edit me!'} <Icon onClick={() => setEditState({...editState, lastName: true})} name="edit"></Icon></span>}
+
     </List.Item>
 
     <List.Item>
       <Label color='red' horizontal>
         Username
       </Label>
-      {username}
+      {editState.username ? <span><Input onChange={handleEditInputChange} name="username" value={editInputState.username} placeholder={"Username"} /><Button onClick={() => handleUpdateUserInfo('username')} color="red">Confirm</Button></span>: <span>{(username || username === "") ? username : 'edit me!'} <Icon onClick={() => setEditState({...editState, username: true})} name="edit"></Icon></span>}
+
     </List.Item>
 
     </List>
