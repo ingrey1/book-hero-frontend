@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import { Grid, Card } from 'semantic-ui-react'
+import { Dimmer, Loader, Segment } from 'semantic-ui-react'
 import _ from 'underscore'
 import LibraryListBook from './LibraryListBook'
 import {constructLibraryListBook, doubleFilterByTitleAndCategory} from '../utilities/helpers'
@@ -15,13 +16,24 @@ function LibraryBooks({library: {userBooks, displayOptions: {filter: {categories
      
 
 
-    return <Grid columns={4} divided style={{padding: '20px'}}>
+    return <div>
+         {console.log("userbooks", userBooks)}
+       {userBooks.length > 0 ? (<Grid columns={4} divided style={{padding: '20px'}}>
       <Card.Group>
       {sortedBooks.map(book => <LibraryListBook key={Math.random()}  book={book} /> )}
       </Card.Group>
    
-  </Grid>
+    </Grid>): (<Dimmer active>
+        <Loader>Retrieving Library</Loader>
+      </Dimmer>)}</div>
           
+    // return (<Grid columns={4} divided style={{padding: '20px'}}>
+    //    <Card.Group>
+    //    {sortedBooks.map(book => <LibraryListBook key={Math.random()}  book={book} /> )}
+    //   </Card.Group>
+   
+    //  </Grid>)
+
 
 }
 const mapStateToProps = (state) => {

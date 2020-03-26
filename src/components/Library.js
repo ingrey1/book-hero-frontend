@@ -20,8 +20,12 @@ function Library({getLibrary, clearCurrentChapter, library, userId, loggedIn, ..
        
 
     return <div>
+        
+       
        <LibraryControls /> 
        <LibraryBooks />
+    
+    
     </div>
 }
 
