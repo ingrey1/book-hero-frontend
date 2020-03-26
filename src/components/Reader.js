@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react'
 import {connect} from 'react-redux'
-import {retrieveCurrentChapter, nextChapterTransition, retrieveNextChapter, updateChapterLocation, startReader, endReader, setNextChapter, setPreviousChapter, setCurrentChapter} from '../actions/currentChapter'
+import {retrieveCurrentChapter, previousChapterTransition, nextChapterTransition, retrieveNextChapter, updateChapterLocation, startReader, endReader, setNextChapter, setPreviousChapter, setCurrentChapter} from '../actions/currentChapter'
 import {Row, Col, Container} from 'react-bootstrap'
 import {Button, Icon, Progress} from 'semantic-ui-react'
-import {updateReadingStatus, getNextChapter} from '../api/api'
+import {updateReadingStatus, getNextChapter, getPreviousChapter} from '../api/api'
 import {getBookByChapter, calculatePercentOfChapterForCurrentPage} from '../utilities/helpers'
 
 
@@ -49,9 +49,7 @@ function Reader({books, match, nextChapterTransition, previousChapter, nextChapt
         
     }, [])
 
-    // useEffect(() => {
-    //     checkAndRetrieveNextChapter()
-    // })
+
 
 
 
@@ -78,12 +76,7 @@ function Reader({books, match, nextChapterTransition, previousChapter, nextChapt
 
     }
 
-    const checkAndRetrieveNextChapter = () => {
-        if (currentChapter.content && !nextChapter.content && calculatePercentOfChapterForCurrentPage(currentChapter.content, currentChapter.current_word + max_characters) > 1) {
-            console.log("retrievenextChapter called")
-            retrieveNextChapter(userId, currentChapter.book_id)
-         }
-    }
+
     
 
     const handleTurnNextPage = async () => {
@@ -133,18 +126,21 @@ function Reader({books, match, nextChapterTransition, previousChapter, nextChapt
         
         } else {  // else go to the prev chapter, update backend
 
-            //  // set next chapter to current chapter
-            //  setNextChapter(currentChapter)
-            //  // reset nextChapter's value to 1
-            //  updateChapterLocation('nextChapter', 1)    
-            //  // set current chapter to prev chapter 
-            //  setCurrentChapter(previousChapter)
-            //  updateChapterLocation('currentChapter', previousChapter.content.length - max_characters)
-            //  // clear previousChapter
-            //  setPreviousChapter({}) 
-            //  // update reading record
-            //  updateReadingStatus(userId, currentChapter.book_id, currentChapter.number, previousChapter.content.length - max_characters)
-
+            updateReadingStatus(userId, currentChapter.book_id, token, currentChapter.content.length - max_characters, currentChapter.number - 1).then(() => {
+              
+                // retrieveNextChapter(userId, currentChapter.book_id).then(() => {
+                //     nextChapterTransition(currentChapter, nextChapter, previousChapter, max_characters)
+                // })
+                getPreviousChapter(userId, currentChapter.book_id, token).then(res => res.json()).then(data => {
+                    if (!data.errors) { // all good, have chapter
+                        console.log("data from getNextChapter", data)
+                        setPreviousChapter(data)
+                        const maxCharPrevChap = currentChapter.content.length - max_characters
+                        previousChapterTransition(currentChapter, previousChapter, data )
+                    }
+            })
+            console.log("next chapter in handleTurnPage", nextChapter)
+        })
         }
 
        
@@ -225,6 +221,7 @@ const mapStateToProps = (state) => {
         retrieveNextChapter: (userId, bookId) => dispatch(retrieveNextChapter(userId, bookId)),
         setNextChapter: (chapter) => dispatch(setNextChapter(chapter)),
         nextChapterTransition: (current, next, max) => dispatch(nextChapterTransition(current, next, max)),
+        previousChapterTransition: (current, prev, newPrev) => dispatch(previousChapterTransition(current, prev, newPrev)),
         setCurrentChapter: (chapter) => dispatch(setCurrentChapter(chapter)),
         setPreviousChapter: (chapter) => dispatch(setPreviousChapter(chapter)),
         updateChapterLocation: (chapter, newCurrentWord) => dispatch(updateChapterLocation(chapter, newCurrentWord))
