@@ -34,6 +34,17 @@ export const createComment = (token, userId, bookId, chapterId, content) => {
     return fetch(url, configuration)
 }
 
+export const deleteComment = (token, userId, bookId, chapterId, commentId) => {
+    
+    const url = `${baseUrl}/users${userId}/books/${bookId}/chapters/${chapterId}/comments`
+    const configuration = {
+        method: "DELETE",
+        headers: createAuthHeader(token)
+    }
+
+    return fetch(url, configuration)
+}
+
 
 
 export function authenticateUser(token) {
