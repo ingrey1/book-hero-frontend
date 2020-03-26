@@ -22,6 +22,20 @@ export const getComments = (token, userId, bookId, chapterId) => {
     return fetch(url, configuration)
 }
 
+export const createComment = (token, userId, bookId, chapterId, content) => {
+    
+    const url = `${baseUrl}/users${userId}/books/${bookId}/chapters/${chapterId}/comments`
+    const configuration = {
+        method: "POST",
+        headers: createAuthHeader(token),
+        body: JSON.stringify({content: content})
+    }
+
+    return fetch(url, configuration)
+}
+
+
+
 export function authenticateUser(token) {
 
     const url = `${baseUrl}/auth`
