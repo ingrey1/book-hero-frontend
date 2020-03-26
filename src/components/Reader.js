@@ -33,7 +33,7 @@ const progressContainerStyle = {
 
 const max_characters = 3100
 
-function Reader({books, match, nextChapterTransition, previousChapter, nextChapter, updateChapterLocation, currentChapter, retrieveCurrentChapter, retrieveNextChapter, setNextChapter, setPreviousChapter, setCurrentChapter, userId, ...props}) {
+function Reader({books, match, nextChapterTransition, previousChapterTransition, previousChapter, nextChapter, updateChapterLocation, currentChapter, retrieveCurrentChapter, retrieveNextChapter, setNextChapter, setPreviousChapter, setCurrentChapter, userId, ...props}) {
     
 
     const [showCommentsState, setShowCommentsState] = useState(false)
@@ -155,18 +155,20 @@ function Reader({books, match, nextChapterTransition, previousChapter, nextChapt
 
             updateReadingStatus(userId, currentChapter.book_id, token, currentChapter.content.length - max_characters, currentChapter.number - 1).then(() => {
               
-                // retrieveNextChapter(userId, currentChapter.book_id).then(() => {
-                //     nextChapterTransition(currentChapter, nextChapter, previousChapter, max_characters)
-                // })
-                getPreviousChapter(userId, currentChapter.book_id, token).then(res => res.json()).then(data => {
-                    if (!data.errors) { // all good, have chapter
+                
+              
+                    getPreviousChapter(userId, currentChapter.book_id, token).then(res => res.json()).then(data => {
+                    
+                    
+                        if (!data.errors) { // all good, have chapter
                         console.log("data from getprevChapter", data)
-                        setPreviousChapter(data)
-                        const maxCharPrevChap = currentChapter.content.length - max_characters
+                        
+                       
                         previousChapterTransition(currentChapter, previousChapter, data )
                     }
             })
-            console.log("prev chapter in handleTurnPage", nextChapter)
+        
+            
         })
         }
 

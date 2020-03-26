@@ -124,6 +124,7 @@ export function updateChapterLocation(chapter, newCurrentWord ) {
 
 export const previousChapterTransition = (currentChapter, prevChapter, newPrevChapter) => {
 
+     console.log("previous chapter transition called")
     const newCurrentChapter = {
         ...prevChapter
     }
