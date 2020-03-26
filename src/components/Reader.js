@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {connect} from 'react-redux'
-import {retrieveCurrentChapter, previousChapterTransition, nextChapterTransition, retrieveNextChapter, updateChapterLocation, startReader, endReader, setNextChapter, setPreviousChapter, setCurrentChapter} from '../actions/currentChapter'
+import {retrieveCurrentChapter, previousChapterTransition, nextChapterTransition, retrieveNextChapter, retrievePreviousChapter, updateChapterLocation, startReader, endReader, setNextChapter, setPreviousChapter, setCurrentChapter} from '../actions/currentChapter'
 import {Row, Col, Container} from 'react-bootstrap'
 import {Button, Icon, Progress} from 'semantic-ui-react'
 import {updateReadingStatus, getNextChapter, getPreviousChapter} from '../api/api'
@@ -41,10 +41,36 @@ function Reader({books, match, nextChapterTransition, previousChapter, nextChapt
     useEffect(() => {
         console.log("useEffect called for Reader")
         const bookId = match.params.bookId
+        const token = localStorage.getItem('fire_token')
         if (currentChapter && currentChapter.content && bookId === currentChapter.book_id) {
             // already have book, no need to retrieve
+            // get previous chapter
+            if (currentChapter.number !== 1) {
+                getPreviousChapter(userId, bookId, token).then(res => res.json()).then(data => {
+                    console.log('getprevchapter')
+                   if (!data.errors && !data.complete) { // all good, have chapter
+       
+                       setPreviousChapter(data)
+       
+                   } else { // handle errors; display message to inform user couldnt retrieve current chapter
+       
+                   }
+               }).catch(err => console.log(err)) 
+            }
         } else {
+
             retrieveCurrentChapter(userId, bookId)
+            getPreviousChapter(userId, bookId, token).then(res => res.json()).then(data => {
+                console.log('getprevchapter')
+               if (!data.errors && !data.complete) { // all good, have chapter
+   
+                   setPreviousChapter(data)
+   
+               } else { // handle errors; display message to inform user couldnt retrieve current chapter
+   
+               }
+           }).catch(err => console.log(err)) 
+           
         }    
         
     }, [])
@@ -72,7 +98,7 @@ function Reader({books, match, nextChapterTransition, previousChapter, nextChapt
 
     const stillHasPreviousText = () => {
 
-        return (currentChapter.current_word - max_characters) > 0
+        return (currentChapter.current_word - max_characters) >= 0
 
     }
 
@@ -121,6 +147,7 @@ function Reader({books, match, nextChapterTransition, previousChapter, nextChapt
            // updateChapterLocation
            const newCharacterIndex = currentChapter.current_word - max_characters
            // updateReadingInfo 
+           console.log("handle previous turn page, still has text")
            updateReadingStatus(userId, currentChapter.book_id, token, newCharacterIndex, currentChapter.number)
            updateChapterLocation('currentChapter', newCharacterIndex)   
         
@@ -133,13 +160,13 @@ function Reader({books, match, nextChapterTransition, previousChapter, nextChapt
                 // })
                 getPreviousChapter(userId, currentChapter.book_id, token).then(res => res.json()).then(data => {
                     if (!data.errors) { // all good, have chapter
-                        console.log("data from getNextChapter", data)
+                        console.log("data from getprevChapter", data)
                         setPreviousChapter(data)
                         const maxCharPrevChap = currentChapter.content.length - max_characters
                         previousChapterTransition(currentChapter, previousChapter, data )
                     }
             })
-            console.log("next chapter in handleTurnPage", nextChapter)
+            console.log("prev chapter in handleTurnPage", nextChapter)
         })
         }
 

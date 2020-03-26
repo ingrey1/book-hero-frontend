@@ -44,6 +44,7 @@ export function getUserBooks(userId, token) {
 }
 
 export function getPreviousChapter(userId, bookId, token) {
+    console.log("get previous chapter called")
     const url = baseUrl + `/users/${userId}/books/${bookId}/chapters/previous_chapter`
     const configuration = {
         method: 'GET',

@@ -3,7 +3,7 @@ import {START_READER, END_READER,
       SET_NEXT_CHAPTER, 
       SET_PREVIOUS_CHAPTER,
       UPDATE_CHAPTER_LOCATION, CLEAR_CURRENT_CHAPTER, PREVIOUS_CHAPTER_TRANSITION, NEXT_CHAPTER_TRANSITION} from './types'
-import {getCurrentChapter, getNextChapter, updateReadingStatus} from '../api/api'
+import {getCurrentChapter, getNextChapter, getPreviousChapter} from '../api/api'
 
 export function startReader() {
     return {
@@ -34,10 +34,10 @@ export function retrieveCurrentChapter(userId, bookId) {
     
     const token = localStorage.getItem('fire_token')
     
-    return function(dispatch) {
+    return async function(dispatch) {
 
          
-        getCurrentChapter(userId, bookId, token).then(res => res.json()).then(data => {
+        return getCurrentChapter(userId, bookId, token).then(res => res.json()).then(data => {
             if (!data.errors) { // all good, have chapter
 
                 dispatch(setCurrentChapter(data))
@@ -81,6 +81,29 @@ export function retrieveNextChapter(userId, bookId) {
     }
 }
 
+export function retrievePreviousChapter(userId, bookId) {
+    
+    const token = localStorage.getItem('fire_token')
+    console.log("outside thunk for get prev chapter")
+    return async function(dispatch) {
+         console.log("thunk for get prev chapter")
+         
+        return getPreviousChapter(userId, bookId, token).then(res => res.json()).then(data => {
+             console.log('getprevchapter')
+            if (!data.errors && !data.complete) { // all good, have chapter
+
+                dispatch(setPreviousChapter(data))
+
+            } else { // handle errors; display message to inform user couldnt retrieve current chapter
+
+            }
+        }).catch(err => console.log(err)) // handle errors 
+
+
+    }
+}
+
+
 export function setPreviousChapter(chapter) {
     return {
         type: SET_PREVIOUS_CHAPTER,
@@ -98,26 +121,6 @@ export function updateChapterLocation(chapter, newCurrentWord ) {
     }
 }
 
-// export function updateReadingInfo(userId, bookId, newCurrentWord, newCurrentChapter) {
-     
-//     const token = localStorage.getItem('fire_token')
-    
-//     return function(dispatch) {
-
-//         updateReadingStatus(userId, bookId, token, newCurrentChapter, newCurrentWord).then(res => res.json()).then(data => {
-//             if (data.errors) {
-//                 // handle errors
-//             }
-//         }).catch(err => console.log(err))
-
-//      } 
-// }
-
-export const retrieveNextChapterAndTransition = (userId, bookId, chapters) => {
-
-
-
-}
 
 export const previousChapterTransition = (currentChapter, prevChapter, newPrevChapter) => {
 
