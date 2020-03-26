@@ -6,7 +6,7 @@ import { Dimmer, Loader} from 'semantic-ui-react'
 import {Button, Icon, Progress} from 'semantic-ui-react'
 import {updateReadingStatus, getNextChapter, getPreviousChapter} from '../api/api'
 import {getBookByChapter, calculatePercentOfChapterForCurrentPage} from '../utilities/helpers'
-
+import Comments from './Comments'
 
 
 
@@ -201,7 +201,9 @@ function Reader({books, match, nextChapterTransition, previousChapterTransition,
     </Col>
     <Col style={readerStyles}>
     <h2 id="chapter-title">{currentChapter.content && currentChapter.title}</h2>
-    <div id="chapter-content">{currentChapter.content && currentChapter.content.substring(currentChapter.current_word, currentChapter.current_word + max_characters)}</div>
+    <div id="chapter-content">{currentChapter.content && currentChapter.content.substring(currentChapter.current_word, currentChapter.current_word + max_characters).split('\n\n').map(paragraph => {
+        return <p>{paragraph}</p>
+    })}</div>
     {currentChapter.content && <div style={progressContainerStyle}><Progress percent={calculatePercentOfChapterForCurrentPage(currentChapter.content, currentChapter.current_word + max_characters)}>{calculatePercentOfChapterForCurrentPage(currentChapter.content, currentChapter.current_word + max_characters)}%</Progress></div>}
     </Col>
     <Col>
@@ -218,6 +220,8 @@ function Reader({books, match, nextChapterTransition, previousChapterTransition,
       <Col> {currentChapter.content && calculatePercentOfChapterForCurrentPage(currentChapter.content, currentChapter.current_word + max_characters) > 99  && <Button basic color='blue' onClick={() => setShowCommentsState(!showCommentsState)}>
       {showCommentsState ? 'Hide': 'Show'} Comments
      </Button>}
+     {showCommentsState && <Comments />}
+
      </Col>
       <Col></Col>
   </Row>
