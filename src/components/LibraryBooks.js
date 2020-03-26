@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import { Grid, Card } from 'semantic-ui-react'
-import { Dimmer, Loader, Segment } from 'semantic-ui-react'
+import { Dimmer, Loader} from 'semantic-ui-react'
 import _ from 'underscore'
 import LibraryListBook from './LibraryListBook'
 import {constructLibraryListBook, doubleFilterByTitleAndCategory} from '../utilities/helpers'

@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {connect} from 'react-redux'
 import {retrieveCurrentChapter, previousChapterTransition, nextChapterTransition, retrieveNextChapter, retrievePreviousChapter, updateChapterLocation, startReader, endReader, setNextChapter, setPreviousChapter, setCurrentChapter} from '../actions/currentChapter'
 import {Row, Col, Container} from 'react-bootstrap'
+import { Dimmer, Loader} from 'semantic-ui-react'
 import {Button, Icon, Progress} from 'semantic-ui-react'
 import {updateReadingStatus, getNextChapter, getPreviousChapter} from '../api/api'
 import {getBookByChapter, calculatePercentOfChapterForCurrentPage} from '../utilities/helpers'
@@ -164,7 +165,7 @@ function Reader({books, match, nextChapterTransition, previousChapterTransition,
                         console.log("data from getprevChapter", data)
                         
                        
-                        previousChapterTransition(currentChapter, previousChapter, data )
+                        previousChapterTransition(currentChapter, previousChapter, data, max_characters)
                     }
             })
         
@@ -181,9 +182,9 @@ function Reader({books, match, nextChapterTransition, previousChapterTransition,
 
 
     return (
-       
+       <div>
 
-        <Container style={readerContainerStyles}>
+        {currentChapter.content ? <Container style={readerContainerStyles}>
              { currentChapter.content && console.log("content.length", currentChapter.content.length)}
             
   <Row>
@@ -219,15 +220,10 @@ function Reader({books, match, nextChapterTransition, previousChapterTransition,
      </Col>
       <Col></Col>
   </Row>
-</Container>
-       
-      
-      
-       
-         
-       
-       
-      )
+</Container>:(<Dimmer active>
+        <Loader>Retrieving Library</Loader>
+      </Dimmer>)}
+      </div>)
 }
 
 const mapStateToProps = (state) => {
@@ -250,7 +246,7 @@ const mapStateToProps = (state) => {
         retrieveNextChapter: (userId, bookId) => dispatch(retrieveNextChapter(userId, bookId)),
         setNextChapter: (chapter) => dispatch(setNextChapter(chapter)),
         nextChapterTransition: (current, next, max) => dispatch(nextChapterTransition(current, next, max)),
-        previousChapterTransition: (current, prev, newPrev) => dispatch(previousChapterTransition(current, prev, newPrev)),
+        previousChapterTransition: (current, prev, newPrev, max) => dispatch(previousChapterTransition(current, prev, newPrev, max)),
         setCurrentChapter: (chapter) => dispatch(setCurrentChapter(chapter)),
         setPreviousChapter: (chapter) => dispatch(setPreviousChapter(chapter)),
         updateChapterLocation: (chapter, newCurrentWord) => dispatch(updateChapterLocation(chapter, newCurrentWord))
