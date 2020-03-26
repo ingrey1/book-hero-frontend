@@ -2,7 +2,7 @@ import {START_READER, END_READER,
      SET_CURRENT_CHAPTER,
       SET_NEXT_CHAPTER, 
       SET_PREVIOUS_CHAPTER,
-      UPDATE_CHAPTER_LOCATION, CLEAR_CURRENT_CHAPTER, NEXT_CHAPTER_TRANSITION} from './types'
+      UPDATE_CHAPTER_LOCATION, CLEAR_CURRENT_CHAPTER, PREVIOUS_CHAPTER_TRANSITION, NEXT_CHAPTER_TRANSITION} from './types'
 import {getCurrentChapter, getNextChapter, updateReadingStatus} from '../api/api'
 
 export function startReader() {
@@ -116,6 +116,28 @@ export function updateChapterLocation(chapter, newCurrentWord ) {
 export const retrieveNextChapterAndTransition = (userId, bookId, chapters) => {
 
 
+
+}
+
+export const previousChapterTransition = (currentChapter, prevChapter, newPrevChapter) => {
+
+    const newCurrentChapter = {
+        ...prevChapter
+    }
+
+    const newNextChapter = {
+        ...currentChapter,
+        current_word: 1
+    }
+
+    return {
+        type: PREVIOUS_CHAPTER_TRANSITION,
+        payload: {
+            currentChapter: newCurrentChapter,
+            nextChapter: newNextChapter,
+            previousChapter: newPrevChapter
+        }
+    }
 
 }
  

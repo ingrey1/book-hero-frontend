@@ -94,10 +94,7 @@ function Reader({books, match, nextChapterTransition, previousChapter, nextChapt
         const token = localStorage.getItem('fire_token')
         // if there is still text left in this chapter, show the next slice of text, and update backend
         if (stillHasNextText()) {
-           // updateChapterLocation
-           // updateReadingStatus(userId, bookId, token, newCurrentWord, newCurrentChapter)
            const newCharacterIndex = currentChapter.current_word + max_characters
-           
            updateChapterLocation('currentChapter', newCharacterIndex) 
            updateReadingStatus(userId, currentChapter.book_id, token, newCharacterIndex, currentChapter.number)
         } else {  // else go to the next chapter, update backend
@@ -115,8 +112,6 @@ function Reader({books, match, nextChapterTransition, previousChapter, nextChapt
                     }
             })
             console.log("next chapter in handleTurnPage", nextChapter)
-            //checkAndRetrieveNextChapter()
-            //nextChapterTransition(currentChapter, nextChapter, previousChapter, max_characters)
         })
 
         
