@@ -7,11 +7,12 @@ import {LinkContainer} from 'react-router-bootstrap'
 import {clearUserStoreAndLogout} from '../actions/auth'
 
 
+const linkContainerStyle = {
+    marginleft: '25px',
+    marginRight: '25px'
+}
 
 function Navigation({readerMode, logout, loggedIn,...props}) {
-   
-
-
 
     
     if (!loggedIn) {
@@ -39,22 +40,22 @@ function Navigation({readerMode, logout, loggedIn,...props}) {
     
     } else if (!readerMode) { // logged in, not in the reader
 
-        return <NavBar>
+        return <NavBar className="justify-content-center">
            <Nav className="mr-auto">
 
-           <LinkContainer to="/library" exact={true}>
+           <LinkContainer style={linkContainerStyle} to="/library" exact={true}>
               <Nav.Link className="nav-link">My Library</Nav.Link>
            </LinkContainer>
 
-           <LinkContainer to="/write" exact={true}>
+           <LinkContainer style={linkContainerStyle} to="/write" exact={true}>
               <Nav.Link>Write</Nav.Link>
            </LinkContainer>
 
-           <LinkContainer to="/browse" exact={true}>
+           <LinkContainer style={linkContainerStyle} to="/browse" exact={true}>
               <Nav.Link>Browse</Nav.Link>
            </LinkContainer>    
 
-           <Form inline>
+           <Form style={linkContainerStyle} inline>
               <FormControl type="text" placeholder="Search Books and Stories" className="mr-sm-2" />
               <Button variant="outline-success">Search</Button>
            </Form>

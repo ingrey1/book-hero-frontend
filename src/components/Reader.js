@@ -49,9 +49,9 @@ function Reader({books, match, nextChapterTransition, previousChapter, nextChapt
         
     }, [])
 
-    useEffect(() => {
-        checkAndRetrieveNextChapter()
-    })
+    // useEffect(() => {
+    //     checkAndRetrieveNextChapter()
+    // })
 
 
 
@@ -62,9 +62,9 @@ function Reader({books, match, nextChapterTransition, previousChapter, nextChapt
     }
 
     const showNextButton = () => {
-
-        return (currentChapter.number && (currentChapter.number < getBookByChapter(books, currentChapter.book_id).chapter_count)) || stillHasNextText()
-
+        if (currentChapter.number !== undefined) {
+            return (currentChapter.number < (getBookByChapter(books, currentChapter.book_id).chapter_count)) || stillHasNextText()
+        }
     }
 
     const stillHasNextText = () => {
@@ -86,22 +86,32 @@ function Reader({books, match, nextChapterTransition, previousChapter, nextChapt
     }
     
 
-    const handleTurnNextPage = () => {
+    const handleTurnNextPage = async () => {
 
         console.log("handle next page clicked")
         // grab the next chapter if at least 50% through current chapter, and there is no next chapter
         
-        
+        const token = localStorage.getItem('fire_token')
         // if there is still text left in this chapter, show the next slice of text, and update backend
         if (stillHasNextText()) {
            // updateChapterLocation
+           // updateReadingStatus(userId, bookId, token, newCurrentWord, newCurrentChapter)
            const newCharacterIndex = currentChapter.current_word + max_characters
+           
            updateChapterLocation('currentChapter', newCharacterIndex) 
-           updateReadingStatus(userId, currentChapter.book_id, currentChapter.number, newCharacterIndex)
+           updateReadingStatus(userId, currentChapter.book_id, token, newCharacterIndex, currentChapter.number)
         } else {  // else go to the next chapter, update backend
-            updateReadingStatus(userId, currentChapter.book_id, currentChapter.number + 1, 1)
+            updateReadingStatus(userId, currentChapter.book_id, token, 1, currentChapter + 1).then(() => {
+              
+                retrieveNextChapter(userId, currentChapter.book_id).then(() => {
+                    nextChapterTransition(currentChapter, nextChapter, previousChapter, max_characters)
+                })
+                
+
+            })
             console.log("next chapter in handleTurnPage", nextChapter)
-            nextChapterTransition(currentChapter, nextChapter, previousChapter, max_characters)
+            //checkAndRetrieveNextChapter()
+            //nextChapterTransition(currentChapter, nextChapter, previousChapter, max_characters)
         }
 
        
@@ -111,27 +121,28 @@ function Reader({books, match, nextChapterTransition, previousChapter, nextChapt
     
     const handleTurnPreviousPage = () => {
         console.log("handle previous page clicked")
-        
+        const token = localStorage.getItem('fire_token')
         // if its not the first page
         if (stillHasPreviousText()) {
            // updateChapterLocation
            const newCharacterIndex = currentChapter.current_word - max_characters
            // updateReadingInfo 
-           updateReadingStatus(userId, currentChapter.book_id, currentChapter.number, newCharacterIndex)
+           updateReadingStatus(userId, currentChapter.book_id, token, newCharacterIndex, currentChapter.number)
+           updateChapterLocation('currentChapter', newCharacterIndex)   
         
         } else {  // else go to the prev chapter, update backend
 
-             // set next chapter to current chapter
-             setNextChapter(currentChapter)
-             // reset nextChapter's value to 1
-             updateChapterLocation('nextChapter', 1)    
-             // set current chapter to prev chapter 
-             setCurrentChapter(previousChapter)
-             updateChapterLocation('currentChapter', previousChapter.content.length - max_characters)
-             // clear previousChapter
-             setPreviousChapter({}) 
-             // update reading record
-             updateReadingStatus(userId, currentChapter.book_id, currentChapter.number, previousChapter.content.length - max_characters)
+            //  // set next chapter to current chapter
+            //  setNextChapter(currentChapter)
+            //  // reset nextChapter's value to 1
+            //  updateChapterLocation('nextChapter', 1)    
+            //  // set current chapter to prev chapter 
+            //  setCurrentChapter(previousChapter)
+            //  updateChapterLocation('currentChapter', previousChapter.content.length - max_characters)
+            //  // clear previousChapter
+            //  setPreviousChapter({}) 
+            //  // update reading record
+            //  updateReadingStatus(userId, currentChapter.book_id, currentChapter.number, previousChapter.content.length - max_characters)
 
         }
 
@@ -166,7 +177,7 @@ function Reader({books, match, nextChapterTransition, previousChapter, nextChapt
     {currentChapter.content && <div style={progressContainerStyle}><Progress percent={calculatePercentOfChapterForCurrentPage(currentChapter.content, currentChapter.current_word + max_characters)}>{calculatePercentOfChapterForCurrentPage(currentChapter.content, currentChapter.current_word + max_characters)}%</Progress></div>}
     </Col>
     <Col>
-     {console.log("re-render reader")} 
+     {console.log("show next button", currentChapter.number && (currentChapter.number < getBookByChapter(books, currentChapter.book_id).chapter_count))} 
      { showNextButton() &&  <Button onClick={handleTurnNextPage}>
     <Button.Content  visible>
         <Icon name='arrow right' />

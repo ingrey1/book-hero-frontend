@@ -66,7 +66,7 @@ export function getNextChapter(userId, bookId, token) {
 }
 
 export function updateReadingStatus(userId, bookId, token, newCurrentWord, newCurrentChapter) {
-
+    console.log("update reading status called")
     const url = baseUrl + `/users/${userId}/books/${bookId}/chapters/update_reading_status`
     const configuration = {
         method: 'POST',

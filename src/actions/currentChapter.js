@@ -35,7 +35,8 @@ export function retrieveCurrentChapter(userId, bookId) {
     const token = localStorage.getItem('fire_token')
     
     return function(dispatch) {
-    
+
+         
         getCurrentChapter(userId, bookId, token).then(res => res.json()).then(data => {
             if (!data.errors) { // all good, have chapter
 
@@ -63,10 +64,10 @@ export function setNextChapter(chapter) {
 export function retrieveNextChapter(userId, bookId) {
     
     const token = localStorage.getItem('fire_token')
-    console.log("r")
-    return function(dispatch) {
+    console.log("retrieve next chapter called")
+    return async function(dispatch) {
         console.log("thunk for retrieveNextChapter dispatched")
-        getNextChapter(userId, bookId, token).then(res => res.json()).then(data => {
+        return getNextChapter(userId, bookId, token).then(res => res.json()).then(data => {
             if (!data.errors) { // all good, have chapter
                 console.log("data from getNextChapter", data)
                 dispatch(setNextChapter(data))
@@ -112,6 +113,12 @@ export function updateChapterLocation(chapter, newCurrentWord ) {
 //      } 
 // }
 
+export const retrieveNextChapterAndTransition = (userId, bookId, chapters) => {
+
+
+
+}
+ 
 export const nextChapterTransition = (currentChapter, nextChapter, previousChapter, max_characters) => {
 
     const newCurrentChapter = {...nextChapter,
