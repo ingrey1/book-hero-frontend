@@ -99,7 +99,8 @@ function Reader({books, match, nextChapterTransition, previousChapterTransition,
 
     const stillHasPreviousText = () => {
 
-        return (currentChapter.current_word - max_characters) >= 0
+        // return (currentChapter.current_word - max_characters) >= 0
+        return currentChapter.current_word > 1
 
     }
 
@@ -146,7 +147,7 @@ function Reader({books, match, nextChapterTransition, previousChapterTransition,
         // if its not the first page
         if (stillHasPreviousText()) {
            // updateChapterLocation
-           const newCharacterIndex = currentChapter.current_word - max_characters
+           const newCharacterIndex = (currentChapter.current_word - max_characters) < 1 ? 1 : (currentChapter.current_word - max_characters)
            // updateReadingInfo 
            console.log("handle previous turn page, still has text")
            updateReadingStatus(userId, currentChapter.book_id, token, newCharacterIndex, currentChapter.number)
