@@ -119,10 +119,11 @@ export const retrieveNextChapterAndTransition = (userId, bookId, chapters) => {
 
 }
  
-export const nextChapterTransition = (currentChapter, nextChapter, previousChapter, max_characters) => {
+export const nextChapterTransition = (currentChapter, nextChapter, max_characters) => {
 
     const newCurrentChapter = {...nextChapter,
                             current_word: 1}
+    console.log("nextchaptertransition", nextChapter)
         
     const newNextChapter = {}
 

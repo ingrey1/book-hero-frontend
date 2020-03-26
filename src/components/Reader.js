@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {retrieveCurrentChapter, nextChapterTransition, retrieveNextChapter, updateChapterLocation, startReader, endReader, setNextChapter, setPreviousChapter, setCurrentChapter} from '../actions/currentChapter'
 import {Row, Col, Container} from 'react-bootstrap'
 import {Button, Icon, Progress} from 'semantic-ui-react'
-import {updateReadingStatus} from '../api/api'
+import {updateReadingStatus, getNextChapter} from '../api/api'
 import {getBookByChapter, calculatePercentOfChapterForCurrentPage} from '../utilities/helpers'
 
 
@@ -101,20 +101,26 @@ function Reader({books, match, nextChapterTransition, previousChapter, nextChapt
            updateChapterLocation('currentChapter', newCharacterIndex) 
            updateReadingStatus(userId, currentChapter.book_id, token, newCharacterIndex, currentChapter.number)
         } else {  // else go to the next chapter, update backend
-            updateReadingStatus(userId, currentChapter.book_id, token, 1, currentChapter + 1).then(() => {
+            updateReadingStatus(userId, currentChapter.book_id, token, 1, currentChapter.number).then(() => {
               
-                retrieveNextChapter(userId, currentChapter.book_id).then(() => {
-                    nextChapterTransition(currentChapter, nextChapter, previousChapter, max_characters)
-                })
-                
-
+                // retrieveNextChapter(userId, currentChapter.book_id).then(() => {
+                //     nextChapterTransition(currentChapter, nextChapter, previousChapter, max_characters)
+                // })
+                getNextChapter(userId, currentChapter.book_id, token).then(res => res.json()).then(data => {
+                    if (!data.errors) { // all good, have chapter
+                        console.log("data from getNextChapter", data)
+                        setNextChapter(data)
+                        const maxCharPrevChap = currentChapter.content.length - max_characters
+                        nextChapterTransition(currentChapter, data, maxCharPrevChap )
+                    }
             })
             console.log("next chapter in handleTurnPage", nextChapter)
             //checkAndRetrieveNextChapter()
             //nextChapterTransition(currentChapter, nextChapter, previousChapter, max_characters)
-        }
+        })
 
-       
+        
+    }
        
     }
 
@@ -223,7 +229,7 @@ const mapStateToProps = (state) => {
         retrieveCurrentChapter: (userId, bookId) => dispatch(retrieveCurrentChapter(userId, bookId)),
         retrieveNextChapter: (userId, bookId) => dispatch(retrieveNextChapter(userId, bookId)),
         setNextChapter: (chapter) => dispatch(setNextChapter(chapter)),
-        nextChapterTransition: (current, next, prev, max) => dispatch(nextChapterTransition(current, next, prev, max)),
+        nextChapterTransition: (current, next, max) => dispatch(nextChapterTransition(current, next, max)),
         setCurrentChapter: (chapter) => dispatch(setCurrentChapter(chapter)),
         setPreviousChapter: (chapter) => dispatch(setPreviousChapter(chapter)),
         updateChapterLocation: (chapter, newCurrentWord) => dispatch(updateChapterLocation(chapter, newCurrentWord))
