@@ -1,4 +1,4 @@
-
+import {ADD_COMMENT, SET_COMMENTS} from '../actions/types'
 
 
 const initialState = []

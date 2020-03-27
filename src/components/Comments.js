@@ -1,33 +1,52 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {List, Form, TextArea, Button} from 'semantic-ui-react'
 import {connect} from 'react-redux'
-import {createAndSetComment} from '../actions/comments'
+import {retrieveAndSetComments, createAndSetComment} from '../actions/comments'
 
-function Comments({comments, userId, chapterId, createComment, ...props}) {
+
+const buttonStyle = {
+    margin: '25px'
+}
+
+function Comments({comments, setComments, userId, chapterId, bookId, createComment, ...props}) {
 
     const [showAddCommentState, setShowAddCommentState] = useState(false)
     const [commentTextState, setCommentTextState] = useState("")
+   
+    useEffect(() => {
+         if (userId && bookId && chapterId) {
+             console.log("userId", userId)
+             console.log("bookId", bookId)
+             console.log("chapterId", chapterId)
+            setComments(userId, bookId, chapterId)
+         }
+         
+    }, [chapterId])
 
     const handleCommentTextChange = (e) => {
         setCommentTextState(e.target.value)
     }
 
     const handleCreateComment = () => {
+       // (token, userId, bookId, chapterId, content)  
       createComment(userId, bookId, chapterId, commentTextState)
+      setCommentTextState("")
+      setShowAddCommentState(false)
     }
 
-    return <div><Button onClick={() => setShowAddCommentState(!showAddCommentState)} color="teal">Toggle Comment Box</Button> 
+    return <div><Button style={buttonStyle} onClick={() => setShowAddCommentState(!showAddCommentState)} color="teal">Toggle Comment Box</Button> 
          {showAddCommentState &&  <Form>
     <TextArea value={commentTextState} onChange={handleCommentTextChange} placeholder='Write a comment' />
-    <Button onClick={handleCreateComment} color="teal">Submit Comment</Button>
+    <Button  style={buttonStyle} onClick={handleCreateComment} color="teal">Submit Comment</Button>
   </Form>}
         <List>
-         <List.Header>Comments</List.Header>
-         {comments.map(comment => {
+         <List.Header as="h2">Comments</List.Header>
+         {console.log("comments value in Comments", comments)}
+         {comments && comments.map(comment => {
          
          return <List.Item>
                
-               <p>comment.content</p>
+               <p>{comment.content}</p>
                 
 
          </List.Item>})}
@@ -43,18 +62,19 @@ const mapStateToProps = state => {
     return {
         comments: state.comments,
         userId: state.auth.userId,
-        chapterId: state.currentChapter.id,
-        bookId: state.currentChapter.book_id
+        chapterId: state.currentChapter.currentChapter.id,
+        bookId: state.currentChapter.currentChapter.book_id
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        createComment: (userId, bookId, chapterId, content) => dispatch(createAndSetComment(userId, bookId, chapterId, content))
+        createComment: (userId, bookId, chapterId, content) => dispatch(createAndSetComment(userId, bookId, chapterId, content)),
+        setComments: (userId, bookId, chapterId) => dispatch(retrieveAndSetComments(userId, bookId, chapterId))
     }
 }
 
 
 
 
-export default connect(mapStateToProps)(Comments)
+export default connect(mapStateToProps, mapDispatchToProps)(Comments)

@@ -7,6 +7,7 @@ import {Button, Icon, Progress} from 'semantic-ui-react'
 import {updateReadingStatus, getNextChapter, getPreviousChapter} from '../api/api'
 import {getBookByChapter, calculatePercentOfChapterForCurrentPage} from '../utilities/helpers'
 import Comments from './Comments'
+import {retrieveAndSetComments} from '../actions/comments'
 
 
 
@@ -34,7 +35,7 @@ const progressContainerStyle = {
 
 const max_characters = 3100
 
-function Reader({books, match, nextChapterTransition, previousChapterTransition, previousChapter, nextChapter, updateChapterLocation, currentChapter, retrieveCurrentChapter, retrieveNextChapter, setNextChapter, setPreviousChapter, setCurrentChapter, userId, ...props}) {
+function Reader({books, setComments, match, nextChapterTransition, previousChapterTransition, previousChapter, nextChapter, updateChapterLocation, currentChapter, retrieveCurrentChapter, retrieveNextChapter, setNextChapter, setPreviousChapter, setCurrentChapter, userId, ...props}) {
     
 
     const [showCommentsState, setShowCommentsState] = useState(false)
@@ -45,12 +46,13 @@ function Reader({books, match, nextChapterTransition, previousChapterTransition,
         const token = localStorage.getItem('fire_token')
         if (currentChapter && currentChapter.content && bookId === currentChapter.book_id) {
             // already have book, no need to retrieve
+            //setComments(userId, currentChapter.book_id, currentChapter.id)
             // get previous chapter
             if (currentChapter.number !== 1) {
                 getPreviousChapter(userId, bookId, token).then(res => res.json()).then(data => {
                     console.log('getprevchapter')
                    if (!data.errors && !data.complete) { // all good, have chapter
-       
+                       
                        setPreviousChapter(data)
        
                    } else { // handle errors; display message to inform user couldnt retrieve current chapter
@@ -60,7 +62,9 @@ function Reader({books, match, nextChapterTransition, previousChapterTransition,
             }
         } else {
 
-            retrieveCurrentChapter(userId, bookId)
+            retrieveCurrentChapter(userId, bookId).then(()=> {
+               // setComments(userId, currentChapter.book_id, currentChapter.id)
+            })
             getPreviousChapter(userId, bookId, token).then(res => res.json()).then(data => {
                 console.log('getprevchapter')
                if (!data.errors && !data.complete) { // all good, have chapter
@@ -247,6 +251,7 @@ const mapStateToProps = (state) => {
 
         startReader: () => dispatch(startReader()), 
         endReader: () => dispatch(endReader()),
+        setComments: (comments) => dispatch(retrieveAndSetComments(comments)),
         retrieveCurrentChapter: (userId, bookId) => dispatch(retrieveCurrentChapter(userId, bookId)),
         retrieveNextChapter: (userId, bookId) => dispatch(retrieveNextChapter(userId, bookId)),
         setNextChapter: (chapter) => dispatch(setNextChapter(chapter)),
