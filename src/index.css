@@ -20,6 +20,23 @@
     color: #F3E9E0;
 }
 
+.panel {
+    position: relative;
+    top: 50px;
+    background-color: aquamarine;
+    height: 80%;
+    
+}
+
+.menu-label {
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.overlay-panel {
+    overflow-y: hidden;
+}
+
  
 #chapter-title {
     margin: 25px;

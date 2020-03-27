@@ -8,6 +8,7 @@ import {updateReadingStatus, getNextChapter, getPreviousChapter} from '../api/ap
 import {getBookByChapter, calculatePercentOfChapterForCurrentPage} from '../utilities/helpers'
 import Comments from './Comments'
 import {retrieveAndSetComments} from '../actions/comments'
+import ReadingMenu from './ReadingMenu'
 
 
 
@@ -201,6 +202,7 @@ function Reader({books, setComments, match, nextChapterTransition, previousChapt
         <Icon name='arrow left' />
       </Button.Content>
      </Button> }
+     <ReadingMenu />
     
     </Col>
     <Col style={readerStyles}>

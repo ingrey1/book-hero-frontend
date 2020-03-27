@@ -1,11 +1,15 @@
 import React, {useState, useEffect} from 'react'
-import {List, Form, TextArea, Button} from 'semantic-ui-react'
+import {List, Form, TextArea, Button, Message} from 'semantic-ui-react'
 import {connect} from 'react-redux'
 import {retrieveAndSetComments, createAndSetComment} from '../actions/comments'
 
 
 const buttonStyle = {
     margin: '25px'
+}
+
+const commentStyle = {
+    width: '100%'
 }
 
 function Comments({comments, setComments, userId, chapterId, bookId, createComment, ...props}) {
@@ -15,9 +19,6 @@ function Comments({comments, setComments, userId, chapterId, bookId, createComme
    
     useEffect(() => {
          if (userId && bookId && chapterId) {
-             console.log("userId", userId)
-             console.log("bookId", bookId)
-             console.log("chapterId", chapterId)
             setComments(userId, bookId, chapterId)
          }
          
@@ -44,9 +45,9 @@ function Comments({comments, setComments, userId, chapterId, bookId, createComme
          {console.log("comments value in Comments", comments)}
          {comments && comments.map(comment => {
          
-         return <List.Item>
+         return <List.Item style={commentStyle}>
                
-               <p>{comment.content}</p>
+         <Message>{comment.content} - {comment.user.username ? comment.user.username : comment.user.email.split("@")[0]} </Message>
                 
 
          </List.Item>})}
