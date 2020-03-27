@@ -1,6 +1,7 @@
 import {SET_USER_LIBRARY, UPDATE_LIBRARY_RETRIEVAL_ERRORS, ADD_BOOK_TO_LIBRARY,
      SET_FILTER_USER_BOOKS_VALUE, SET_SORT_USER_BOOKS_VALUE, SEARCH_AND_FILTER_LIBRARY, CLEAR_LIBRARY} from './types'
-import {getUserBooks} from '../api/api'
+import {getUserBooks, addBook} from '../api/api'
+import {removeBookFromAllBooks} from './books'
 
 
 export const addBookToLibrary = (book) => {
@@ -35,6 +36,20 @@ export function setFilterUserBooksValue(newFilterInfo) {
     return {
        type: SET_FILTER_USER_BOOKS_VALUE,
        payload: newFilterInfo
+    }
+}
+
+export function addBookAndUpdateStore(userId, bookId){
+    return function(dispatch) {
+        const token = localStorage.getItem('fire_token') 
+        addBook(token, userId, bookId).then(res => res.json()).then(book => {
+           if (!book.errors) {
+            dispatch(addBookToLibrary(book))
+            dispatch(removeBookFromAllBooks(book.id))
+           }
+           
+        }).catch(err => console.log(err))
+
     }
 }
 

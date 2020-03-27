@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {Card, Image, Grid, Button} from 'semantic-ui-react'
+import {addBookAndUpdateStore} from '../actions/library'
 
 
 
@@ -22,11 +23,13 @@ const buttonStyle = {
     marginTop: '25px'
 }
 
-function LibraryDetailBook({books, location, allBooks, match, ...props}) {
+function LibraryDetailBook({books, userId, addBookToLibrary, location, allBooks, match, ...props}) {
 
     // note: make sure to handle case where user goes straight to library/bookId using url
 
-    const handleAddToLibrary = () => {
+    const handleAddToLibrary = (book) => {
+
+      addBookToLibrary(userId, book.id)
       
     }
 
@@ -60,8 +63,8 @@ function LibraryDetailBook({books, location, allBooks, match, ...props}) {
   </Card>
   <Card style={cardStyle}>
       <Card.Content>
-      {!isTopPick ? (<Button color="blue" style={buttonStyle}><Link style={linkStyle} to="/library">Back To Library</Link></Button>):(<Button color="blue" style={buttonStyle}><Link style={linkStyle} to="/home">Back To Top Picks</Link></Button>)}
-      {!isTopPick ? (<Button color="blue" style={buttonStyle}><Link style={linkStyle} to={`/reader/read/${bookId}`}>Read</Link></Button>): <Button onClick={handleAddToLibrary} color="blue" style={buttonStyle}><Link style={linkStyle} to={`/library`}>Add To Library</Link></Button>}
+      {!isTopPick ? (<Button color="blue" style={buttonStyle}><Link style={linkStyle} to="/library">Back To Library</Link></Button>):(<Button color="blue" style={buttonStyle}><Link style={linkStyle} to="/home">Back To Top Picks</Link></Button>)}<br />
+      {!isTopPick ? (<Button color="blue" style={buttonStyle}><Link style={linkStyle} to={`/reader/read/${bookId}`}>Read</Link></Button>): <Button onClick={() => handleAddToLibrary(thisBook)} color="blue" style={buttonStyle}><Link style={linkStyle} to={`/home`}>Add To Library</Link></Button>}
 
       </Card.Content>
   </Card>
@@ -77,14 +80,16 @@ function LibraryDetailBook({books, location, allBooks, match, ...props}) {
 const mapStateToProps = (state) => {
     return {
         books: state.library.userBooks,
-        allBooks: state.books
+        allBooks: state.books,
+        userId: state.auth.userId
     }
  }
  
  const mapDispatchToProps = (dispatch) => {
 
       return {
-
+         
+        addBookToLibrary: (userId, bookId) => dispatch(addBookAndUpdateStore(userId, bookId))
 
       }
  }

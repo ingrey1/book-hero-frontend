@@ -1,4 +1,4 @@
-import {SET_BOOKS} from './types'
+import {SET_BOOKS, REMOVE_BOOK_FROM_ALL_BOOKS} from './types'
 import {getAllBooks} from '../api/api'
 
 export const setBooks = (books) => {
@@ -6,6 +6,15 @@ export const setBooks = (books) => {
         type: SET_BOOKS,
         payload: books
     }
+}
+
+export const removeBookFromAllBooks = (bookId) => {
+
+    return {
+        type: REMOVE_BOOK_FROM_ALL_BOOKS,
+        payload: bookId
+    }
+
 }
 
 export function retrieveAndSetBooks(userId){
