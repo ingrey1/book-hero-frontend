@@ -12,9 +12,9 @@ import ReadingMenu from './ReadingMenu'
 
 
 function calculateTotalCharacters(textSize) {
-    if (textSize === 24) return 1200
+    if (textSize === 24) return 1150
     else if (textSize === 36) return 520
-    else return 330
+    else return 270
 }
 
 const readerContainerStyles = {
@@ -41,10 +41,11 @@ const colReaderStyles = {
 
 }
 
-const max_characters = 3100
+
 
 function Reader({books, textSize, setComments, match, nextChapterTransition, previousChapterTransition, previousChapter, nextChapter, updateChapterLocation, currentChapter, retrieveCurrentChapter, retrieveNextChapter, setNextChapter, setPreviousChapter, setCurrentChapter, userId, ...props}) {
     
+    const max_characters = calculateTotalCharacters(textSize)
 
     const [readerStyles, setReaderStyles] = useState({
         fontSize: 24
