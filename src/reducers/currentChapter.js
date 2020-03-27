@@ -8,7 +8,7 @@ const initialState = {
     previousChapter: {},
     readingMode: false,
     displayOptions: {
-        textSize: 12    
+        textSize: 24    
     }
    
 }

@@ -11,7 +11,11 @@ import {retrieveAndSetComments} from '../actions/comments'
 import ReadingMenu from './ReadingMenu'
 
 
-
+function calculateTotalCharacters(textSize) {
+    if (textSize === 24) return 1200
+    else if (textSize === 36) return 520
+    else return 330
+}
 
 const readerContainerStyles = {
     marginTop: '25px'
@@ -30,14 +34,19 @@ const progressContainerStyle = {
     height: '20px'
 }
 
+const colReaderStyles = {
+
+    minWidth: '700px',
+    maxWidth: '700px'
+
+}
+
 const max_characters = 3100
 
 function Reader({books, textSize, setComments, match, nextChapterTransition, previousChapterTransition, previousChapter, nextChapter, updateChapterLocation, currentChapter, retrieveCurrentChapter, retrieveNextChapter, setNextChapter, setPreviousChapter, setCurrentChapter, userId, ...props}) {
     
 
     const [readerStyles, setReaderStyles] = useState({
-        minWidth: '700px',
-        maxWidth: '700px',
         fontSize: 24
     })
 
@@ -114,7 +123,7 @@ function Reader({books, textSize, setComments, match, nextChapterTransition, pre
 
     const stillHasPreviousText = () => {
 
-        // return (currentChapter.current_word - max_characters) >= 0
+        
         return currentChapter.current_word > 1
 
     }
@@ -215,9 +224,9 @@ function Reader({books, textSize, setComments, match, nextChapterTransition, pre
      
     
     </Col>
-    <Col style={readerStyles}>
+    <Col style={colReaderStyles}>
     <h2 id="chapter-title">{currentChapter.content && currentChapter.title}</h2>
-    <div id="chapter-content">{currentChapter.content && currentChapter.content.substring(currentChapter.current_word, currentChapter.current_word + max_characters).split('\n\n').map(paragraph => {
+    <div style={readerStyles} id="chapter-content">{currentChapter.content && currentChapter.content.substring(currentChapter.current_word, currentChapter.current_word + max_characters).split('\n\n').map(paragraph => {
         return <p>{paragraph}</p>
     })}</div>
     {currentChapter.content && <div style={progressContainerStyle}><Progress percent={calculatePercentOfChapterForCurrentPage(currentChapter.content, currentChapter.current_word + max_characters)}>{calculatePercentOfChapterForCurrentPage(currentChapter.content, currentChapter.current_word + max_characters)}%</Progress></div>}
