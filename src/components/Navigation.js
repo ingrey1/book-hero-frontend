@@ -43,6 +43,10 @@ function Navigation({readerMode, logout, loggedIn,...props}) {
         return <NavBar className="justify-content-center">
            <Nav className="mr-auto">
 
+           <LinkContainer style={linkContainerStyle} to="/home" exact={true}>
+              <Nav.Link className="nav-link">Home</Nav.Link>
+           </LinkContainer>
+         
            <LinkContainer style={linkContainerStyle} to="/library" exact={true}>
               <Nav.Link className="nav-link">My Library</Nav.Link>
            </LinkContainer>

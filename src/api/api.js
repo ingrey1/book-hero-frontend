@@ -11,6 +11,19 @@ function createAuthHeader(token) {
 
 // rails book hero api methods
 
+export const getAllBooks = (token, userId) => {
+
+    const url = `${baseUrl}/users/${userId}/all_books`
+    console.log(url)
+    const configuration = {
+        method: "GET",
+        headers: createAuthHeader(token)
+    }
+
+    return fetch(url, configuration)
+    
+}
+
 export const getComments = (token, userId, bookId, chapterId) => {
 
 
