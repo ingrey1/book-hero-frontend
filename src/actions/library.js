@@ -1,7 +1,14 @@
-import {SET_USER_LIBRARY, UPDATE_LIBRARY_RETRIEVAL_ERRORS,
+import {SET_USER_LIBRARY, UPDATE_LIBRARY_RETRIEVAL_ERRORS, ADD_BOOK_TO_LIBRARY,
      SET_FILTER_USER_BOOKS_VALUE, SET_SORT_USER_BOOKS_VALUE, SEARCH_AND_FILTER_LIBRARY, CLEAR_LIBRARY} from './types'
 import {getUserBooks} from '../api/api'
 
+
+export const addBookToLibrary = (book) => {
+    return {
+        type: ADD_BOOK_TO_LIBRARY,
+        payload: book
+    }
+}
 
 export const clearLibrary = () => {
     return {

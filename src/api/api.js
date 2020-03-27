@@ -24,6 +24,19 @@ export const getAllBooks = (token, userId) => {
     
 }
 
+export const addBook = (token, userId, bookId) => {
+
+    const url = `${baseUrl}/users/${userId}/add_book/${bookId}`
+    console.log(url)
+    const configuration = {
+        method: "POST",
+        headers: createAuthHeader(token)
+    }
+
+    return fetch(url, configuration)
+
+}
+
 export const getComments = (token, userId, bookId, chapterId) => {
 
 
