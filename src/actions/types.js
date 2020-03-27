@@ -29,3 +29,5 @@ export const SET_TEXT_SIZE = 'SET_TEXT_SIZE'
 // comments reducer
 export const SET_COMMENTS = 'SET_COMMENTS'
 export const ADD_COMMENT = 'ADD_COMMENT'
+// books reducer
+export const SET_BOOKS = 'SET_BOOKS'

@@ -22,19 +22,24 @@ const buttonStyle = {
     marginTop: '25px'
 }
 
-function LibraryDetailBook({books, match, ...props}) {
+function LibraryDetailBook({books, location, allBooks, match, ...props}) {
 
     // note: make sure to handle case where user goes straight to library/bookId using url
+
+    const handleAddToLibrary = () => {
+      
+    }
+
     const bookId = match.params.bookId
-    const thisBook = books.find(b => b.id == bookId) 
-     
+    const isTopPick = location.pathname.split("/")[1] === 'top_picks'
+    console.log(isTopPick)
+    const thisBook = isTopPick ? allBooks.find(b => b.id == bookId) : books.find(b => b.id == bookId)
+    console.log("this book", thisBook) 
+    console.log("location", location)
     return <Grid>
         
        
-{/*         
-        <p>title: {thisBook.title}</p>
-        <Link to="/library">Back To Library</Link><br />
-        <Link to={`/reader/read/${bookId}`}>Read</Link> */}
+
        
        <Grid.Column>
        <Grid.Row>
@@ -55,8 +60,8 @@ function LibraryDetailBook({books, match, ...props}) {
   </Card>
   <Card style={cardStyle}>
       <Card.Content>
-      <Button color="blue" style={buttonStyle}><Link style={linkStyle} to="/library">Back To Library</Link></Button><br />
-      <Button color="blue" style={buttonStyle}><Link style={linkStyle} to={`/reader/read/${bookId}`}>Read</Link></Button>
+      {!isTopPick ? (<Button color="blue" style={buttonStyle}><Link style={linkStyle} to="/library">Back To Library</Link></Button>):(<Button color="blue" style={buttonStyle}><Link style={linkStyle} to="/home">Back To Top Picks</Link></Button>)}
+      {!isTopPick ? (<Button color="blue" style={buttonStyle}><Link style={linkStyle} to={`/reader/read/${bookId}`}>Read</Link></Button>): <Button onClick={handleAddToLibrary} color="blue" style={buttonStyle}><Link style={linkStyle} to={`/library`}>Add To Library</Link></Button>}
 
       </Card.Content>
   </Card>
@@ -71,7 +76,8 @@ function LibraryDetailBook({books, match, ...props}) {
 
 const mapStateToProps = (state) => {
     return {
-        books: state.library.userBooks
+        books: state.library.userBooks,
+        allBooks: state.books
     }
  }
  

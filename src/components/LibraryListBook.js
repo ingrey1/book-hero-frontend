@@ -8,15 +8,15 @@ const bookContainerStyle =  {
 }
 
 
-function LibraryListBook({book, ...props }) {
-  
+function LibraryListBook({book, topPick, ...props }) {
+    console.log("book", book)
     //debugger 
-    return <Link style={bookContainerStyle} to={`/library/${book.id}`}><Card style={{ width: '15rem', height: '20rem' }}>
+    return <Link style={bookContainerStyle} to={topPick ? `/top_picks/${book.id}`:`/library/${book.id}`}><Card style={{ width: '15rem', height: '20rem' }}>
     <Image  style={{height: '10rem'}} src={book.imageUrl} />
     <Card.Content>
       <Card.Header>{book.title}</Card.Header>
       
-<Card.Description>{book.authors.map(a => `${a} ` )}</Card.Description>
+<Card.Description>{book.authors ? book.authors.map(a => `${a} ` ): book.author.name}</Card.Description>
       
       
       </Card.Content>

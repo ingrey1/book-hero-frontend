@@ -30,6 +30,7 @@ function Main({signOut, user, firebaseAppAuth, providers, signInWithGoogle, sign
          <Route exact path="/library" render={(routerProps) => loggedIn ? <Library {...routerProps} />:<Redirect to="/welcome" />    } />
          <Route exact path="/reader/read/:bookId" render={(routerProps) =>  loggedIn ? <Reader {...routerProps} /> : <Redirect to="/welcome" />} />
          <Route exact path="/library/:bookId" render={(routerProps) => loggedIn ? <LibraryDetailBook {...routerProps} />:<Redirect to="/welcome" />} />
+         <Route exact path="/top_picks/:bookId" render={(routerProps) => loggedIn ? <LibraryDetailBook {...routerProps} />:<Redirect to="/welcome" />} />
          <Route exact path="/profile" render={(routerProps) => loggedIn ? <Profile {...routerProps} />:<Redirect to="/welcome" />    } />
          <Route exact path="/refill" render={(routerProps) => loggedIn ? <Refill {...routerProps} />:<Redirect to="/welcome" />    } />
          <Route exact path="/write" render={(routerProps) => loggedIn ? <Write {...routerProps} />:<Redirect to="/welcome" />    } />
