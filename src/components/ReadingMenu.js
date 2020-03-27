@@ -4,18 +4,37 @@ import SlidingPane from 'react-sliding-pane';
 import 'react-sliding-pane/dist/react-sliding-pane.css';
 import {Button} from 'semantic-ui-react' 
 import {Grid} from "semantic-ui-react";
+import {connect} from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
+import {setTextSize} from '../actions/currentChapter'
+
+
+
+
+
+
+const readingOptionsButtonStyle = {
+  margin: '25px'
+}
 
 class ReadingMenu extends Component {
     constructor(props) {
 
         super(props);
+        
         this.state = {
-            isPaneOpen: false
+            isPaneOpen: false,
+            value: 1
+           
         };
        
+    }
+
+    onTextSliderChange = (newValue) => {
+       console.log('new value', newValue) 
+       this.props.changeFontSize(newValue)  
     }
  
     componentDidMount() {
@@ -26,7 +45,7 @@ class ReadingMenu extends Component {
  
     render() {
         return <div ref={ref => this.el = ref}>
-            <Button color='blue' onClick={() => this.setState({ isPaneOpen: true })}>Toggle Reading Options</Button>
+            <Button style={readingOptionsButtonStyle} color='blue' onClick={() => this.setState({ isPaneOpen: true })}>Toggle Reading Options</Button>
             
             <SlidingPane
                 className='panel'
@@ -43,7 +62,23 @@ class ReadingMenu extends Component {
                 <Grid>
       <Grid.Column>
        
+      <div style={{width: '200px'}}>
+      <Typography  id="discrete-slider" gutterBottom>
+        Text Size
+      </Typography>
+      <Slider
         
+        onChange={(e) => this.setState({value: e.target.value})}
+        defaultValue={this.props.textSize}
+        getAriaValueText={this.onTextSliderChange}
+        aria-labelledby="discrete-slider"
+        valueLabelDisplay="auto"
+        step={12}
+        marks={[{value: 24, label: 'Small'}, {value: 36, label: 'Medium'}, {value: 48, label: 'Large'}]}
+        min={24}
+        max={48}
+      />
+      </div>
 
       </Grid.Column>
      
@@ -60,4 +95,21 @@ class ReadingMenu extends Component {
     }
 }
 
-export default ReadingMenu
+const mapStateToProps = state => {
+  return {
+
+    textSize: state.currentChapter.displayOptions.textSize
+
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  
+  return {
+
+    changeFontSize: (newSize) => dispatch(setTextSize(newSize))
+
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ReadingMenu)

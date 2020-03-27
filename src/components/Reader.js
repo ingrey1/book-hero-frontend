@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {connect} from 'react-redux'
-import {retrieveCurrentChapter, previousChapterTransition, nextChapterTransition, retrieveNextChapter, retrievePreviousChapter, updateChapterLocation, startReader, endReader, setNextChapter, setPreviousChapter, setCurrentChapter} from '../actions/currentChapter'
+import {retrieveCurrentChapter, previousChapterTransition, nextChapterTransition, retrieveNextChapter, retrievePreviousChapter, updateChapterLocation, startReader, endReader, setNextChapter, setPreviousChapter, setCurrentChapter, setTextSize} from '../actions/currentChapter'
 import {Row, Col, Container} from 'react-bootstrap'
 import { Dimmer, Loader} from 'semantic-ui-react'
 import {Button, Icon, Progress} from 'semantic-ui-react'
@@ -12,10 +12,6 @@ import ReadingMenu from './ReadingMenu'
 
 
 
-const readerStyles = {
-    minWidth: '700px',
-    maxWidth: '700px'
-}
 
 const readerContainerStyles = {
     marginTop: '25px'
@@ -36,8 +32,15 @@ const progressContainerStyle = {
 
 const max_characters = 3100
 
-function Reader({books, setComments, match, nextChapterTransition, previousChapterTransition, previousChapter, nextChapter, updateChapterLocation, currentChapter, retrieveCurrentChapter, retrieveNextChapter, setNextChapter, setPreviousChapter, setCurrentChapter, userId, ...props}) {
+function Reader({books, textSize, setComments, match, nextChapterTransition, previousChapterTransition, previousChapter, nextChapter, updateChapterLocation, currentChapter, retrieveCurrentChapter, retrieveNextChapter, setNextChapter, setPreviousChapter, setCurrentChapter, userId, ...props}) {
     
+
+    const [readerStyles, setReaderStyles] = useState({
+        minWidth: '700px',
+        maxWidth: '700px',
+        fontSize: 24
+    })
+
 
     const [showCommentsState, setShowCommentsState] = useState(false)
     
@@ -80,6 +83,13 @@ function Reader({books, setComments, match, nextChapterTransition, previousChapt
         }    
         
     }, [])
+
+    useEffect(() => {
+       setReaderStyles({
+        ...readerStyles,   
+        fontSize: textSize
+    })
+    }, [textSize])
 
 
 
@@ -202,7 +212,7 @@ function Reader({books, setComments, match, nextChapterTransition, previousChapt
         <Icon name='arrow left' />
       </Button.Content>
      </Button> }
-     <ReadingMenu />
+     
     
     </Col>
     <Col style={readerStyles}>
@@ -220,6 +230,7 @@ function Reader({books, setComments, match, nextChapterTransition, previousChapt
       </Button.Content>
     </Button>}
     </Col>
+    <Col><ReadingMenu /></Col>
   </Row>
   <Row style={commentsContainerStyle}>
       <Col></Col>
@@ -243,7 +254,8 @@ const mapStateToProps = (state) => {
         currentChapter: state.currentChapter.currentChapter,
         nextChapter: state.currentChapter.nextChapter,
         previousChapter: state.currentChapter.previousChapter,
-        userId: state.auth.userId
+        userId: state.auth.userId,
+        textSize: state.currentChapter.displayOptions.textSize
     }
  }
  

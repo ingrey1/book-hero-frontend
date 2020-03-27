@@ -2,12 +2,19 @@ import {START_READER, END_READER,
      SET_CURRENT_CHAPTER,
       SET_NEXT_CHAPTER, 
       SET_PREVIOUS_CHAPTER,
-      UPDATE_CHAPTER_LOCATION, CLEAR_CURRENT_CHAPTER, PREVIOUS_CHAPTER_TRANSITION, NEXT_CHAPTER_TRANSITION} from './types'
+      UPDATE_CHAPTER_LOCATION, SET_TEXT_SIZE, CLEAR_CURRENT_CHAPTER, PREVIOUS_CHAPTER_TRANSITION, NEXT_CHAPTER_TRANSITION} from './types'
 import {getCurrentChapter, getNextChapter, getPreviousChapter} from '../api/api'
 
 export function startReader() {
     return {
        type: START_READER
+    }
+}
+
+export function setTextSize(newSize) {
+    return {
+        type: SET_TEXT_SIZE,
+        payload: newSize
     }
 }
 
