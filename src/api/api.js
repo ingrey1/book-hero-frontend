@@ -111,7 +111,7 @@ export function getUserBooks(userId, token) {
 
 export function getPreviousChapter(userId, bookId, token) {
     console.log("get previous chapter called")
-    const url = baseUrl + `/users/${userId}/books/${bookId}/chapters/previous_chapter`
+    const url = baseUrl + `/users/${userId}/books/${bookId}/chapters/-1?chapter_designation=previous`
     const configuration = {
         method: 'GET',
         headers: createAuthHeader(token)
@@ -121,7 +121,7 @@ export function getPreviousChapter(userId, bookId, token) {
 
 export function getCurrentChapter(userId, bookId, token) {
 
-    const url = baseUrl + `/users/${userId}/books/${bookId}/chapters/current_chapter`
+    const url = baseUrl + `/users/${userId}/books/${bookId}/chapters/-1?chapter_designation=current`
     const configuration = {
         method: 'GET',
         headers: createAuthHeader(token)
@@ -132,7 +132,7 @@ export function getCurrentChapter(userId, bookId, token) {
 
 export function getNextChapter(userId, bookId, token) {
 
-    const url = baseUrl + `/users/${userId}/books/${bookId}/chapters/next_chapter`
+    const url = baseUrl + `/users/${userId}/books/${bookId}/chapters/-1?chapter_designation=next`
     const configuration = {
         method: 'GET',
         headers: createAuthHeader(token)
