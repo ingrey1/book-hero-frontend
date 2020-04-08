@@ -13,7 +13,7 @@ function createAuthHeader(token) {
 
 export const getAllBooks = (token, userId) => {
 
-    const url = `${baseUrl}/users/${userId}/all_books`
+    const url = `${baseUrl}/users/${userId}/books`
     console.log(url)
     const configuration = {
         method: "GET",
@@ -100,7 +100,7 @@ export function updateUser(userId, token, info) {
 }
 
 export function getUserBooks(userId, token) {
-   const url = baseUrl + `/users/${userId}/books`
+   const url = baseUrl + `/users/${userId}/books?my_library=true`
    const configuration = {
     method: "GET",
     headers: createAuthHeader(token)

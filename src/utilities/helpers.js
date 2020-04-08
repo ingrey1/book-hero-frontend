@@ -84,3 +84,6 @@ export const calculatePercentOfChapterForCurrentPage = (chapterContent, lastChar
     return Math.round(1.0 * lastCharOnPageIndex / chapterContent.length * 100) 
 }
 
+export const getChapterIdByNumber = (chapters, num) => {
+  return chapters.find(chapter => chapter.number == num)["id"]
+}
