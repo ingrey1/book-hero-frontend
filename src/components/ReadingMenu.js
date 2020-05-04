@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 import {setTextSize} from '../actions/currentChapter'
 import {Link} from 'react-router-dom'
+import {getBookByChapter} from '../utilities/helpers'
 
 
 
@@ -31,6 +32,15 @@ class ReadingMenu extends Component {
            
         };
        
+    }
+
+    renderChapters = () => {
+          const chapterCount = getBookByChapter(this.props.books, this.props.bookId)
+          return <ul>
+              {this.props.books.map(book => {
+                return <Link></Link>
+              })}
+          </ul>
     }
 
     onTextSliderChange = (newValue) => {
@@ -92,6 +102,8 @@ class ReadingMenu extends Component {
        <h2>Chapters</h2>
            
       <div id="chapter-links">
+
+        
           
        </div>
        </Grid.Column>
@@ -112,7 +124,9 @@ class ReadingMenu extends Component {
 const mapStateToProps = state => {
   return {
 
-    textSize: state.currentChapter.displayOptions.textSize
+    textSize: state.currentChapter.displayOptions.textSize,
+    books: state.library.userBooks,
+    bookId: state.currentChapter.book_id
 
   }
 }
