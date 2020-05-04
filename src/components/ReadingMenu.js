@@ -9,6 +9,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 import {setTextSize} from '../actions/currentChapter'
+import {Link} from 'react-router-dom'
 
 
 
@@ -60,6 +61,7 @@ class ReadingMenu extends Component {
                 <div>
 
                 <Grid>
+       <Grid.Row>         
       <Grid.Column>
        
       <div style={{width: '200px'}}>
@@ -81,7 +83,19 @@ class ReadingMenu extends Component {
       </div>
 
       </Grid.Column>
-     
+
+      </Grid.Row>  
+
+      <Grid.Row>
+
+        <Grid.Column>
+       <h2>Chapters</h2>
+           
+      <div id="chapter-links">
+          
+       </div>
+       </Grid.Column>
+      </Grid.Row>     
     
     </Grid>
 
