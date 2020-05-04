@@ -9,7 +9,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 import {setTextSize} from '../actions/currentChapter'
-import {Link} from 'react-router-dom'
 import {getBookByChapter} from '../utilities/helpers'
 
 
@@ -34,13 +33,25 @@ class ReadingMenu extends Component {
        
     }
 
-    renderChapters = () => {
-          const chapterCount = getBookByChapter(this.props.books, this.props.bookId)
-          return <ul>
-              {this.props.books.map(book => {
-                return <Link></Link>
-              })}
-          </ul>
+    handleChapterClick = (event) => {
+      const chapterNum = event.target.id
+      console.log("chapter num", chapterNum)
+    }
+
+    renderChapterLinks = () => {
+          const chapter = getBookByChapter(this.props.books, this.props.bookId)
+         
+          if (chapter) {  
+            const chapterCount = getBookByChapter(this.props.books, this.props.bookId).chapter_count
+            const chapters = []
+            
+            for (let i = 0; i < chapterCount; i++) {
+            chapters.push(<li id={`${i + 1}`} key={Math.random()} onClick={this.handleChapterClick}>Chapter {i + 1}</li>)
+            }
+           
+            return chapters
+         }
+          
     }
 
     onTextSliderChange = (newValue) => {
@@ -102,7 +113,8 @@ class ReadingMenu extends Component {
        <h2>Chapters</h2>
            
       <div id="chapter-links">
-
+          
+          {this.renderChapterLinks()}
         
           
        </div>
@@ -116,7 +128,7 @@ class ReadingMenu extends Component {
                 <br />
                 
             </SlidingPane>
-            
+           
         </div>;
     }
 }
@@ -126,7 +138,7 @@ const mapStateToProps = state => {
 
     textSize: state.currentChapter.displayOptions.textSize,
     books: state.library.userBooks,
-    bookId: state.currentChapter.book_id
+    bookId: state.currentChapter.currentChapter.book_id
 
   }
 }
