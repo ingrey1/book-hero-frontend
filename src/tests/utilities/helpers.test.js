@@ -1,4 +1,4 @@
-import {getBookByChapter } from '../utilities/helpers'
+import {getBookByChapter } from '../../utilities/helpers'
 
 // export const getBookByChapter = (books, book_id) => {
   
