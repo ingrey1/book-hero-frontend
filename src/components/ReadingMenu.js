@@ -5,11 +5,11 @@ import 'react-sliding-pane/dist/react-sliding-pane.css';
 import {Button} from 'semantic-ui-react' 
 import {Grid} from "semantic-ui-react";
 import {connect} from 'react-redux'
-import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 import {setTextSize} from '../actions/currentChapter'
 import {getBookByChapter} from '../utilities/helpers'
+import {updateReadingStatus} from '../api/api'
 
 
 
@@ -35,7 +35,13 @@ class ReadingMenu extends Component {
 
     handleChapterClick = (event) => {
       const chapterNum = event.target.id
-      console.log("chapter num", chapterNum)
+      //updateReadingStatus(userId, bookId, token, newCurrentWord, newCurrentChapter)
+      updateReadingStatus(this.props.auth.userId, this.props.bookId, localStorage.getItem('fire_token') , 1, chapterNum).
+       then(res => res.json()).then(() => {
+              // TODO: chapter has been updated, so load that chapter
+              
+       }).catch(err => console.log("error changing chapters"))
+      
     }
 
     renderChapterLinks = () => {
@@ -138,7 +144,8 @@ const mapStateToProps = state => {
 
     textSize: state.currentChapter.displayOptions.textSize,
     books: state.library.userBooks,
-    bookId: state.currentChapter.currentChapter.book_id
+    bookId: state.currentChapter.currentChapter.book_id,
+    auth: state.auth
 
   }
 }
