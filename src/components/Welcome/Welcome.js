@@ -31,7 +31,7 @@ function Welcome({user, firebaseAppAuth, providers,authorize, loginFunctions, lo
        <Row>
          <Col>
            <div id="background-image-div">
-                 book background image
+                 background image div
            </div>
          </Col> 
          <Col><SignIn user={user} firebaseAppAuth={firebaseAppAuth} providers={providers} loginFunctions={loginFunctions}  /></Col>

@@ -1,0 +1,12 @@
+
+
+
+
+/* book image on top left side of welcome page */
+#background-image-div {
+    height: 80%;
+    background-image: url("/public/images/logo.svg");
+    /* background-color: grey; */
+    
+
+}
