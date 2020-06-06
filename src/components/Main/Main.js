@@ -11,7 +11,7 @@ import Profile from "../Profile/Profile"
 import Refill from '../Refill/Refill'
 import Browse from '../Browse/Browse'
 import Write from '../Write/Write'
-
+import "./Main.css"
 
 function Main({signOut, user, firebaseAppAuth, providers, signInWithGoogle, signInWithEmailAndPassword, createUserWithEmailAndPassword, loggedIn, ...props}) {
    
