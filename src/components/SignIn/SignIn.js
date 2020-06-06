@@ -10,7 +10,7 @@ import "./SignIn.css"
 
 const componentStyles = {
 
-  backgroundImage: `url(${process.env.PUBLIC_URL}/background_book1.jpg)`
+  backgroundImage: `url(${process.env.PUBLIC_URL}/images/background_book1.jpg)`
 
 }
 
@@ -85,7 +85,7 @@ function SignIn({providers, user, firebaseAppAuth, loginWithGoogle, loginFunctio
     <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
     <Grid.Column style={{ maxWidth: 450 }}>
       <Header as='h2' color='blue' textAlign='center'>
-        <Image src={process.env.PUBLIC_URL + '/logo.svg'} /> {signupState ? "Signup" : "Login"}
+        <Image src={process.env.PUBLIC_URL + '/images/logo.svg'} /> {signupState ? "Signup" : "Login"}
       </Header>
       <Form size='large'>
         <Segment stacked>
