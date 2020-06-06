@@ -5,7 +5,7 @@ import Nav from 'react-bootstrap/Nav'
 import {Form, FormControl, Button, NavDropdown} from 'react-bootstrap'
 import {LinkContainer} from 'react-router-bootstrap'
 import {clearUserStoreAndLogout} from '../../actions/auth'
-
+import "./Navigation.css"
 
 const linkContainerStyle = {
     marginleft: '25px',
