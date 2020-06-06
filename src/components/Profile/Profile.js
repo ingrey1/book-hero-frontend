@@ -3,6 +3,8 @@ import {connect} from 'react-redux'
 import {Grid, Label, Segment, Icon, List, Input, Button} from 'semantic-ui-react'
 import {updateUserInfo} from '../../actions/auth'
 import {updateUser} from '../../api/api'
+import "./Profile.css"
+
 
 const colStyle = {
     marginLeft: '10px'
