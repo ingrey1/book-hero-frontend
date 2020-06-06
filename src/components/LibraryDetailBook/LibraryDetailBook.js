@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {Card, Image, Grid, Button} from 'semantic-ui-react'
 import {addBookAndUpdateStore} from '../../actions/library'
-
+import "./LibraryDetailBook.css"
 
 
 const cardStyle = {
