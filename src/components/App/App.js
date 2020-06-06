@@ -5,6 +5,7 @@ import 'firebase/auth';
 import firebaseConfig from '../../firebaseConfig';
 import {Grid, Row, Col} from 'react-bootstrap'
 import Main from '../Main/Main'
+import './App.css'
 
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
