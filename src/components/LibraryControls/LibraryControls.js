@@ -4,7 +4,7 @@ import { Input } from 'semantic-ui-react'
 import {connect} from 'react-redux'
 import {getAllCategories, createBootstrapDropDownItems, mapSortPropertyToSortLabel} from '../../utilities/helpers'
 import {setFilterUserBooksValue, setSortUserBooksValue, searchAndFilterLibrary} from '../../actions/library'
-
+import "./LibraryControls.css"
 
 function LibraryControls({books, sort, filter, sortBooks, filterBooks, searchBooks, ...props}) {
 

@@ -5,7 +5,7 @@ import { Dimmer, Loader} from 'semantic-ui-react'
 import _ from 'underscore'
 import LibraryListBook from '../LibraryListBook/LibraryListBook'
 import {constructLibraryListBook, doubleFilterByTitleAndCategory} from '../../utilities/helpers'
-
+import "./LibraryBooks.css"
 
 function LibraryBooks({library: {userBooks, displayOptions: {filter: {categories, titleSearch}, sort: { property, ascending }}}, ...props}) {
     
