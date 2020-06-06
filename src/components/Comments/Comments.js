@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import {List, Form, TextArea, Button, Message} from 'semantic-ui-react'
 import {connect} from 'react-redux'
 import {retrieveAndSetComments, createAndSetComment} from '../../actions/comments'
+import './Comments.css'
 
 
 const buttonStyle = {

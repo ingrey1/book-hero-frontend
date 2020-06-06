@@ -5,6 +5,7 @@ import {retrieveLibrary} from '../../actions/library'
 import {retrieveAndSetBooks} from '../../actions/books'
 import {clearCurrentChapter} from '../../actions/currentChapter'
 import LibraryListBook from '../LibraryListBook/LibraryListBook'
+import "./Home.css"
 
 const colStyle = {
     marginTop: '25px'
