@@ -7,9 +7,9 @@ import {Grid} from "semantic-ui-react";
 import {connect} from 'react-redux'
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
-import {setTextSize} from '../actions/currentChapter'
-import {getBookByChapter} from '../utilities/helpers'
-import {updateReadingStatus} from '../api/api'
+import {setTextSize} from '../../actions/currentChapter'
+import {getBookByChapter} from '../../utilities/helpers'
+import {updateReadingStatus} from '../../api/api'
 
 
 

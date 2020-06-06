@@ -2,8 +2,8 @@ import React, {useState} from 'react'
 import {Dropdown, Row, Col} from 'react-bootstrap'
 import { Input } from 'semantic-ui-react'
 import {connect} from 'react-redux'
-import {getAllCategories, createBootstrapDropDownItems, mapSortPropertyToSortLabel} from '../utilities/helpers'
-import {setFilterUserBooksValue, setSortUserBooksValue, searchAndFilterLibrary} from '../actions/library'
+import {getAllCategories, createBootstrapDropDownItems, mapSortPropertyToSortLabel} from '../../utilities/helpers'
+import {setFilterUserBooksValue, setSortUserBooksValue, searchAndFilterLibrary} from '../../actions/library'
 
 
 function LibraryControls({books, sort, filter, sortBooks, filterBooks, searchBooks, ...props}) {

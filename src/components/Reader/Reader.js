@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from 'react'
 import {connect} from 'react-redux'
-import {retrieveCurrentChapter, previousChapterTransition, nextChapterTransition, retrieveNextChapter, retrievePreviousChapter, updateChapterLocation, startReader, endReader, setNextChapter, setPreviousChapter, setCurrentChapter, setTextSize} from '../actions/currentChapter'
+import {retrieveCurrentChapter, previousChapterTransition, nextChapterTransition, retrieveNextChapter, retrievePreviousChapter, updateChapterLocation, startReader, endReader, setNextChapter, setPreviousChapter, setCurrentChapter, setTextSize} from '../../actions/currentChapter'
 import {Row, Col, Container} from 'react-bootstrap'
 import { Dimmer, Loader} from 'semantic-ui-react'
 import {Button, Icon, Progress} from 'semantic-ui-react'
-import {updateReadingStatus, getNextChapter, getPreviousChapter} from '../api/api'
-import {getBookByChapter, calculatePercentOfChapterForCurrentPage} from '../utilities/helpers'
-import Comments from './Comments'
-import {retrieveAndSetComments} from '../actions/comments'
-import ReadingMenu from './ReadingMenu'
+import {updateReadingStatus, getNextChapter, getPreviousChapter} from '../../api/api'
+import {getBookByChapter, calculatePercentOfChapterForCurrentPage} from '../../utilities/helpers'
+import Comments from '../Comments/Comments'
+import {retrieveAndSetComments} from '../../actions/comments'
+import ReadingMenu from '../ReadingMenu/ReadingMenu'
 
 
 function calculateTotalCharacters(textSize) {

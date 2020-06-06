@@ -4,7 +4,7 @@ import NavBar from 'react-bootstrap/NavBar'
 import Nav from 'react-bootstrap/Nav'
 import {Form, FormControl, Button, NavDropdown} from 'react-bootstrap'
 import {LinkContainer} from 'react-router-bootstrap'
-import {clearUserStoreAndLogout} from '../actions/auth'
+import {clearUserStoreAndLogout} from '../../actions/auth'
 
 
 const linkContainerStyle = {

@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import {connect} from 'react-redux'
 import {Card} from 'semantic-ui-react'
-import {retrieveLibrary} from '../actions/library'
-import {retrieveAndSetBooks} from '../actions/books'
-import {clearCurrentChapter} from '../actions/currentChapter'
-import LibraryListBook from './LibraryListBook'
+import {retrieveLibrary} from '../../actions/library'
+import {retrieveAndSetBooks} from '../../actions/books'
+import {clearCurrentChapter} from '../../actions/currentChapter'
+import LibraryListBook from '../LibraryListBook/LibraryListBook'
 
 const colStyle = {
     marginTop: '25px'

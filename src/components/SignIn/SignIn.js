@@ -1,7 +1,17 @@
 import React, {useState} from 'react'
 import {connect} from 'react-redux'
-import {loginWithGoogle, createUserWithEmailPassword} from '../actions/auth'
+import {loginWithGoogle, createUserWithEmailPassword} from '../../actions/auth'
 import { Button, Form, Grid, Header, Image, Message, Segment, Icon } from 'semantic-ui-react'
+
+
+
+
+
+const componentStyles = {
+
+  backgroundImage: `url(${process.env.PUBLIC_URL}/background_book1.jpg)`
+
+}
 
 
 
@@ -70,7 +80,7 @@ function SignIn({providers, user, firebaseAppAuth, loginWithGoogle, loginFunctio
   }
 
  
-  return <div style={{backgroundImage: `url(${process.env.PUBLIC_URL}/background_book.jpg)`}}>
+  return <div style={componentStyles}>
     <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
     <Grid.Column style={{ maxWidth: 450 }}>
       <Header as='h2' color='blue' textAlign='center'>

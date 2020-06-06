@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
-import SignIn from './SignIn'
+import SignIn from '../SignIn/SignIn'
 import {connect} from 'react-redux' 
-import {authorizeUserOrLogout} from '../actions/auth'
+import {authorizeUserOrLogout} from '../../actions/auth'
 
 
 

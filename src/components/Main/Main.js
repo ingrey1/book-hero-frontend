@@ -1,16 +1,16 @@
 import React from 'react'
 import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom'
 import {connect} from 'react-redux'
-import Welcome from './Welcome'
-import Home from "./Home"
-import Navigation from "./Navigation"
-import Library from './Library'
-import LibraryDetailBook from './LibraryDetailBook'
-import Reader from "./Reader"
-import Profile from "./Profile"
-import Refill from './Refill'
-import Browse from './Browse'
-import Write from './Write'
+import Welcome from '../Welcome/Welcome'
+import Home from "../Home/Home"
+import Navigation from "../Navigation/Navigation"
+import Library from '../Library/Library'
+import LibraryDetailBook from '../LibraryDetailBook/LibraryDetailBook'
+import Reader from "../Reader/Reader"
+import Profile from "../Profile/Profile"
+import Refill from '../Refill/Refill'
+import Browse from '../Browse/Browse'
+import Write from '../Write/Write'
 
 
 function Main({signOut, user, firebaseAppAuth, providers, signInWithGoogle, signInWithEmailAndPassword, createUserWithEmailAndPassword, loggedIn, ...props}) {

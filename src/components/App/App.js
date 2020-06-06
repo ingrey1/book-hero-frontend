@@ -2,9 +2,9 @@ import React from 'react';
 import withFirebaseAuth from 'react-with-firebase-auth'
 import * as firebase from 'firebase/app';
 import 'firebase/auth';
-import firebaseConfig from '../firebaseConfig';
+import firebaseConfig from '../../firebaseConfig';
 import {Grid, Row, Col} from 'react-bootstrap'
-import Main from './Main'
+import Main from '../Main/Main'
 
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
