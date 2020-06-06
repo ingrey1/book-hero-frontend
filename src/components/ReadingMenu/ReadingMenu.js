@@ -10,7 +10,7 @@ import Slider from '@material-ui/core/Slider';
 import {setTextSize} from '../../actions/currentChapter'
 import {getBookByChapter} from '../../utilities/helpers'
 import {updateReadingStatus} from '../../api/api'
-
+import "./ReadingMenu.css"
 
 
 

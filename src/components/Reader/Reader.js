@@ -9,6 +9,7 @@ import {getBookByChapter, calculatePercentOfChapterForCurrentPage} from '../../u
 import Comments from '../Comments/Comments'
 import {retrieveAndSetComments} from '../../actions/comments'
 import ReadingMenu from '../ReadingMenu/ReadingMenu'
+import "./Reader.css"
 
 
 function calculateTotalCharacters(textSize) {
