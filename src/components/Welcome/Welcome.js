@@ -1,4 +1,5 @@
 import React, {useEffect} from 'react'
+import {Container, Row, Col} from 'react-bootstrap'
 import SignIn from '../SignIn/SignIn'
 import {connect} from 'react-redux' 
 import {authorizeUserOrLogout} from '../../actions/auth'
@@ -23,9 +24,42 @@ function Welcome({user, firebaseAppAuth, providers,authorize, loginFunctions, lo
      } 
     })
 
-    return <div>
-       <SignIn user={user} firebaseAppAuth={firebaseAppAuth} providers={providers} loginFunctions={loginFunctions}  />
-    </div>
+    return <Container>
+        
+        {/* SignIn Component and Background Book Image */}
+
+       <Row>
+         <Col>
+           <div id="background-image-div">
+
+           </div>
+         </Col> 
+         <Col><SignIn user={user} firebaseAppAuth={firebaseAppAuth} providers={providers} loginFunctions={loginFunctions}  /></Col>
+         
+        </Row>
+           
+           {/* About Book Hero Section */}
+           <Col>Description</Col>
+           <Col>Book Image 1</Col>
+           <Col>Book Image 2</Col>
+           <Col>Book Image 3</Col>
+
+          
+        <Row>
+            
+        </Row> 
+
+          {/* Personal Testamonial */}
+
+        <Row>
+
+            <Col>User Image</Col>
+            <Col>Testamnial Text</Col>
+
+        </Row>
+ 
+
+    </Container>
 }
 
 const mapStateToProps = state => {
