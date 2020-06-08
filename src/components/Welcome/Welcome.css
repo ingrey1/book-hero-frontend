@@ -19,6 +19,8 @@ div.noMargin {
     margin-left: 0;
 }
 
+/* allow rows to be adjacent without margin space */
+
 div.noBottomMargin {
     margin-bottom: 0;
    
@@ -39,14 +41,3 @@ div.noTopMargin {
 
 }
 
-/* second column of first row */
-
-.login-col {
-   
-}
-
-/* first column of first row */
-
-.image-col {
-   min-height: 550px;
-}
