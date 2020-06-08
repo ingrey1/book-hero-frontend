@@ -106,7 +106,18 @@ function Welcome({
       {/* Personal Testamonial */}
 
       <Row>
-        <Col>User Image</Col>
+        <Col>
+          <div className="testimonial-image">
+            <img
+              alt="image for random user"
+              src={require("../../assets/images/cherry_blossom_tree.jpg")}
+            />
+            <br />
+            <label>
+              <strong>Lost Song</strong>
+            </label>
+          </div>
+        </Col>
         <Col>Testamnial Text</Col>
       </Row>
       <Row className="noTopMargin">
