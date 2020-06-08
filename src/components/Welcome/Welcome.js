@@ -24,14 +24,13 @@ function Welcome({user, firebaseAppAuth, providers,authorize, loginFunctions, lo
      } 
     })
 
-    return <Container>
+    return <Container className="noPadding" fluid>
         
         {/* SignIn Component and Background Book Image */}
 
-       <Row>
-         <Col>
+       <Row className="noMargin">
+         <Col className="noPadding">
            <div id="background-image-div">
-                 background image div
            </div>
          </Col> 
          <Col><SignIn user={user} firebaseAppAuth={firebaseAppAuth} providers={providers} loginFunctions={loginFunctions}  /></Col>

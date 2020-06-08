@@ -5,10 +5,16 @@
 /* book image on top left side of welcome page */
 #background-image-div {
     height: 80%;
-    background-image: url(../../assets/images/background_book.jpg);
-    
-    
-   
-    
+    background-image: url(../../assets/images/background4.jpg);
+    background-repeat: no-repeat;
+}
 
+/* make row/col flush with left side of screen */
+
+div.noPadding {
+    padding-left: 0;
+}
+
+div.noMargin {
+    margin-left: 0;
 }
