@@ -37,3 +37,9 @@ div.noTopMargin {
 .book-image {
   height: 200px;
 }
+
+/* shifting the about text content right */
+
+.shift-right {
+  padding-left: 20px;
+}

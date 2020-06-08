@@ -55,7 +55,7 @@ function Welcome({
       <Row>
         {/* About Book Hero Section */}
         <Col>
-          <section>
+          <section className="shift-right">
             <h3>Browse, Read, Write</h3>
             <p>
               Explore Thousands of Books including <br />
