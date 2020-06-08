@@ -28,16 +28,16 @@ function Welcome({user, firebaseAppAuth, providers,authorize, loginFunctions, lo
         
         {/* SignIn Component and Background Book Image */}
 
-       <Row className="noMargin">
-         <Col className="noPadding">
+       <Row className="noMargin noBottomMargin">
+         <Col className="noPadding image-col">
            <div id="background-image-div">
            </div>
          </Col> 
-         <Col><SignIn user={user} firebaseAppAuth={firebaseAppAuth} providers={providers} loginFunctions={loginFunctions}  /></Col>
+         <Col className="login-col"><SignIn user={user} firebaseAppAuth={firebaseAppAuth} providers={providers} loginFunctions={loginFunctions}  /></Col>
          
         </Row>
 
-        <Row>Divider Row</Row>
+        <Row className="noTopMargin"><hr className="welcome-divider" /></Row>
            
         <Row>
 

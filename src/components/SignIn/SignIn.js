@@ -82,7 +82,7 @@ function SignIn({providers, user, firebaseAppAuth, loginWithGoogle, loginFunctio
 
  
   return <div style={componentStyles}>
-    <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
+    <Grid textAlign='center' style={{ height: '550px' }} verticalAlign='middle'>
     <Grid.Column style={{ maxWidth: 450 }}>
       <Header as='h2' color='blue' textAlign='center'>
         <Image src={process.env.PUBLIC_URL + '/images/logo.svg'} /> {signupState ? "Signup" : "Login"}

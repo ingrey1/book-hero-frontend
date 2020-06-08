@@ -4,7 +4,7 @@
 
 /* book image on top left side of welcome page */
 #background-image-div {
-    height: 80%;
+    height: 550px;
     background-image: url(../../assets/images/background4.jpg);
     background-repeat: no-repeat;
 }
@@ -17,4 +17,36 @@ div.noPadding {
 
 div.noMargin {
     margin-left: 0;
+}
+
+div.noBottomMargin {
+    margin-bottom: 0;
+   
+}
+
+div.noTopMargin {
+    margin-top: 0;
+   
+}
+
+
+
+/* Divider separating sections in Welcome component */
+
+.welcome-divider {
+    border: 8px solid #28827F;
+    width: 100%;
+
+}
+
+/* second column of first row */
+
+.login-col {
+   
+}
+
+/* first column of first row */
+
+.image-col {
+   min-height: 550px;
 }
