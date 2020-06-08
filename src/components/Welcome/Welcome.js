@@ -52,7 +52,7 @@ function Welcome({user, firebaseAppAuth, providers,authorize, loginFunctions, lo
             
         </Row> 
 
-        <Row>Divider Row</Row>
+        <Row className="noTopMargin"><hr className="welcome-divider" /></Row>
 
           {/* Personal Testamonial */}
          
@@ -64,8 +64,10 @@ function Welcome({user, firebaseAppAuth, providers,authorize, loginFunctions, lo
             <Col>Testamnial Text</Col>
 
         </Row>
- 
+        <Row className="noTopMargin"><hr className="welcome-divider" /></Row>
 
+   {/* Join the conversation section*/}
+       <Row>join the convo</Row>
     </Container>
 }
 
