@@ -1,89 +1,134 @@
-import React, {useEffect} from 'react'
-import {Container, Row, Col} from 'react-bootstrap'
-import SignIn from '../SignIn/SignIn'
-import {connect} from 'react-redux' 
-import {authorizeUserOrLogout} from '../../actions/auth'
-import "./Welcome.css"
+import React, { useEffect } from "react";
+import { Container, Row, Col } from "react-bootstrap";
+import SignIn from "../SignIn/SignIn";
+import { connect } from "react-redux";
+import { authorizeUserOrLogout } from "../../actions/auth";
+import "./Welcome.css";
 
+function Welcome({
+  user,
+  firebaseAppAuth,
+  providers,
+  authorize,
+  loginFunctions,
+  loggedIn,
+  history,
+  location,
+  ...props
+}) {
+  useEffect(() => {
+    console.log("use effect welcome comp, called just once");
+    authorize();
+  }, []);
 
+  useEffect(() => {
+    console.log("use effect Welcome Comp, called every time");
+    if (loggedIn) {
+      history.push("/home");
+    } else {
+      if (location.path === "/") history.push("/welcome");
+    }
+  });
 
-function Welcome({user, firebaseAppAuth, providers,authorize, loginFunctions, loggedIn, history, location, ...props}) {
+  return (
+    <Container className="noPadding" fluid>
+      {/* SignIn Component and Background Book Image */}
 
-    useEffect(() => {
-        console.log("use effect welcome comp, called just once")
-        authorize()
-     }, [])
+      <Row className="noMargin noBottomMargin">
+        <Col className="noPadding image-col">
+          <div id="background-image-div"></div>
+        </Col>
+        <Col className="login-col">
+          <SignIn
+            user={user}
+            firebaseAppAuth={firebaseAppAuth}
+            providers={providers}
+            loginFunctions={loginFunctions}
+          />
+        </Col>
+      </Row>
 
-    useEffect(() => {
-     console.log("use effect Welcome Comp, called every time")
-     if (loggedIn) {
-        history.push('/home')
-     } else {
-        if (location.path === "/") history.push('/welcome')
-        
-     } 
-    })
+      <Row className="noTopMargin">
+        <hr className="welcome-divider" />
+      </Row>
 
-    return <Container className="noPadding" fluid>
-        
-        {/* SignIn Component and Background Book Image */}
+      <Row>
+        {/* About Book Hero Section */}
+        <Col>
+          <section>
+            <h3>Browse, Read, Write</h3>
+            <p>
+              Explore Thousands of Books including <br />
+              Fantasy, Non-Fiction, Romance, <br />
+              Fan-Fiction, and more...
+            </p>
+            <br />
 
-       <Row className="noMargin noBottomMargin">
-         <Col className="noPadding image-col">
-           <div id="background-image-div">
-           </div>
-         </Col> 
-         <Col className="login-col"><SignIn user={user} firebaseAppAuth={firebaseAppAuth} providers={providers} loginFunctions={loginFunctions}  /></Col>
-         
-        </Row>
+            <p>
+              Use Book Hero to share your own stories and creations with the
+              world
+            </p>
+          </section>
+        </Col>
+        <Col className="closer-book-image">
+          <div>
+            <img
+              className="book-image"
+              src={require("../../assets/images/1q84_book_cover.jpg")}
+              alt="1q84 book cover"
+            />
+          </div>
+        </Col>
+        <Col>
+          <div>
+            <img
+              className="book-image"
+              src={require("../../assets/images/hobbit_book_cover.jpg")}
+              alt="1q84 book cover"
+            />
+          </div>
+        </Col>
+        <Col>
+          <div>
+            <img
+              className="book-image"
+              src={require("../../assets/images/a_tale_of_two_cities_book_cover.jpg")}
+              alt="1q84 book cover"
+            />
+          </div>
+        </Col>
+      </Row>
 
-        <Row className="noTopMargin"><hr className="welcome-divider" /></Row>
-           
-        <Row>
+      <Row className="noTopMargin">
+        <hr className="welcome-divider" />
+      </Row>
 
-           {/* About Book Hero Section */}
-           <Col>Description</Col>
-           <Col>Book Image 1</Col>
-           <Col>Book Image 2</Col>
-           <Col>Book Image 3</Col>
-           
-          
-        
-            
-        </Row> 
+      {/* Personal Testamonial */}
 
-        <Row className="noTopMargin"><hr className="welcome-divider" /></Row>
+      <Row>
+        <Col>User Image</Col>
+        <Col>Testamnial Text</Col>
+      </Row>
+      <Row className="noTopMargin">
+        <hr className="welcome-divider" />
+      </Row>
 
-          {/* Personal Testamonial */}
-         
-         
-
-        <Row>
-            
-            <Col>User Image</Col>
-            <Col>Testamnial Text</Col>
-
-        </Row>
-        <Row className="noTopMargin"><hr className="welcome-divider" /></Row>
-
-   {/* Join the conversation section*/}
-       <Row>join the convo</Row>
+      {/* Join the conversation section*/}
+      <Row>join the convo</Row>
     </Container>
+  );
 }
 
 const mapStateToProps = state => {
-    return {
-        loggedIn: state.auth.loggedIn
-    }
-}
+  return {
+    loggedIn: state.auth.loggedIn
+  };
+};
 
 const mapDispatchToProps = dispatch => {
-    return {
- 
-      authorize: () => dispatch(authorizeUserOrLogout())
-        
-    }
- }
+  return {
+    authorize: () => dispatch(authorizeUserOrLogout())
+  };
+};
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(Welcome)
+export default connect(mapStateToProps, mapDispatchToProps)(Welcome);

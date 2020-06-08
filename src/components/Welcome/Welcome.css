@@ -1,43 +1,39 @@
-
-
-
-
 /* book image on top left side of welcome page */
 #background-image-div {
-    height: 550px;
-    background-image: url(../../assets/images/background4.jpg);
-    background-repeat: no-repeat;
+  height: 550px;
+  background-image: url(../../assets/images/welcome_book_background.jpg);
+  background-repeat: no-repeat;
 }
 
 /* make row/col flush with left side of screen */
 
 div.noPadding {
-    padding-left: 0;
+  padding-left: 0;
 }
 
 div.noMargin {
-    margin-left: 0;
+  margin-left: 0;
 }
 
 /* allow rows to be adjacent without margin space */
 
 div.noBottomMargin {
-    margin-bottom: 0;
-   
+  margin-bottom: 0;
 }
 
 div.noTopMargin {
-    margin-top: 0;
-   
+  margin-top: 0;
 }
-
-
 
 /* Divider separating sections in Welcome component */
 
 .welcome-divider {
-    border: 8px solid #28827F;
-    width: 100%;
-
+  border: 8px solid #28827f;
+  width: 100%;
 }
 
+/* book cover images in second row */
+
+.book-image {
+  height: 200px;
+}
