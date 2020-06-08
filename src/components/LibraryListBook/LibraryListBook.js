@@ -12,24 +12,27 @@ function LibraryListBook({ book, topPick, ...props }) {
   //debugger
 
   return (
-
     
+     
 
-    <Link
-      style={bookContainerStyle}
-      to={topPick ? `/top_picks/${book.id}` : `/library/${book.id}`}
-    >
-      <Card style={{ width: "15rem", height: "20rem" }}>
-        <Image style={{ height: "10rem" }} src={book.image_url} />
-        <Card.Content>
-          <Card.Header>{book.title}</Card.Header>
+      <Link
+        style={bookContainerStyle}
+        to={topPick ? `/top_picks/${book.id}` : `/library/${book.id}`}
+      >
+        <Card style={{ width: "15rem", height: "20rem" }}>
+          <Image style={{ height: "10rem" }} src={book.image_url} />
+          <Card.Content>
+            <Card.Header>{book.title}</Card.Header>
 
-          <Card.Description>
-            {book.authors ? book.authors.map((a) => `${a} `) : book.author.name}
-          </Card.Description>
-        </Card.Content>
-      </Card>
-    </Link>
+            <Card.Description>
+              {book.authors
+                ? book.authors.map((a) => `${a} `)
+                : book.author.name}
+            </Card.Description>
+          </Card.Content>
+        </Card>
+      </Link>
+    
   );
 }
 

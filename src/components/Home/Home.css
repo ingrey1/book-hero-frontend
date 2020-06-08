@@ -1,0 +1,12 @@
+/* .categories-group {
+  margin: 25px;
+  align-items: center;
+  justify-content: space-between;
+} */
+
+.categories-row{
+  margin:25px;
+  text-align: center;
+  justify-content: center;
+
+}
