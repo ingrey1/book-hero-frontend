@@ -37,22 +37,30 @@ function Welcome({user, firebaseAppAuth, providers,authorize, loginFunctions, lo
          <Col><SignIn user={user} firebaseAppAuth={firebaseAppAuth} providers={providers} loginFunctions={loginFunctions}  /></Col>
          
         </Row>
+
+        <Row>Divider Row</Row>
            
+        <Row>
+
            {/* About Book Hero Section */}
            <Col>Description</Col>
            <Col>Book Image 1</Col>
            <Col>Book Image 2</Col>
            <Col>Book Image 3</Col>
-
+           
           
-        <Row>
+        
             
         </Row> 
 
+        <Row>Divider Row</Row>
+
           {/* Personal Testamonial */}
+         
+         
 
         <Row>
-
+            
             <Col>User Image</Col>
             <Col>Testamnial Text</Col>
 
