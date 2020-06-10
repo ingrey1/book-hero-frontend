@@ -41,6 +41,8 @@ div.noTopMargin {
 /* shifting the about text content right */
 
 .shift-right {
+  color: #073b4c;
+  font-size: 20px;
   padding-left: 20px;
 }
 
@@ -49,14 +51,38 @@ div.noTopMargin {
 .testimonial-image {
   text-align: center;
   color: #073b4c;
+  font-size: 25px;
 }
 
 .testimonial-text {
   color: #073b4c;
   padding-top: 15%;
+  font-size: 20px;
 }
 
 .testimonial-small-text {
   font-size: 10px;
   margin-left: 10px;
+}
+
+/* for the right picture in last row */
+
+.join-convo-picture {
+  margin-top: 5%;
+  margin-bottom: 10%;
+  width: 210px;
+  height: 270px;
+}
+
+/* for the text for join conversation seciton */
+
+.join-convo-text {
+  margin-left: 5%;
+  color: #073b4c;
+  padding-top: 10%;
+  float: right;
+  font-size: 20px;
+}
+
+.join-convo-small-text {
 }

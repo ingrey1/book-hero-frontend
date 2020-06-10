@@ -136,7 +136,26 @@ function Welcome({
       </Row>
 
       {/* Join the conversation section*/}
-      <Row>join the convo</Row>
+      <Row>
+        <Col>
+          <section className="join-convo-text">
+            <h3><strong>Join The Conversation</strong></h3>
+            <p className="join-convo-small-text">
+              Review what you've read, and participate
+              <br />
+              in discussion threads for books and stories
+            </p>
+          </section>
+        </Col>
+        <Col>
+          <div>
+            <img
+              className="join-convo-picture"
+              src={require("../../assets/images/join_convo.jpg")}
+            />
+          </div>
+        </Col>
+      </Row>
     </Container>
   );
 }
