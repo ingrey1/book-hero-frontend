@@ -107,7 +107,7 @@ function Welcome({
 
       <Row>
         <Col>
-          <div className="testimonial-image">
+          <section className="testimonial-image">
             <img
               alt="image for random user"
               src={require("../../assets/images/cherry_blossom_tree.jpg")}
@@ -116,9 +116,20 @@ function Welcome({
             <label>
               <strong>Lost Song</strong>
             </label>
-          </div>
+          </section>
         </Col>
-        <Col>Testamnial Text</Col>
+        <Col className="testimonial-col">
+          <section className="testimonial-text">
+            <p>
+              "I finally found a great place to share my stories! <br />
+              The community here is amazing!"
+            </p>
+            <p className="testimonial-small-text">
+              <em>Lost Song</em>'s' "The Pterodactyl's Revenge" has been read
+              over 10k times
+            </p>
+          </section>
+        </Col>
       </Row>
       <Row className="noTopMargin">
         <hr className="welcome-divider" />
