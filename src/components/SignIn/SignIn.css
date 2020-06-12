@@ -1,0 +1,27 @@
+.secondary-color-text {
+  color: #28827f !important;
+}
+
+.login-button {
+  background-color: #28827f !important;
+  color: white !important;
+}
+
+.primary-color-text {
+  color: #073b4c !important;
+}
+
+.toggle-signup-link {
+  color: #28827f !important;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.toggle-signup-link:hover {
+  font-size: 25px;
+}
+
+.google-button {
+  background-color: #28827f !important;
+  color: white !important;
+}
