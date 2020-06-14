@@ -5,7 +5,7 @@ import "./CategorySelect.css";
 function CategorySelect(props) {
   return (
     <Row className="categories-row">
-      <Col className="romance-category">
+      <Col className="romance-category col-text">
         <input
           type="image"
           src={require("../../assets/images/romance_icon.svg")}

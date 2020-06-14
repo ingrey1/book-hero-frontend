@@ -6,6 +6,10 @@
   font-size: 25px;
 }
 
+.category-label:hover {
+  font-size: 35px;
+}
+
 .romance-image {
   margin-left: 15px;
 }
