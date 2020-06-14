@@ -15,12 +15,12 @@ function CategorySelect(props) {
           className="romance-image no-focus-outline"
         />
         <br />
-        <label className="category-label">
+        <label>
           <strong>Romance</strong>
         </label>
       </Col>
 
-      <Col className="non-fiction-category">
+      <Col className="fiction-category col-text">
         <input
           type="image"
           src={require("../../assets/images/fiction_logo.svg")}
@@ -30,12 +30,12 @@ function CategorySelect(props) {
           className="fantasy-image no-focus-outline"
         />
         <br />
-        <label className="category-label">
+        <label>
           <strong>Fantasy</strong>
         </label>
       </Col>
 
-      <Col className="mystery-category">
+      <Col className="mystery-category col-text">
         <input
           type="image"
           src={require("../../assets/images/mystery_logo.svg")}
@@ -45,12 +45,12 @@ function CategorySelect(props) {
           className="mystery-image no-focus-outline"
         />
         <br />
-        <label className="category-label">
+        <label>
           <strong>Mystery</strong>
         </label>
       </Col>
 
-      <Col className="literature-category">
+      <Col className="literature-category col-text">
         <input
           type="image"
           src={require("../../assets/images/literature_logo.svg")}
@@ -60,12 +60,12 @@ function CategorySelect(props) {
           className="literature-image no-focus-outline"
         />
         <br />
-        <label className="category-label">
+        <label>
           <strong>Literature</strong>
         </label>
       </Col>
 
-      <Col className="literature-category">
+      <Col className="literature-category col-text">
         <input
           type="image"
           src={require("../../assets/images/more_logo.svg")}
@@ -75,7 +75,7 @@ function CategorySelect(props) {
           className="category-image no-focus-outline"
         />
         <br />
-        <label className="category-label">
+        <label>
           <strong>More</strong>
         </label>
       </Col>

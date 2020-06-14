@@ -2,14 +2,6 @@
   margin-left: 25px !important;
 }
 
-.category-label {
-  font-size: 25px;
-}
-
-.category-label:hover {
-  font-size: 35px;
-}
-
 .romance-image {
   margin-left: 15px;
 }
@@ -28,4 +20,12 @@
 
 .literature-image {
   margin-left: 20px;
+}
+
+.col-text {
+  font-size: 25px;
+}
+
+.col-text:hover {
+  font-size: 35px;
 }
