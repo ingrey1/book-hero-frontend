@@ -4,5 +4,21 @@
 
 .category-select-title {
   padding-top: 15px;
-  padding-left: 15px;
+  padding-left: 30px;
+  padding-bottom: 15px;
+}
+
+.primary-color {
+  color: #073b4c !important;
+}
+
+.divider {
+  border: 2px solid #073b4c;
+}
+
+.container-custom {
+  margin-left: 0px !important;
+  padding-left: 0px !important;
+  margin-right: 0px !important;
+  padding-right: 0px !important;
 }

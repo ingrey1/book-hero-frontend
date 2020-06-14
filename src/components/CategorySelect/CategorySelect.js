@@ -1,75 +1,86 @@
 import React from "react";
-import { Row } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
+import "./CategorySelect.css";
 
 function CategorySelect(props) {
-  return <Row
-  className="categories-row"
-  style={{
-    justifyContent: "space-between",
-    marginLeft: "225px",
-    marginRight: "225px",
-  }}
->
-  <div className="romance-category">
-    <input
-      type="image"
-      src={require("../../assets/images/romance_icon.svg")}
-      name="saveForm"
-      height="80px"
-      width="75px"
-      alt="romance-image"
-      class="btTxt submit"
-      id="saveForm"
-    />
-    <br />
-    <label>Romance</label>
-  </div>
+  return (
+    <Row className="categories-row">
+      <Col className="romance-category">
+        <input
+          type="image"
+          src={require("../../assets/images/romance_icon.svg")}
+          height="80px"
+          width="75px"
+          alt="romance-image"
+          className="romance-image"
+        />
+        <br />
+        <label className="category-label">
+          <strong>Romance</strong>
+        </label>
+      </Col>
 
-  <div className="non-fiction-category">
-    <input
-      type="image"
-      src={require("../../assets/images/non-fiction_icon.png")}
-      name="saveForm"
-      height="80px"
-      width="75px"
-      alt="romance-image"
-      class="btTxt submit"
-      id="saveForm"
-    />
-    <br />
-    <label>Non-Fiction</label>
-  </div>
+      <Col className="non-fiction-category">
+        <input
+          type="image"
+          src={require("../../assets/images/fiction_logo.svg")}
+          height="80px"
+          width="75px"
+          alt="non-fiction-image"
+          className="fantasy-image"
+        />
+        <br />
+        <label className="category-label">
+          <strong>Fantasy</strong>
+        </label>
+      </Col>
 
-  <div className="mystery-category">
-    <input
-      type="image"
-      src={require("../../assets/images/mystery_icon.png")}
-      height="80px"
-      width="75px"
-      name="saveForm"
-      alt="romance-image"
-      class="btTxt submit"
-      id="saveForm"
-    />
-    <br />
-    <label>Mystery</label>
-  </div>
+      <Col className="mystery-category">
+        <input
+          type="image"
+          src={require("../../assets/images/mystery_logo.svg")}
+          height="80px"
+          width="75px"
+          alt="romance-image"
+          className="mystery-image"
+        />
+        <br />
+        <label className="category-label">
+          <strong>Mystery</strong>
+        </label>
+      </Col>
 
-  <div className="fiction-category">
-    <input
-      type="image"
-      src={require("../../assets/images/fiction_icon.png")}
-      name="saveForm"
-      height="80px"
-      width="75px"
-      alt="romance-image"
-      class="btTxt submit"
-      id="saveForm"
-    />
-    <br />
-    <label>Fiction</label>
-  </div>
-</Row>
+      <Col className="literature-category">
+        <input
+          type="image"
+          src={require("../../assets/images/literature_logo.svg")}
+          height="80px"
+          width="75px"
+          alt="literature-image"
+          className="literature-image"
+        />
+        <br />
+        <label className="category-label">
+          <strong>Literature</strong>
+        </label>
+      </Col>
+
+      <Col className="literature-category">
+        <input
+          type="image"
+          src={require("../../assets/images/more_logo.svg")}
+          height="80px"
+          width="75px"
+          alt="more-image"
+          className="category-image"
+        />
+        <br />
+        <label className="category-label">
+          <strong>More</strong>
+        </label>
+      </Col>
+    </Row>
+  );
 }
 
 export default CategorySelect;

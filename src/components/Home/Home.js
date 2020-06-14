@@ -25,11 +25,12 @@ function Home({
   }, []);
 
   return (
-    <Container fluid>
+    <Container fluid className="primary-color container-custom">
       <Row className="category-select-title">
         <h2>Category Select</h2>
       </Row>
       <CategorySelect />
+      <hr className="divider" />
       <Row className="current-category-title">
         <h1 className="m-auto">Top Picks</h1>
       </Row>
