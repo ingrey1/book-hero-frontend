@@ -12,7 +12,7 @@ function CategorySelect(props) {
           height="80px"
           width="75px"
           alt="romance-image"
-          className="romance-image"
+          className="romance-image no-focus-outline"
         />
         <br />
         <label className="category-label">
@@ -27,7 +27,7 @@ function CategorySelect(props) {
           height="80px"
           width="75px"
           alt="non-fiction-image"
-          className="fantasy-image"
+          className="fantasy-image no-focus-outline"
         />
         <br />
         <label className="category-label">
@@ -42,7 +42,7 @@ function CategorySelect(props) {
           height="80px"
           width="75px"
           alt="romance-image"
-          className="mystery-image"
+          className="mystery-image no-focus-outline"
         />
         <br />
         <label className="category-label">
@@ -57,7 +57,7 @@ function CategorySelect(props) {
           height="80px"
           width="75px"
           alt="literature-image"
-          className="literature-image"
+          className="literature-image no-focus-outline"
         />
         <br />
         <label className="category-label">
@@ -72,7 +72,7 @@ function CategorySelect(props) {
           height="80px"
           width="75px"
           alt="more-image"
-          className="category-image"
+          className="category-image no-focus-outline"
         />
         <br />
         <label className="category-label">
