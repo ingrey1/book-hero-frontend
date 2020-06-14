@@ -1,12 +1,8 @@
-/* .categories-group {
-  margin: 25px;
-  align-items: center;
-  justify-content: space-between;
-} */
+.current-category-title {
+  margin-top: 50px;
+}
 
-.categories-row{
-  margin:25px;
-  text-align: center;
-  justify-content: center;
-
+.category-select-title {
+  padding-top: 15px;
+  padding-left: 15px;
 }

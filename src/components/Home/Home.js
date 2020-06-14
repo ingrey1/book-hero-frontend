@@ -1,27 +1,14 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { Card, Icon, IconGroup } from "semantic-ui-react";
-import {
-  Button,
-  ButtonGroup,
-  DropdownButton,
-  Dropdown,
-  Row
-} from "react-bootstrap";
+
+import { Container, Col, Row } from "react-bootstrap";
 import { retrieveLibrary } from "../../actions/library";
 import { retrieveAndSetBooks } from "../../actions/books";
 import { clearCurrentChapter } from "../../actions/currentChapter";
-import LibraryListBook from "../LibraryListBook/LibraryListBook";
 import CategorySelect from "../CategorySelect/CategorySelect";
 import "./Home.css";
-
-// const colStyle = {
-//     marginTop: '25px'
-// }
-
-const titleStyle = {
-  marginTop: "25px"
-};
+import BookBrowserResults from "../BookBrowserResults/BookBrowserResults";
+import BookBrowserControls from "../BookBrowserControls/BookBrowserControls";
 
 function Home({
   userId,
@@ -38,20 +25,17 @@ function Home({
   }, []);
 
   return (
-    <div>
-      <Row as="h2">Category Select</Row>
-      
+    <Container fluid>
+      <Row className="category-select-title">
+        <h2>Category Select</h2>
+      </Row>
       <CategorySelect />
-
-      <h2 style={titleStyle}>Top Picks</h2>
-
-      <Card.Group>
-        {books &&
-          books.map(book => (
-            <LibraryListBook key={book.id} topPick={true} book={book} />
-          ))}
-      </Card.Group>
-    </div>
+      <Row className="current-category-title">
+        <h1 className="m-auto">Top Picks</h1>
+      </Row>
+      <BookBrowserControls />
+      <BookBrowserResults />
+    </Container>
   );
 }
 
