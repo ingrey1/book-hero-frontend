@@ -2,9 +2,7 @@ import React from "react";
 import { Row, Col, Dropdown, DropdownButton } from "react-bootstrap";
 import "./CategorySelect.css";
 
-function CategorySelect() {
-  const categories = ["a", "b", "c", "d", "E", "f", "g"];
-
+function CategorySelect({ categories }) {
   return (
     <Row className="categories-row">
       <Col className="romance-category col-text">
