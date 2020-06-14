@@ -7,7 +7,8 @@
 }
 
 .no-focus-outline:focus {
-  outline: none;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 .fantasy-image {
@@ -28,4 +29,18 @@
 
 .col-text:hover {
   font-size: 35px;
+}
+
+.dropdown-toggle-category {
+  background-color: white !important;
+  border-style: none !important;
+}
+
+.more-label {
+  color: #073b4c;
+  font-size: 25px;
+}
+
+.more-label:hover {
+  cursor: pointer;
 }

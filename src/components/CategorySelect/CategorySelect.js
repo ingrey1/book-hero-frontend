@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Dropdown, DropdownButton } from "react-bootstrap";
 import "./CategorySelect.css";
 
 function CategorySelect(props) {
@@ -65,19 +65,32 @@ function CategorySelect(props) {
         </label>
       </Col>
 
-      <Col className="literature-category col-text">
-        <input
-          type="image"
-          src={require("../../assets/images/more_logo.svg")}
-          height="80px"
-          width="75px"
-          alt="more-image"
-          className="category-image no-focus-outline"
-        />
-        <br />
-        <label>
-          <strong>More</strong>
-        </label>
+      <Col>
+        <Dropdown className="no-focus-outline">
+          <Dropdown.Toggle
+            className="dropdown-toggle-category no-focus-outline"
+            variant="success"
+            id="dropdown-basic"
+          >
+            <label className="more-label">More</label>
+            <div>
+              <input
+                type="image"
+                src={require("../../assets/images/more_logo.svg")}
+                height="80px"
+                width="75px"
+                alt="more-image"
+                className="category-image no-focus-outline"
+              />
+            </div>
+          </Dropdown.Toggle>
+
+          <Dropdown.Menu>
+            <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+            <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
       </Col>
     </Row>
   );
