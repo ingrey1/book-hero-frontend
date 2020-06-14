@@ -2,9 +2,26 @@ import React from "react";
 import { Row, Col, Dropdown, DropdownButton } from "react-bootstrap";
 import "./CategorySelect.css";
 
-function CategorySelect(props) {
+function CategorySelect() {
+  const categories = ["a", "b", "c", "d", "E", "f", "g"];
+
   return (
     <Row className="categories-row">
+      <Col className="romance-category col-text">
+        <input
+          type="image"
+          src={require("../../assets/images/tree_logo.svg")}
+          height="80px"
+          width="75px"
+          alt="all-category-image"
+          className=" no-focus-outline"
+        />
+        <br />
+        <label className="all-label">
+          <strong>All</strong>
+        </label>
+      </Col>
+
       <Col className="romance-category col-text">
         <input
           type="image"
@@ -86,9 +103,18 @@ function CategorySelect(props) {
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
-            <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-            <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+            {categories.map((category, i) => {
+              return (
+                <Dropdown.Item
+                  key={Math.random()}
+                  value={category}
+                  onClick={e => console.log("e", e.target.value)}
+                  as="button"
+                >
+                  {category}
+                </Dropdown.Item>
+              );
+            })}
           </Dropdown.Menu>
         </Dropdown>
       </Col>

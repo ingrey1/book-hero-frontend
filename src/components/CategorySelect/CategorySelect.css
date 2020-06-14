@@ -36,6 +36,10 @@
   border-style: none !important;
 }
 
+.all-label {
+  margin-left: 25px;
+}
+
 .more-label {
   color: #073b4c;
   font-size: 25px;
