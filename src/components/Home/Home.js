@@ -34,7 +34,9 @@ function Home({
       <CategorySelect categories={getAllCategories(userBooks)} />
       <hr className="divider" />
       <Row className="current-category-title">
-        <h1 className="m-auto">{capitalizeWords(selectedCategory)}</h1>
+        <h1 className="m-auto">
+          {selectedCategory && capitalizeWords(selectedCategory)}
+        </h1>
       </Row>
       <BookBrowserControls />
       <BookBrowserResults />
