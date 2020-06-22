@@ -14,6 +14,7 @@ function Home({
   userId,
   userBooks,
   books,
+  selectedCategory,
   setBooks,
   getLibrary,
   clearCurrentChapter,
@@ -33,7 +34,12 @@ function Home({
       <CategorySelect categories={getAllCategories(userBooks)} />
       <hr className="divider" />
       <Row className="current-category-title">
-        <h1 className="m-auto">Top Picks</h1>
+        <h1 className="m-auto">
+          {selectedCategory.replace(
+            selectedCategory[0],
+            selectedCategory[0].toUpperCase()
+          )}
+        </h1>
       </Row>
       <BookBrowserControls />
       <BookBrowserResults />
@@ -45,7 +51,8 @@ const mapStateToProps = state => {
   return {
     userId: state.auth.userId,
     books: state.books,
-    userBooks: state.library.userBooks
+    userBooks: state.library.userBooks,
+    selectedCategory: state.browse.category
   };
 };
 

@@ -1,8 +1,11 @@
 import React from "react";
 import { Row, Col, Dropdown, DropdownButton } from "react-bootstrap";
 import "./CategorySelect.css";
+import { connect } from "react-redux";
+import { setCategory } from "../../actions/browse";
+import { capitalize } from "../../utilities/helpers";
 
-function CategorySelect({ categories }) {
+function CategorySelect({ categories, setSelectedCategory }) {
   return (
     <Row className="categories-row">
       <Col className="romance-category col-text">
@@ -106,7 +109,7 @@ function CategorySelect({ categories }) {
                 <Dropdown.Item
                   key={Math.random()}
                   value={category}
-                  onClick={e => console.log("e", e.target.value)}
+                  onClick={e => setSelectedCategory(e.target.value)}
                   as="button"
                 >
                   {category}
@@ -120,4 +123,10 @@ function CategorySelect({ categories }) {
   );
 }
 
-export default CategorySelect;
+const mapDispatchToProps = dispatch => {
+  return {
+    setSelectedCategory: category => dispatch(setCategory(category))
+  };
+};
+
+export default connect(null, mapDispatchToProps)(CategorySelect);
