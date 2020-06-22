@@ -33,3 +33,5 @@ export const ADD_COMMENT = 'ADD_COMMENT'
 // books reducer
 export const SET_BOOKS = 'SET_BOOKS'
 export const REMOVE_BOOK_FROM_ALL_BOOKS = 'REMOVE_BOOK_FROM_ALL_BOOKS'
+// browse reducer
+export const SET_CATEGORY = "SET_CATEGORY"
