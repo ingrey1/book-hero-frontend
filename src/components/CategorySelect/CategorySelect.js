@@ -3,7 +3,7 @@ import { Row, Col, Dropdown, DropdownButton } from "react-bootstrap";
 import "./CategorySelect.css";
 import { connect } from "react-redux";
 import { setCategory } from "../../actions/browse";
-import { capitalize } from "../../utilities/helpers";
+
 
 function CategorySelect({ categories, setSelectedCategory }) {
   return (

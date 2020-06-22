@@ -88,6 +88,10 @@ export const getChapterIdByNumber = (chapters, num) => {
   return chapters.find(chapter => chapter.number == num)["id"]
 }
 
-export const capitalize = (word) => {
+export const capitalizeWord = (word) => {
     return word.toLowerCase().replace(word[0], word[0].toUpperCase())
+}
+
+export const capitalizeWords = (words) => {
+  return words.split(" ").map(word => capitalizeWord(word)).join(" ")
 }

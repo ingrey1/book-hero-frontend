@@ -9,7 +9,7 @@ import { getAllCategories } from "../../utilities/helpers";
 import "./Home.css";
 import BookBrowserResults from "../BookBrowserResults/BookBrowserResults";
 import BookBrowserControls from "../BookBrowserControls/BookBrowserControls";
-
+import { capitalizeWords } from "../../utilities/helpers";
 function Home({
   userId,
   userBooks,
@@ -34,12 +34,7 @@ function Home({
       <CategorySelect categories={getAllCategories(userBooks)} />
       <hr className="divider" />
       <Row className="current-category-title">
-        <h1 className="m-auto">
-          {selectedCategory.replace(
-            selectedCategory[0],
-            selectedCategory[0].toUpperCase()
-          )}
-        </h1>
+        <h1 className="m-auto">{capitalizeWords(selectedCategory)}</h1>
       </Row>
       <BookBrowserControls />
       <BookBrowserResults />
