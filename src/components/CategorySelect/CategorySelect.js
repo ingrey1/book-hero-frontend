@@ -4,7 +4,6 @@ import "./CategorySelect.css";
 import { connect } from "react-redux";
 import { setCategory } from "../../actions/browse";
 
-
 function CategorySelect({ categories, setSelectedCategory }) {
   return (
     <Row className="categories-row">
@@ -109,7 +108,7 @@ function CategorySelect({ categories, setSelectedCategory }) {
                 <Dropdown.Item
                   key={Math.random()}
                   value={category}
-                  onClick={e => setSelectedCategory(e.target.value)}
+                  onClick={e => setSelectedCategory(e.target.value.trim())}
                   as="button"
                 >
                   {category}

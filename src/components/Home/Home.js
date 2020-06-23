@@ -38,7 +38,7 @@ function Home({
           {selectedCategory && capitalizeWords(selectedCategory)}
         </h1>
       </Row>
-      <BookBrowserControls />
+      <BookBrowserControls novels={userBooks} />
       <BookBrowserResults />
     </Container>
   );

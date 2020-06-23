@@ -1,0 +1,17 @@
+.search-input-field {
+  width: 50% !important;
+}
+
+.search-datalist-item {
+  width: 75% !important;
+  color: white !important;
+  background-color: #073b4c !important;
+}
+
+.search-datalist-active-item {
+  background-color: #28827f !important;
+  padding: 10px;
+}
+
+.search-datalist {
+}
