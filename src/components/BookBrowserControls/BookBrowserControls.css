@@ -2,6 +2,11 @@
   width: 50% !important;
 }
 
+.search-input-field:focus {
+  border: 2px solid #073b4c !important;
+  outline-width: 0;
+}
+
 .search-datalist-item {
   width: 75% !important;
   color: white !important;
