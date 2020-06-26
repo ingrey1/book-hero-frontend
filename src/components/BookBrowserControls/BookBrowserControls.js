@@ -1,12 +1,16 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
-import { Input } from "semantic-ui-react";
 import "./BookBrowserControls.css";
 import DataListInput from "react-datalist-input";
+import { Button, Icon } from "semantic-ui-react";
 
 function BookBrowserControls({ novels }) {
   const onNovelSelect = novel => {
     console.log("novel", novel);
+  };
+
+  const onNovelSearchTextChange = e => {
+    console.log(e, "e");
   };
 
   return (
@@ -15,6 +19,8 @@ function BookBrowserControls({ novels }) {
       <Col></Col>
       <Col>
         <DataListInput
+          onInput={onNovelSearchTextChange}
+          onSelect={onNovelSelect}
           requiredInputLength={1}
           placeholder="Search Novels..."
           inputClassName="search-input-field"
@@ -25,21 +31,6 @@ function BookBrowserControls({ novels }) {
             return { ...novel, key: novel.title, label: novel.title };
           })}
         />
-        <div>
-          {/* <Input
-            className="data-list"
-            list="novels"
-            action="Search"
-            onChange={e => onNovelSelect(e.target.value)}
-            placeholder="Search Novels..."
-          />
-          <datalist id="novels" className="novel-datalist">
-            {novels &&
-              novels.map(novel => {
-                return <option value={novel.title}></option>;
-              })}
-          </datalist> */}
-        </div>
       </Col>
     </Row>
   );
